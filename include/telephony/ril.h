@@ -5806,17 +5806,6 @@ typedef struct {
  */
 #define RIL_UNSOL_RADIO_CAPABILITY 1042
 
-/*
- * RIL_UNSOL_ON_SS
- *
- * Called when SS response is received when DIAL/USSD/SS is changed to SS by
- * call control.
- *
- * "data" is const RIL_StkCcUnsolSsResponse *
- *
- */
-#define RIL_UNSOL_ON_SS 1043
-
 /**
  * RIL_UNSOL_STK_CC_ALPHA_NOTIFY
  *
@@ -5883,6 +5872,7 @@ typedef struct {
 #define RIL_UNSOL_CP_POSITION 11038
 #define RIL_UNSOL_HOME_NETWORK_NOTI 11043
 #define RIL_UNSOL_STK_CALL_STATUS 11054
+#define RIL_UNSOL_ON_SS 11055
 #define RIL_UNSOL_MODEM_CAP 11056
 #define RIL_UNSOL_SIM_SWAP_STATE_CHANGED 11057
 #define RIL_UNSOL_SIM_COUNT_MISMATCHED 11058

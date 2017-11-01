@@ -14,24 +14,21 @@ on fs
     chmod 0771 /efs
 
     chown radio radio /sys/devices/virtual/misc/multipdp/waketime
-    chmod 0660 /sys/devices/virtual/misc/umts_dm0/dm_state
-    chown radio system /sys/devices/virtual/misc/umts_dm0/dm_state
     chown radio radio /sys/devices/platform/s5p-ehci/ehci_cpu_core
 
 on post-fs-data
     # Remove symlinks to avoid issues with migrate after nandroid restores
     # Will be recreated at end of boot
-    rm -r -d /data/data/com.android.providers.telephony/databases
-    rm -r -d /data/data/com.android.providers.telephony/shared_prefs
+    rm -r /data/data/com.android.providers.telephony/databases
+    rm -r /data/data/com.android.providers.telephony/shared_prefs
 
     # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
     symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
     symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
-    
+
     start modemloader
 
     # restart RIL <--> modem stack to account for new locations
-
     restart cpboot-daemon
     restart ril-daemon
 

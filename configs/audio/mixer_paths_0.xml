@@ -239,7 +239,7 @@
     <path name="speaker">
         <path name="verb-normal" />
         <ctl name="SPK Switch" value="1" />
-        <ctl name="Speaker Digital Volume" value="127" />
+        <ctl name="Speaker Digital Volume" value="148" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
     </path>
@@ -268,7 +268,7 @@
 
     <path name="voice-speaker">
         <path name="speaker" />
-        <ctl name="Speaker Digital Volume" value="126" />
+        <ctl name="Speaker Digital Volume" value="148" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
         <ctl name="SPKOUTL Input 3 Volume" value="32" />
@@ -277,7 +277,7 @@
 
     <path name="voice-speaker-wb">
         <path name="speaker" />
-        <ctl name="Speaker Digital Volume" value="126" />
+        <ctl name="Speaker Digital Volume" value="148" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
         <ctl name="SPKOUTL Input 3 Volume" value="32" />

@@ -1,3 +1,2 @@
-SM-P901 device repo for Lineage Os.
+SM-P901/P902 device repo for CyangenMod.
 
-# device_samsung_v1a3g

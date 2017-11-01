@@ -17,7 +17,7 @@
 
 int __popcountsi2(int a)
 {
-    int x = (int)a;
+    unsigned int x = (unsigned int)a;
     x = x - ((x >> 1) & 0x55555555);
     /* Every 2 bits holds the sum of every pair of bits */
     x = ((x >> 2) & 0x33333333) + (x & 0x33333333);

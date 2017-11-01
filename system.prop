@@ -15,6 +15,5 @@ telephony.lteOnCdmaDevice=0
 ro.ril.samsung_nextgen_modem=false
 ro.ril.needs_videocall_field=false
 
-
-# UI
-ro.sf.lcd_density=320
+# GPS
+ro.gps.agps_provider=1
