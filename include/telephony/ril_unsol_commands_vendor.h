@@ -6,7 +6,7 @@
 ** you may not use this file except in compliance with the License.
 ** You may obtain a copy of the License at
 **
-**     http://www.apache.org/licenses/LICENSE-2.0
+**     http:// www.apache.org/licenses/LICENSE-2.0
 **
 ** Unless required by applicable law or agreed to in writing, software
 ** distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
 ** See the License for the specific language governing permissions and
 ** limitations under the License.
 */
-
     {SAMSUNG_UNSOL_RESPONSE_BASE, NULL, WAKE_PARTIAL}, // 11000
     {RIL_UNSOL_RELEASE_COMPLETE_MESSAGE, responseVoid, WAKE_PARTIAL}, // 11001
     {RIL_UNSOL_STK_SEND_SMS_RESULT, responseInts, WAKE_PARTIAL}, // 11002
@@ -70,7 +69,7 @@
     {11052, NULL, WAKE_PARTIAL}, // 11052
     {11053, NULL, WAKE_PARTIAL}, // 11053
     {RIL_UNSOL_STK_CALL_STATUS, responseInts, WAKE_PARTIAL}, // 11054
-    {RIL_UNSOL_ON_SS, responseVoid, WAKE_PARTIAL}, // 11055
+    {11055, NULL, WAKE_PARTIAL}, // 11055
     {RIL_UNSOL_MODEM_CAP, responseRaw, WAKE_PARTIAL}, // 11056
     {RIL_UNSOL_SIM_SWAP_STATE_CHANGED, responseInts, WAKE_PARTIAL}, // 11057
     {RIL_UNSOL_SIM_COUNT_MISMATCHED, responseInts, WAKE_PARTIAL}, // 11058

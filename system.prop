@@ -3,17 +3,15 @@
 #
 
 # Radio Modem
-rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/ttyS0
-#ro.telephony.ril_class=Exynos542xRIL
-ro.telephony.ril_class=SamsungExynosRIL
-#ro.telephony.ril_class=SlteRIL
-#ro.telephony.ril_class=SlteRILn
 ro.ril.telephony.mqanelements=6
-ro.telephony.default_network=0
-telephony.lteOnCdmaDevice=0
-ro.ril.samsung_nextgen_modem=false
-ro.ril.needs_videocall_field=false
+ro.telephony.ril_class=SamsungExynosRIL
 
 # GPS
 ro.gps.agps_provider=1
+
+# OK Google fix
+ro.qc.sdk.audio.fluencetype=none
+persist.audio.fluence.voicerec=true
+persist.audio.fluence.speaker=false
+use.voice.path.for.pcm.voip=true

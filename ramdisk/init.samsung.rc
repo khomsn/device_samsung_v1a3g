@@ -80,6 +80,14 @@ on post-fs-data
     restorecon_recursive /data/security
 # ]
 
+    mkdir /mnt/shell 0750 shell shell
+    chown shell shell /mnt/shell
+    chmod 0750 /mnt/shell
+
+    mkdir /mnt/media_rw 0771 media_rw media_rw
+    chown media_rw media_rw /mnt/media_rw
+    chmod 0771 /mnt/media_rw
+
 on boot
     # Vibetonz
     chmod 0660 /dev/tspdrv

@@ -20,4 +20,12 @@ ifeq ($(TARGET_DEVICE),v1a3g)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
+
+LOCAL_ADDITIONAL_DEPENDENCIES += busybox_symlinks
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -lt 24; echo $$?),0)
+LOCAL_POST_INSTALL_CMD := \
+	$(hide) mkdir -p $(TARGET_ROOT_OUT)/sbin && \
+	ln -sf /sbin/busybox $(TARGET_ROOT_OUT)/sbin/sh
+endif
+
 endif

@@ -18,15 +18,12 @@ on fs
 
 on post-fs-data
     # Remove symlinks to avoid issues with migrate after nandroid restores
-    # Will be recreated at end of boot
-    rm -r /data/data/com.android.providers.telephony/databases
-    rm -r /data/data/com.android.providers.telephony/shared_prefs
+    rm /data/data/com.android.providers.telephony/databases
+    rm /data/data/com.android.providers.telephony/shared_prefs
 
     # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
     symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
     symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
-
-    start modemloader
 
     # restart RIL <--> modem stack to account for new locations
     restart cpboot-daemon
@@ -36,7 +33,6 @@ on post-fs-data
 service modemloader /system/bin/modemloader
     class core
     oneshot
-    disabled
 
 service cpboot-daemon /system/bin/cbd -d -txmm626x -bh -mh -p13
     class main
