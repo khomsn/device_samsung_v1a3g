@@ -1,0 +1,54 @@
+[1/2] CMParts: Add toggle for Accidental Touch
+
+Original commit: https://github.com/AICP/packages_apps_CMParts/commit/c700db7aa2b18471fbe77468e2109012d06bc585
+
+project packages/apps/CMParts/
+diff --git a/packages/apps/CMParts/res/values-ru/strings.xml b/packages/apps/CMParts/res/values-ru/strings.xml
+index cae770b..e2397d6 100644
+--- a/packages/apps/CMParts/res/values-ru/strings.xml
++++ b/packages/apps/CMParts/res/values-ru/strings.xml
+@@ -197,6 +197,10 @@
+   <string name="volume_answer_call_summary">Отвечать на телефонный вызов нажатием кнопок громкости</string>
+   <string name="home_answer_call_title">Ответ на вызов</string>
+   <string name="home_answer_call_summary">Отвечать на входящий вызов нажатием кнопки «Домой»</string>
++  <!-- ANBI -->
++  <string name="buttons_misc_cat">Разное</string>
++  <string name="anbi_title">Случайное касание</string>
++  <string name="anbi_summary">Отключать взаимодействие с навигационными кнопками во время касания экрана</string>
+   <!-- Key backlight -->
+   <string name="button_backlight_title">Подсветка</string>
+   <string name="button_backlight_enabled">Подсветка кнопок</string>
+diff --git a/packages/apps/CMParts/res/values/strings.xml b/packages/apps/CMParts/res/values/strings.xml
+index 603d9ba..92bc0af 100644
+--- a/packages/apps/CMParts/res/values/strings.xml
++++ b/packages/apps/CMParts/res/values/strings.xml
+@@ -211,6 +211,11 @@
+     <string name="home_answer_call_title">Answer call</string>
+     <string name="home_answer_call_summary">Answer incoming calls by pressing the home button</string>
+ 
++    <!-- ANBI -->
++    <string name="buttons_misc_cat">Misc</string>
++    <string name="anbi_title">Accidental touch</string>
++    <string name="anbi_summary">Prevent interaction with navigation buttons while the screen is being touched</string>
++
+     <!-- Key backlight -->
+     <string name="button_backlight_title">Backlight</string>
+     <string name="button_backlight_enabled">Illuminate buttons</string>
+diff --git a/packages/apps/CMParts/res/xml/button_settings.xml b/packages/apps/CMParts/res/xml/button_settings.xml
+index 9b71607..24791e6 100644
+--- a/packages/apps/CMParts/res/xml/button_settings.xml
++++ b/packages/apps/CMParts/res/xml/button_settings.xml
+@@ -300,4 +300,13 @@
+             android:summary="@string/swap_volume_buttons_summary" />
+     </PreferenceCategory>
+ 
++    <PreferenceCategory
++        android:key="buttons_misc"
++        android:title="@string/buttons_misc_cat">
++
++        <cyanogenmod.preference.SystemSettingSwitchPreference
++            android:key="anbi_enabled"
++            android:title="@string/anbi_title"
++            android:summary="@string/anbi_summary" />
++    </PreferenceCategory>
+ </PreferenceScreen>

@@ -1,13 +1,22 @@
-<mixer>
+<!-- // Controls that can be set once at system startup.  As the WM8994/WM1811 -->
+<!-- // outputs don't conflict with each other we set up most of our routing -->
+<!-- // statically at system startup. -->
 
+<!-- // For WM5102 on P90x -->
+<!-- // AIF1 is the port for System IN/OUT signal , System gives OUT signal only to AIF1RX1 for Left channel and AIF1RX2 for Right channel -->
+<!-- // AIF2 is the port for System <-> Voice GSM-Modem IN/OUT signal -->
+<!-- // AIF3 is the port for System <-> Bluetooth IN/OUT signal -->
+
+<mixer>
     <pcmdai playback_link="3" />
     <pcmdai playback_deep_link="3" />
     <pcmdai capture_link="0" />
     <pcmdai baseband_link="1" />
     <pcmdai bluetooth_link="2" />
 
-    <!-- ########## Initial mixer settings ########## -->
-    <!-- Noise Gate Switch -->
+<!-- ########## Initial mixer settings ########## -->
+
+<!--  Noise gate control  -->
     <ctl name="Noise Gate Switch" value="0" />
     <ctl name="HPOUT1L NG HPOUT1L Switch" value="0" />
     <ctl name="HPOUT1R NG HPOUT1R Switch" value="0" />
@@ -18,75 +27,14 @@
     <ctl name="SPKOUTR NG SPKOUTR Switch" value="0" />
     <ctl name="SPKDAT1L NG SPKDAT1L Switch" value="0" />
     <ctl name="SPKDAT1R NG SPKDAT1R Switch" value="0" />
-    <ctl name="Noise Gate Threshold Volume" value="3" />
+    <ctl name="Noise Gate Threshold Volume"  value="3" />
 
-    <!-- Analog output AMP -->
-    <!-- AP Side is mixed to Input 1 of each out mixer -->
-    <!-- RCV(Mono) -->
-    <ctl name="EPOUT Input 1" value="AIF1RX1" />
-    <ctl name="EPOUT Input 2" value="AIF1RX2" />
-    <ctl name="EPOUT Digital Switch" value="1" />
-    <!-- SPK(stereo) -->
-    <ctl name="SPKOUTL Input 1" value="AIF1RX1" />
-    <ctl name="SPKOUTR Input 1" value="AIF1RX2" />
-    <ctl name="Speaker Digital Switch" value="1" />
-    <!-- HP(stereo) -->
-    <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
-    <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
-    <ctl name="HPOUT1 Digital Switch" value="1" />
-    <!-- VPS(stereo) -->
-    <ctl name="HPOUT2L Input 1" value="AIF1RX1" />
-    <ctl name="HPOUT2R Input 1" value="AIF1RX2" />
-    <ctl name="OUT2 Digital Switch" value="1" />
-
-    <!-- BT <- AP (use input 1) -->
-    <!-- ASRC2(RX domain) -->
-    <ctl name="ASRC2L Input" value="AIF2RX1" />
-    <ctl name="ASRC2R Input" value="AIF2RX2" />
-
-    <!-- Currently use i2c dual mono(both L/R) -->
-    <!-- CP->RCV -->
-    <ctl name="EPOUT Input 3" value="None" />
-    <!-- CP->SPK -->
-    <ctl name="SPKOUTL Input 3" value="None" />
-    <ctl name="SPKOUTR Input 3" value="None" />
-    <!-- CP->HP -->
-    <ctl name="HPOUT1L Input 2" value="None" />
-    <ctl name="HPOUT1R Input 2" value="None" />
-    <!-- CP->BT -->
-    <ctl name="AIF3TX1 Input 2" value="AIF2RX1" />
-    <ctl name="AIF3TX2 Input 2" value="AIF2RX2" />
-
-    <!-- Route all mics via LHPF1 -->
-    <!-- need to move modifier field -->
-    <ctl name="LHPF1 Mode" value="High-pass" />
-    <ctl name="LHPF2 Mode" value="High-pass" />
-    <!-- BT mic->CP -->
-    <ctl name="AIF2TX1 Input 2" value="AIF3RX1" />
-    <ctl name="AIF2TX2 Input 2" value="AIF3RX2" />
-
-    <!-- Stereo recording from mics -->
-    <!-- need to move channeltype -->
-    <!-- Gain for main and headset mics -->
-    <ctl name="IN1L Volume" value="30" />
-    <ctl name="IN1R Volume" value="30" />
-    <!-- Gain for sub and 3rd mic -->
-    <ctl name="IN2L Volume" value="30" />
-    <ctl name="IN2R Volume" value="30" />
-    <!-- Mics to AIF2TX -->
-    <ctl name="ASRC1L Input" value="LHPF1" />
-    <ctl name="ASRC1R Input" value="LHPF2" />
-    <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
-    <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
-    <!-- BT<-CP(use input 2) -->
-    <ctl name="AIF1TX1 Input 2" value="ASRC2L" />
-    <ctl name="AIF1TX2 Input 2" value="ASRC2R" />
-    <!-- LHPF1 & 2 filter -->
-    <ctl name="LHPF1 COEFF FILTER" value="130Hz" />
-    <ctl name="LHPF2 COEFF FILTER" value="130Hz" />
-
-    <!-- common digital volume -->
-    <!-- don't change this common volume -->
+<!-- *****************Preset Volume************************ -->
+    <!-- Volume only is PGA for Analogue volume range from 20h to 50h = 32 to 80 Default is 40h=64 -->
+    <!-- Digital volume is 00h-BFh = 0-191 -->
+    <!-- Digital CORE Volume range from 20h to 50h = 32 to 80 Default is 40h=64 -->
+<!--  common digital volume  -->
+<!--  don't change this common volume  -->
     <ctl name="AIF1TX1 Input 1 Volume" value="32" />
     <ctl name="AIF1TX1 Input 2 Volume" value="32" />
     <ctl name="AIF1TX1 Input 3 Volume" value="32" />
@@ -138,7 +86,7 @@
 
     <ctl name="Input Ramp Up" value="8ms/6dB" />
 
-    <ctl name="RCV Switch" value="0" />
+    <ctl name="RCV Switch" value="0" /><!-- not in kernel control -->
     <ctl name="SPK Switch" value="0" />
     <ctl name="HP Switch" value="0" />
     <ctl name="VPS Switch" value="0" />
@@ -147,80 +95,186 @@
     <ctl name="Sub Mic Switch" value="0" />
     <ctl name="3rd Mic Switch" value="0" />
     <ctl name="Headset Mic Switch" value="0" />
+    
+    <ctl name="AIF2 Mode" value="Master" />
+    
+<!--   Gain for main and headset mics  -->
+    <!-- Default to 40h = 64 / Digital volume at 80h = 128-->
+    <ctl name="IN1L Volume" value="30" />
+    <ctl name="IN1R Volume" value="30" />
 
-    <!-- Channels -->
-    <path name="channel-left">
-        <ctl name="AIF1TX1 Input 1" value="LHPF1" />
-        <ctl name="AIF1TX2 Input 1" value="LHPF1" />
-        <ctl name="ASRC1L Input" value="LHPF1" />
-        <ctl name="ASRC1R Input" value="LHPF1" />
+<!--   Gain for sub and 3rd mic  -->
+    <ctl name="IN2L Volume" value="30" />
+    <ctl name="IN2R Volume" value="30" />
+
+<!-- **************************SET LHPF parameters******************** -->
+<!--  LHPFn Mode "High-pass" or "Low-pass" -->
+    <ctl name="LHPF1 Mode" value="Low-pass" />
+    <ctl name="LHPF2 Mode" value="High-pass" />
+    <ctl name="LHPF3 Mode" value="Low-pass" />
+    <ctl name="LHPF4 Mode" value="High-pass" />
+
+    <ctl name="LHPF1 Input 1 Volume" value="32" />
+    <ctl name="LHPF1 Input 2 Volume" value="32" />
+    <ctl name="LHPF1 Input 3 Volume" value="32" />
+    <ctl name="LHPF1 Input 4 Volume" value="32" />
+    <ctl name="LHPF2 Input 1 Volume" value="32" />
+    <ctl name="LHPF2 Input 2 Volume" value="32" />
+    <ctl name="LHPF2 Input 3 Volume" value="32" />
+    <ctl name="LHPF2 Input 4 Volume" value="32" />
+    <ctl name="LHPF3 Input 1 Volume" value="32" />
+    <ctl name="LHPF3 Input 2 Volume" value="32" />
+    <ctl name="LHPF3 Input 3 Volume" value="32" />
+    <ctl name="LHPF3 Input 4 Volume" value="32" />
+    <ctl name="LHPF4 Input 1 Volume" value="32" />
+    <ctl name="LHPF4 Input 2 Volume" value="32" />
+    <ctl name="LHPF4 Input 3 Volume" value="32" />
+    <ctl name="LHPF4 Input 4 Volume" value="32" />
+<!--  ************** EQn *************************** -->
+    <ctl name="EQ1 Input 1 Volume" value="32" />
+    <ctl name="EQ1 Input 2 Volume" value="32" />
+    <ctl name="EQ1 Input 3 Volume" value="32" />
+    <ctl name="EQ1 Input 4 Volume" value="32" />
+    <ctl name="EQ2 Input 1 Volume" value="32" />
+    <ctl name="EQ2 Input 2 Volume" value="32" />
+    <ctl name="EQ2 Input 3 Volume" value="32" />
+    <ctl name="EQ2 Input 4 Volume" value="32" />
+<!--  LHPF1 & 2 filter  -->
+    <ctl name="LHPF1 COEFF FILTER" value="1100Hz" />
+    <ctl name="LHPF2 COEFF FILTER" value="64Hz" />
+<!-- LHPF1 - HPF Fc=5Hz -->
+<!--
+    <ctl name="LHPF1 Coefficients" value="0" />
+    <ctl name="LHPF2 Coefficients" value="0" />
+    -->
+
+<!--  ************************************Initial END*************************************  -->
+
+
+<!-- +++++++++++++++++++++++++++++++++ Devices ++++++++++++++++++++++++++++++++++++++++ -->
+    
+<!-- // Default configuration for a specific output  -->
+<!-- // Should really add aliasing; headset and headphone are the same thing  -->
+<!-- // and we should refcount appropriately (ditto for speaker/earpiece on  -->
+<!-- // some low end devices)  -->
+
+<!-- ************ System ******************************** -->
+<!-- /// OUTPUT Paths for System /// -->
+    
+    <!--  SPK(stereo) [System -> SPK] -->
+    <ctl name="SPKOUTL Input 1" value="AIF1RX1" />
+    <ctl name="SPKOUTR Input 1" value="AIF1RX2" />
+    <ctl name="Speaker Digital Switch" value="1" />
+
+    <!--  HP(stereo)  [System -> HP]-->
+    <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
+    <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
+    <ctl name="HPOUT1 Digital Switch" value="1" />
+
+    <!--  BT(stereo) [System -> BT] require no settings-->
+
+<!-- ************ GSM Voice Call ******************************** -->
+    <!-- ******* MODEM : AIF2RXn domain ********** -->
+    <!-- Signal in from modem must pass throu ASRC to change rate to connect to output -->
+    <ctl name="ASRC2L Input" value="AIF2RX1" />
+    <ctl name="ASRC2R Input" value="AIF2RX2" />
+    <!-- USE Input 3 for GSM Voice Call -->
+	<!--  CP->SPK  -->
+    <ctl name="SPKOUTL Input 3" value="ASRC2L" />
+    <ctl name="SPKOUTR Input 3" value="ASRC2R" />
+	<!--  CP->HP  -->
+    <ctl name="HPOUT1L Input 3" value="ASRC2L" />
+    <ctl name="HPOUT1R Input 3" value="ASRC2R" />
+    <!--  CP->BT  -->
+    <!-- USE Input 4 for Modem <-> BT -->
+    <ctl name="AIF3TX1 Input 4" value="AIF2RX1" />
+    <ctl name="AIF3TX2 Input 4" value="AIF2RX2" />
+
+<!-- ++++++++++++++++++++++++++++++++ Output #Verb Stage +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!--  #Currently just using normal and voicecall  -->
+    
+    <path name="Verb-Normal"> <!-- This is Default value -->
+	    <ctl name="AIF2 Mode" value="Master" />
     </path>
 
-    <path name="channel-right">
-        <ctl name="AIF1TX1 Input 1" value="LHPF2" />
-        <ctl name="AIF1TX2 Input 1" value="LHPF2" />
-        <ctl name="ASRC1L Input" value="LHPF2" />
-        <ctl name="ASRC1R Input" value="LHPF2" />
+    <path name="Verb-Voicecall">
+	    <ctl name="AIF2 Mode" value="Slave" />
+    </path>
+    
+<!-- Paths that roughly correspond to devices -->
+
+    <!-- ******************************** Output Device ********************************* -->
+    <path name="OP-Speaker-Enable">
+	    <ctl name="SPK Switch" value="1" />
     </path>
 
-    <path name="channel-stereo">
-        <ctl name="AIF1TX1 Input 1" value="LHPF1" />
-        <ctl name="AIF1TX2 Input 1" value="LHPF2" />
-        <ctl name="ASRC1L Input" value="LHPF1" />
-        <ctl name="ASRC1R Input" value="LHPF2" />
+    <path name="OP-Headphone-Enable">
+	    <ctl name="HP Switch" value="1" />
     </path>
 
-    <path name="channel-none">
-        <ctl name="ASRC1L Input" value="AIF1RX1" />
-        <ctl name="ASRC1R Input" value="AIF1RX2" />
+    <path name="OP-Analogue-Dock-Out-Enable">
+	    <ctl name="VPS Switch" value="1" />
     </path>
 
-    <!-- Verbs -->
-    <path name="verb-normal">
-        <ctl name="AIF2 Mode" value="Master" />
-        <ctl name="EPOUT DRE Switch" value="1" />
-        <ctl name="EPOUT Input 3" value="None" />
-        <ctl name="SPKOUTL Input 3" value="None" />
-        <ctl name="SPKOUTR Input 3" value="None" />
-        <ctl name="HPOUT1L Input 2" value="None" />
-        <ctl name="HPOUT1R Input 2" value="None" />
+    <path name="OP-AUX Digital Out-Enable">
+	    <ctl name="HDMI Switch" value="1" />
     </path>
 
-    <path name="verb-voicecall">
-        <ctl name="AIF2 Mode" value="Slave" />
-        <ctl name="EPOUT DRE Switch" value="0" />
-        <ctl name="EPOUT Input 3" value="ASRC2L" />
-        <ctl name="SPKOUTL Input 3" value="ASRC2L" />
-        <ctl name="SPKOUTR Input 3" value="ASRC2R" />
-        <ctl name="HPOUT1L Input 2" value="ASRC2L" />
-        <ctl name="HPOUT1R Input 2" value="ASRC2R" />
+    <!-- BT OUTPUT no control by Mixer -->
+    
+<!-- /// OUTPUT Paths for System END/// -->
+
+<!-- /// INPUT Paths for System /// -->
+    
+<!-- ******* Bluetooth : AIF3RXn domain ********** -->
+    <!--  BT mic->CP [BT -> Gsm Voicecall Modem] -->
+    <!-- USE Input 4 for BT <-> Modem -->
+    <ctl name="AIF2TX1 Input 4" value="AIF3RX1" />
+    <ctl name="AIF2TX2 Input 4" value="AIF3RX2" />
+
+
+<!-- ********************************* Input Devices ************************************ -->
+    <path name="Builtin_Mic-Enable">
+        <!-- Main Mic uses Input 1 & FILTER 1 -->
+	    <ctl name="Main Mic Switch" value="1" />
+        <ctl name="LHPF1 Input 1" value="IN1L" />
+	    <ctl name="AIF1TX1 Input 1" value="LHPF1" />
+	    <ctl name="AIF1TX2 Input 1" value="LHPF1" />
     </path>
 
-    <!-- Other -->
-    <path name="main-mic">
-        <path name="channel-left" />
-        <path name="verb-voicecall" />
+    <path name="Headset_In-Enable">
+        <!-- Headset Mic uses Input 2 & FILTER 3-->
+	    <ctl name="Headset Mic Switch" value="1" />
+        <ctl name="LHPF3 Input 2" value="IN1R" />
+	    <ctl name="AIF1TX1 Input 2" value="LHPF3" />
+	    <ctl name="AIF1TX2 Input 2" value="LHPF3" />
+    </path>
+
+    <path name="VMainMic">
+        <!-- Main Mic uses Input 1 & FILTER 1 -->
         <ctl name="Main Mic Switch" value="1" />
         <ctl name="LHPF1 Input 1" value="IN1L" />
+        <ctl name="LHPF2 Input 1" value="LHPF1" />
+        <ctl name="ASRC1L Input" value="LHPF2" />
+        <ctl name="ASRC1R Input" value="LHPF2" />
         <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
         <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
-        <ctl name="IN1L Volume" value="27" />
-        <ctl name="IN1L Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
     </path>
-
-    <path name="headset-mic">
-        <path name="channel-left" />
-        <path name="verb-voicecall" />
+    <path name="VHeadsetMic">
+        <!-- Headset Mic uses Input 2 & FILTER 3-->
         <ctl name="Headset Mic Switch" value="1" />
-        <ctl name="LHPF1 Input 1" value="IN1R" />
-        <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
-        <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
-        <ctl name="IN1R Volume" value="39" />
-        <ctl name="IN1R Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <ctl name="LHPF3 Input 2" value="IN1R" />
+        <ctl name="ASRC1L Input" value="LHPF3" />
+        <ctl name="ASRC1R Input" value="LHPF3" />
+        <ctl name="AIF2TX1 Input 3" value="ASRC1L" />
+        <ctl name="AIF2TX2 Input 3" value="ASRC1R" />
     </path>
 
+    <!-- BT INPUT no control by Mixer -->
+
+<!-- /// INPUT Paths for System END/// -->
+
+<!-- *****************************  Audio Hal Paths Start Here ************************* -->
     <!--
     #######################################################
     ### AUDIO ROUTING
@@ -228,250 +282,223 @@
     -->
 
     <path name="none">
-        <path name="channel-none" />
+        <!-- Empty path -->
     </path>
 
     <!-- ########## Playback ########## -->
-    <!-- path name="earpiece" -->
-        <!-- Empty path -->
-    <!-- /path -->
+
+    <!--path name="earpiece"-->
+        <!-- Empty path V1A don't have this output-->
+    <!--/path-->
 
     <path name="speaker">
-        <path name="verb-normal" />
-        <ctl name="SPK Switch" value="1" />
-        <ctl name="Speaker Digital Volume" value="127" />
+        <path name="OP-Speaker-Enable" />
+        <ctl name="Speaker Digital Volume" value="152" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
     </path>
 
     <path name="headphones">
-        <path name="verb-normal" />
-        <ctl name="HP Switch" value="1" />
+        <path name="OP-Headphone-Enable" />
         <ctl name="Noise Gate Switch" value="0" />
-        <ctl name="HPOUT1 Digital Volume" value="115" />
+        <ctl name="HPOUT1 Digital Volume" value="128" />
         <ctl name="HPOUT1L Input 1 Volume" value="32" />
         <ctl name="HPOUT1R Input 1 Volume" value="32" />
     </path>
 
     <path name="speaker-and-headphones">
-        <path name="speaker" />
-        <path name="headphones" />
-    </path>
-
-    <!-- path name="voice-earpiece" -->
-        <!-- Empty path -->
-    <!-- /path -->
-
-    <!-- path name="voice-earpiece-wb" -->
-        <!-- Empty path -->
-    <!-- /path -->
-
-    <path name="voice-speaker">
-        <path name="speaker" />
-        <ctl name="Speaker Digital Volume" value="126" />
+        <path name="OP-Speaker-Enable" />
+        <ctl name="Speaker Digital Volume" value="128" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
+        
+        <path name="OP-Headphone-Enable" />
+        <ctl name="Noise Gate Switch" value="0" />
+        <ctl name="HPOUT1 Digital Volume" value="128" />
+        <ctl name="HPOUT1L Input 1 Volume" value="32" />
+        <ctl name="HPOUT1R Input 1 Volume" value="32" />
+    </path>
+
+    <!--path name="voice-earpiece"-->
+        <!-- Empty path V1A don't have this output-->
+    <!--/path-->
+
+    <!--path name="voice-earpiece-wb"-->
+        <!-- Empty path V1A don't have this output-->
+    <!--/path-->
+
+    <path name="voice-speaker">
+        <!-- For voice phone call OUTPUT Path -->
+        <path name="OP-Speaker-Enable" />
+        <ctl name="Speaker Digital Volume" value="148" />
+        <!-- #CP RX -->
         <ctl name="SPKOUTL Input 3 Volume" value="32" />
         <ctl name="SPKOUTR Input 3 Volume" value="32" />
+        <path name="Verb-Voicecall" />
     </path>
 
     <path name="voice-speaker-wb">
-        <path name="speaker" />
-        <ctl name="Speaker Digital Volume" value="126" />
-        <ctl name="SPKOUTL Input 1 Volume" value="32" />
-        <ctl name="SPKOUTR Input 1 Volume" value="32" />
-        <ctl name="SPKOUTL Input 3 Volume" value="32" />
-        <ctl name="SPKOUTR Input 3 Volume" value="32" />
+        <path name="voice-speaker" />
     </path>
 
     <path name="voice-headphones">
-        <path name="headphones" />
+        <!-- For voice phone call OUTPUT Path -->
+        <path name="OP-Headphone-Enable" />
         <ctl name="Noise Gate Switch" value="0" />
-        <ctl name="HPOUT1 Digital Volume" value="108" />
-        <ctl name="HPOUT1L Input 1 Volume" value="32" />
-        <ctl name="HPOUT1R Input 1 Volume" value="32" />
-        <ctl name="HPOUT1L Input 2 Volume" value="32" />
-        <ctl name="HPOUT1R Input 2 Volume" value="32" />
+        <ctl name="HPOUT1 Digital Volume" value="148" />
+        <!-- #CP RX -->
+        <ctl name="HPOUT1L Input 3 Volume" value="32" />
+        <ctl name="HPOUT1R Input 3 Volume" value="32" />
+        <path name="Verb-Voicecall" />
     </path>
 
     <path name="voice-headphones-wb">
-        <path name="headphones" />
-        <ctl name="Noise Gate Switch" value="0" />
-        <ctl name="HPOUT1 Digital Volume" value="108" />
-        <ctl name="HPOUT1L Input 1 Volume" value="32" />
-        <ctl name="HPOUT1R Input 1 Volume" value="32" />
-        <ctl name="HPOUT1L Input 2 Volume" value="32" />
-        <ctl name="HPOUT1R Input 2 Volume" value="32" />
+        <path name="voice-headphones" />
     </path>
 
     <path name="voice-bt-sco-headset">
-        <ctl name="ASRC1L Input" value="AIF1RX1" />
-        <ctl name="ASRC1R Input" value="AIF1RX2" />
-        <ctl name="AIF3TX1 Input 1" value="ASRC1L" />
-        <ctl name="AIF3TX2 Input 1" value="ASRC1R" />
-        <ctl name="AIF3TX1 Input 2" value="AIF2RX1" />
-        <ctl name="AIF3TX2 Input 2" value="AIF2RX2" />
-        <ctl name="AIF3TX1 Input 1 Volume" value="32" />
-        <ctl name="AIF3TX1 Input 2 Volume" value="32" />
-        <ctl name="AIF3TX2 Input 1 Volume" value="32" />
-        <ctl name="AIF3TX2 Input 2 Volume" value="32" />
+        <!-- For voice phone call OUTPUT Path -->
+        <path name="Verb-Voicecall" />
     </path>
 
     <path name="voice-bt-sco-headset-wb">
-        <ctl name="ASRC1L Input" value="AIF1RX1" />
-        <ctl name="ASRC1R Input" value="AIF1RX2" />
-        <ctl name="AIF3TX1 Input 1" value="ASRC1L" />
-        <ctl name="AIF3TX2 Input 1" value="ASRC1R" />
-        <ctl name="AIF3TX1 Input 2" value="AIF2RX1" />
-        <ctl name="AIF3TX2 Input 2" value="AIF2RX2" />
-        <ctl name="AIF3TX1 Input 1 Volume" value="32" />
-        <ctl name="AIF3TX1 Input 2 Volume" value="32" />
-        <ctl name="AIF3TX2 Input 1 Volume" value="32" />
-        <ctl name="AIF3TX2 Input 2 Volume" value="32" />
+        <path name="Verb-Voicecall" />
     </path>
 
-    <!-- path name="hdmi" -->
-        <!-- Empty path -->
-    <!-- /path -->
+    <path name="hdmi">
+        <path name="OP-AUX Digital Out-Enable" />
+    </path>
 
-    <!-- path name="speaker-and-hdmi" -->
-        <!-- path name="speaker" / -->
-        <!-- path name="hdmi" / -->
-    <!-- /path -->
+    <path name="speaker-and-hdmi">
+        <path name="speaker" />
+        <path name="hdmi" />   
+    </path>
 
     <path name="bt-sco-headset">
-        <ctl name="ASRC1L Input" value="AIF1RX1" />
-        <ctl name="ASRC1R Input" value="AIF1RX2" />
-        <ctl name="AIF3TX1 Input 1" value="ASRC1L" />
-        <ctl name="AIF3TX2 Input 1" value="ASRC1R" />
-        <ctl name="AIF3TX1 Input 2" value="AIF2RX1" />
-        <ctl name="AIF3TX2 Input 2" value="AIF2RX2" />
-        <ctl name="AIF3TX1 Input 1 Volume" value="32" />
-        <ctl name="AIF3TX1 Input 2 Volume" value="32" />
-        <ctl name="AIF3TX2 Input 1 Volume" value="32" />
-        <ctl name="AIF3TX2 Input 2 Volume" value="32" />
     </path>
 
     <!-- ########## Capture ########## -->
 
     <path name="earpiece-mic">
-        <path name="main-mic" />
-        <ctl name="IN1L Volume" value="23" />
-        <ctl name="IN1L Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <!-- For LineageOs Recorder program -->
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="32" />
+        <ctl name="IN1L Digital Volume" value="150" />
+        <ctl name="LHPF1 Input 1 Volume" value="42" />
     </path>
 
     <path name="speaker-mic">
-        <path name="main-mic" />
-        <ctl name="IN1L Volume" value="35" />
-        <ctl name="IN1L Digital Volume" value="152" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <!-- For normal uses -->
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="42" />
+        <ctl name="IN1L Digital Volume" value="150" />
+        <ctl name="LHPF1 Input 1 Volume" value="42" />
+    </path>
+
+    <path name="headset-mic">
+        <path name="Headset_In-Enable" />
+        <ctl name="IN1R Volume" value="42" />
+        <ctl name="IN1R Digital Volume" value="150" />
+        <ctl name="LHPF3 Input 2 Volume" value="42" />
     </path>
 
     <path name="voice-mic">
-        <path name="main-mic" />
-        <ctl name="IN1L Volume" value="23" />
+        <!-- For voice phone call INPUT Path -->
+        <!-- Configure builtin mic only -->
+        <path name="VMainMic" />
+        <ctl name="IN1L Volume" value="32" />
         <ctl name="IN1L Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        
+        <ctl name="LHPF1 Input 1 Volume" value="42" />
+        <ctl name="LHPF2 Input 1 Volume" value="42" />
+        <ctl name="AIF2TX1 Input 1 Volume" value="42" />
+        <ctl name="AIF2TX2 Input 1 Volume" value="42" />
     </path>
 
     <!-- Two mic -->
-    <!-- path name="voice-earpiece-mic" -->
+    <!--path name="voice-earpiece-mic"-->
         <!-- Should be main mic and back mic -->
         <!-- Capture channel set to main mic -->
         <!-- Empty path -->
-    <!-- /path -->
+    <!--/path-->
 
-    <!-- path name="voice-earpiece-mic-wb" -->
+    <!--path name="voice-earpiece-mic-wb"-->
         <!-- Should be main mic and back mic -->
         <!-- Capture channel set to main mic -->
         <!-- Empty path -->
-    <!-- /path -->
+    <!--/path-->
 
-    <!-- path name="voice-speaker-mic" -->
-        <!-- Should be main mic and back mic -->
-        <!-- Capture channel set to main mic -->
-        <!-- Empty path -->
-    <!-- /path -->
-
-    <!-- path name="voice-speaker-mic-wb" -->
+    <path name="voice-speaker-mic">
         <!-- Should be main mic and back mic -->
         <!-- Capture channel set to back mic -->
-        <!-- Empty path -->
-    <!-- /path -->
-    <!-- End - Two mic -->
+        <path name="voice-mic" />
+    </path>
+
+    <path name="voice-speaker-mic-wb">
+        <!-- Should be main mic and back mic -->
+        <!-- Capture channel set to back mic -->
+        <path name="voice-speaker-mic" />
+    </path>
 
     <path name="voice-headset-mic">
-        <path name="headset-mic" />
-        <ctl name="IN1R Volume" value="39" />
-        <ctl name="IN1R Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <!-- For voice phone call INPUT Path -->
+        <path name="VHeadsetMic" />
+        <ctl name="IN1R Volume" value="32" />
+        <ctl name="IN1R Digital Volume" value="148" />
+      
+        <ctl name="LHPF3 Input 2 Volume" value="42" />
+        <ctl name="AIF2TX1 Input 3 Volume" value="42" />
+        <ctl name="AIF2TX2 Input 3 Volume" value="42" />
     </path>
 
     <path name="voice-headset-mic-wb">
-        <path name="headset-mic" />
-        <ctl name="IN1R Volume" value="39" />
-        <ctl name="IN1R Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <path name="voice-headset-mic" />
     </path>
 
     <path name="voice-bt-sco-mic">
-        <path name="channel-none" />
-        <ctl name="AIF2TX1 Input 2" value="AIF3RX1" />
-        <ctl name="AIF2TX2 Input 2" value="AIF3RX2" />
-        <ctl name="ASRC2L Input" value="AIF3RX1" />
-        <ctl name="ASRC2R Input" value="AIF3RX2" />
-        <ctl name="AIF2TX1 Input 1" value="None" />
-        <ctl name="AIF2TX2 Input 1" value="None" />
+        <!-- For voice phone call INPUT Path -->
+        <!-- Empty path -->
     </path>
 
     <path name="voice-bt-sco-mic-wb">
-        <path name="channel-none" />
-        <ctl name="AIF2TX1 Input 2" value="AIF3RX1" />
-        <ctl name="AIF2TX2 Input 2" value="AIF3RX2" />
-        <ctl name="ASRC2L Input" value="AIF3RX1" />
-        <ctl name="ASRC2R Input" value="AIF3RX2" />
-        <ctl name="AIF2TX1 Input 1" value="None" />
-        <ctl name="AIF2TX2 Input 1" value="None" />
+        <!-- Empty path -->
     </path>
 
-    <!-- path name="hdmi-mic" -->
+    <path name="hdmi-mic">
         <!-- Empty path -->
-    <!-- /path -->
+    </path>
 
     <path name="bt-sco-mic">
-        <path name="channel-none" />
-        <ctl name="AIF2TX1 Input 2" value="AIF3RX1" />
-        <ctl name="AIF2TX2 Input 2" value="AIF3RX2" />
-        <ctl name="ASRC2L Input" value="AIF3RX1" />
-        <ctl name="ASRC2R Input" value="AIF3RX2" />
-        <ctl name="AIF2TX1 Input 1" value="None" />
-        <ctl name="AIF2TX2 Input 1" value="None" />
+        <!-- Empty path -->
     </path>
 
     <path name="voice-rec-headset-mic">
-        <path name="headset-mic" />
-        <ctl name="IN1R Volume" value="39" />
+        <!-- For Voice Recording INPUT Path -->
+        <path name="VHeadsetMic" />
+        <ctl name="IN1R Volume" value="32" />
         <ctl name="IN1R Digital Volume" value="128" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <ctl name="LHPF3 Input 2 Volume" value="32" />
     </path>
 
     <path name="voice-rec-mic">
-        <path name="main-mic" />
-        <ctl name="IN1L Volume" value="35" />
-        <ctl name="IN1L Digital Volume" value="152" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <!-- For Voice Recording INPUT Path -->
+        <!-- "OK Google" Google app use this path for input--> 
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="42" />
+        <ctl name="IN1L Digital Volume" value="148" />
+        <ctl name="LHPF1 Input 1 Volume" value="46" />
     </path>
 
     <path name="camcorder-mic">
-        <path name="main-mic" />
-        <ctl name="IN1L Volume" value="35" />
-        <ctl name="IN1L Digital Volume" value="152" />
-        <ctl name="LHPF1 Input 1 Volume" value="32" />
+        <!-- For Camera/Vedio recording -->
+        <!-- Should be builtin and back mic -->
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="42" />
+        <ctl name="IN1L Digital Volume" value="148" />
+        <ctl name="LHPF1 Input 1 Volume" value="46" />
     </path>
 
-    <!-- path name="loopback-aec" -->
-        <!-- Empty path -->
-    <!-- /path -->
+    <path name="loopback-aec">
+    </path>
 
 </mixer>

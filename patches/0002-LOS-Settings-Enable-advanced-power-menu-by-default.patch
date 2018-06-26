@@ -1,0 +1,17 @@
+Settings: Enable advanced power menu by default
+
+project packages/apps/Settings/
+diff --git a/packages/apps/Settings/res/xml/development_prefs.xml b/packages/apps/Settings/res/xml/development_prefs.xml
+index d654829ca1..66670a90bf 100644
+--- a/packages/apps/Settings/res/xml/development_prefs.xml
++++ b/packages/apps/Settings/res/xml/development_prefs.xml
+@@ -36,7 +36,8 @@
+     <cyanogenmod.preference.CMSecureSettingSwitchPreference
+             android:key="advanced_reboot"
+             android:title="@string/advanced_reboot_title"
+-            android:summary="@string/advanced_reboot_summary" />
++            android:summary="@string/advanced_reboot_summary"
++            android:defaultValue="true"/>
+ 
+     <PreferenceScreen
+             android:key="local_backup_password"

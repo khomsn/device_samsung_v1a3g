@@ -1,5 +1,5 @@
 # Unified Memory Management device
-#type ump_device, dev_type;
+type ump_device, dev_type;
 
 # /dev/block/mmcblk0p[0-9] (/dev/mbin0)
 type emmcblk_device, file_type;
@@ -8,13 +8,13 @@ type emmcblk_device, file_type;
 type mif_device, dev_type;
 
 # /dev/ttySAC0
-#type bluetooth_device, dev_type;
+type bluetooth_device, dev_type;
 
 # /dev/rfkill
-#type rfkill_device, dev_type;
+type rfkill_device, dev_type;
 
 # /dev/s5p-smem
-#type secmem_device, dev_type;
+type secmem_device, dev_type;
 
 # /dev/fimg2d
-#type fimg2d_device, dev_type;
+type fimg2d_device, dev_type;

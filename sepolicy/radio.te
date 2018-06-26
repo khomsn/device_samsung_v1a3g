@@ -1,0 +1,2 @@
+# denied for path="/data/user_de/0/com.android.settings"
+allow radio system_app_data_file:dir getattr;

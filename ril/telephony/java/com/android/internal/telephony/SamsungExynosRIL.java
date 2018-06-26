@@ -26,6 +26,7 @@ import android.os.Message;
 import android.os.Parcel;
 import android.os.SystemProperties;
 import android.telephony.PhoneNumberUtils;
+import com.android.internal.telephony.cdma.CdmaSmsBroadcastConfigInfo;
 import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
 import com.android.internal.telephony.uicc.IccUtils;
@@ -53,6 +54,7 @@ public class SamsungExynosRIL extends RIL {
     private static final int RIL_UNSOL_STK_SEND_SMS_RESULT = 11002;
     private static final int RIL_UNSOL_AM = 11010;
     private static final int RIL_UNSOL_DUN_PIN_CONTROL_SIGNAL = 11011;
+    private static final int RIL_UNSOL_WB_AMR_STATE = 11017;
     private static final int RIL_UNSOL_SIM_SWAP_STATE_CHANGED = 11057;
 
     // Property to determine whether we are using this subclass on a nextgen modem or not.
@@ -294,6 +296,9 @@ public class SamsungExynosRIL extends RIL {
                     case RIL_UNSOL_DUN_PIN_CONTROL_SIGNAL:
                         ret = responseVoid(p);
                         break;
+                    case RIL_UNSOL_WB_AMR_STATE:
+                        ret = responseInts(p);
+                        break;
                     case RIL_UNSOL_SIM_SWAP_STATE_CHANGED: // To be remapped
                         superProcessUnsolicited(p, type, dataPosition,
                                                 RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED);
@@ -328,6 +333,18 @@ public class SamsungExynosRIL extends RIL {
             // Not an OEM response.
             superProcessUnsolicited(p, type, dataPosition, -1);
             return;
+        }
+    }
+
+    @Override
+    public void
+    setCdmaBroadcastConfig(CdmaSmsBroadcastConfigInfo[] configs, Message response) {
+        Rlog.w(RILJ_LOG_TAG, "Ignoring call to 'setCdmaBroadcastConfig'. Not supported.");
+        if (response != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(response, null, ex);
+            response.sendToTarget();
         }
     }
 }

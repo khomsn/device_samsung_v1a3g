@@ -1,0 +1,8 @@
+allow sysinit cache_file:dir getattr;
+allow sysinit efs_file:dir getattr;
+allow sysinit proc:file rw_file_perms;
+allow sysinit storage_file:dir getattr;
+allow sysinit unlabeled:dir getattr;
+allow sysinit emmcblk_device:blk_file { read open ioctl };
+allow sysinit system_block_device:blk_file { read open ioctl };
+allow sysinit self:capability sys_admin;
