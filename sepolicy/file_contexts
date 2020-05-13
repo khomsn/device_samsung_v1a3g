@@ -53,6 +53,11 @@
 /efs/wifi(/.*)?								u:object_r:wifi_efs_file:s0
 /efs/wv\.keys								u:object_r:cpk_efs_file:s0
 
+# Widevine
+/efs/cpk(/.*)								u:object_r:cpk_efs_file:s0
+/efs/h2k.dat								u:object_r:cpk_efs_file:s0
+/efs/wv.keys								u:object_r:cpk_efs_file:s0
+
 # camera
 /sys/devices/virtual/camera/.*/.*_camfw					u:object_r:video_device:s0
 /data/camera(/.*)?							u:object_r:camera_data_file:s0
@@ -98,3 +103,6 @@
 
 # For SpenCommand
 /dev/input/event1							u:object_r:input_device:s0
+
+/persist(/.*)?								u:object_r:persist_file:s0
+/persist/alarm(/.*)?							u:object_r:persist_alarm_file:s0

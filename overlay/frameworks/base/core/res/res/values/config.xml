@@ -21,6 +21,9 @@
      for different hardware and product builds. -->
 <resources>
 
+    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+    <bool translatable="false" name="config_intrusiveNotificationLed">true</bool>
+
     <!-- If enabled, capacitive keys will only light up when pressed.
          Otherwise, the buttons will light up whenever the user interacts with the device -->
     <bool name="config_buttonLightOnKeypressOnly">true</bool>
@@ -369,8 +372,20 @@
     <!-- Whether to persist the notification for when a usb drive device is plugged in -->
     <bool name="config_persistUsbDriveNotification">true</bool>
 
-    <!-- The device supports freeform window management -->
+    <!-- The device supports freeform window management. Windows have title bars and can be moved
+         and resized. If you set this to true, you also need to add
+         PackageManager.FEATURE_FREEFORM_WINDOW_MANAGEMENT feature to your device specification.
+         The duplication is necessary, because this information is used before the features are
+         available to the system.-->
     <bool name="config_freeformWindowManagement">true</bool>
+
+    <!-- Controls the opacity of the navigation bar depending on the visibility of the
+         various workspace stacks.
+         0 - Nav bar is always opaque when either the freeform stack or docked stack is visible.
+         1 - Nav bar is always translucent when the freeform stack is visible, otherwise always
+         opaque.
+         -->
+    <integer name="config_navBarOpacityMode">1</integer>
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
