@@ -140,7 +140,7 @@ index 57d0a01397a..964f3c4dd18 100644
              updateSettings();
          }
  
-@@ -2573,6 +2580,20 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -2587,6 +2594,20 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                              MSG_ENABLE_POINTER_LOCATION : MSG_DISABLE_POINTER_LOCATION);
                  }
              }
@@ -161,14 +161,14 @@ index 57d0a01397a..964f3c4dd18 100644
              // use screen off timeout setting as the timeout for the lockscreen
              mLockScreenTimeout = Settings.System.getIntForUser(resolver,
                      Settings.System.SCREEN_OFF_TIMEOUT, 0, UserHandle.USER_CURRENT);
-@@ -6464,9 +6485,16 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -6478,9 +6499,16 @@ public class PhoneWindowManager implements WindowManagerPolicy {
          final boolean canceled = event.isCanceled();
          final int keyCode = event.getKeyCode();
          final int scanCode = event.getScanCode();
 +        final int source = event.getSource();
- 
+
          final boolean isInjected = (policyFlags & WindowManagerPolicy.FLAG_INJECTED) != 0;
- 
+
 +        final boolean appSwitchKey = keyCode == KeyEvent.KEYCODE_APP_SWITCH;
 +        final boolean homeKey = keyCode == KeyEvent.KEYCODE_HOME;
 +        final boolean menuKey = keyCode == KeyEvent.KEYCODE_MENU;
@@ -178,10 +178,10 @@ index 57d0a01397a..964f3c4dd18 100644
          // If screen is off then we treat the case where the keyguard is open but hidden
          // the same as if it were open and in front.
          // This will prevent any keys other than the power button from waking the screen
-@@ -6476,6 +6504,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -6490,6 +6518,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                                                  isKeyguardShowingAndNotOccluded() :
                                                  mKeyguardDelegate.isShowing()));
- 
+
 +        if (mANBIHandler != null && mANBIEnabled && mANBIHandler.isScreenTouched()
 +                && !navBarKey && (appSwitchKey || homeKey || menuKey || backKey)) {
 +            return 0;
@@ -190,10 +190,10 @@ index 57d0a01397a..964f3c4dd18 100644
          if (DEBUG_INPUT) {
              Log.d(TAG, "interceptKeyTq keycode=" + keyCode
                      + " interactive=" + interactive + " keyguardActive=" + keyguardActive
-@@ -8008,6 +8041,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -8027,6 +8060,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
          // CMHardwareService to be up and running
          mSettingsObserver.observe();
- 
+
 +        mANBIHandler = new ANBIHandler(mContext);
 +
          readCameraLensCoverState();

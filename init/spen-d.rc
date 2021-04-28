@@ -1,0 +1,9 @@
+service spen-d /system/xbin/bash /system/xbin/spenindetection.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:sudaemon:s0
+
+on property:sys.boot_completed=1 && property:sys.logbootcomplete=1
+    start spen-d        

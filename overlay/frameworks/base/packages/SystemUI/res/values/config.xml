@@ -44,4 +44,7 @@
     <string name="quick_settings_tiles_default" translatable="false">
         cell,wifi,bt,location,dnd,flashlight,cast,ambient_display,hotspot,usb_tether,rotation
     </string>
+    <!-- Enable doze mode -->
+    <bool name="doze_display_state_supported">true</bool>
+   
 </resources>

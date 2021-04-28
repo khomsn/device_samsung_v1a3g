@@ -34,6 +34,7 @@
 #include <sys/mman.h>
 
 #include "ExynosCameraHWInterface.h"
+#include <camera/ExynosCameraAutoTimer.h>
 
 namespace android {
 

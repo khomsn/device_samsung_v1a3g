@@ -21,6 +21,9 @@
      for different hardware and product builds. -->
 <resources>
 
+    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+    <bool translatable="false" name="config_intrusiveNotificationLed">true</bool>
+
     <!-- If enabled, capacitive keys will only light up when pressed.
          Otherwise, the buttons will light up whenever the user interacts with the device -->
     <bool name="config_buttonLightOnKeypressOnly">true</bool>
@@ -337,8 +340,9 @@
          don't support RIL_REQUEST_GET_RADIO_CAPABILITY
          format is UMTS|LTE|...
     -->
-    <string translatable="false" name="config_radio_access_family">GSM|GPRS|EDGE|WCDMA</string>
+    <string translatable="false" name="config_radio_access_family">GPRS|EDGE|UMTS|HSDPA|HSUPA|HSPA|HSPAP|GSM|TD_SCDMA|WCDMA</string>
 
+    <!-- Enable doze mode -->
     <!-- ComponentName of a dream to show whenever the system would otherwise have
          gone to sleep.  When the PowerManager is asked to go to sleep, it will instead
          try to start this dream if possible.  The dream should typically call startDozing()
@@ -349,11 +353,19 @@
          Note that doze dreams are not subject to the same start conditions as ordinary dreams.
          Doze dreams will run whenever the power manager is in a dozing state. -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <bool name="config_dozeAfterScreenOff">true</bool>
 
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">20</integer>
+    <integer name="config_screenBrightnessDoze">1</integer>
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
+
+    <!-- Permit doze mode to operate -->
+    <bool name="config_enableAutoPowerModes">true</bool>
+
+    <!-- If this is true, the screen will fade off. -->
+    <bool name="config_animateScreenLights">true</bool>
 
     <!-- Indicate whether the lid state impacts the accessibility of
          the navigation buttons.  0 means it doesn't, 1 means it is accessible
@@ -369,8 +381,20 @@
     <!-- Whether to persist the notification for when a usb drive device is plugged in -->
     <bool name="config_persistUsbDriveNotification">true</bool>
 
-    <!-- The device supports freeform window management -->
+    <!-- The device supports freeform window management. Windows have title bars and can be moved
+         and resized. If you set this to true, you also need to add
+         PackageManager.FEATURE_FREEFORM_WINDOW_MANAGEMENT feature to your device specification.
+         The duplication is necessary, because this information is used before the features are
+         available to the system.-->
     <bool name="config_freeformWindowManagement">true</bool>
+
+    <!-- Controls the opacity of the navigation bar depending on the visibility of the
+         various workspace stacks.
+         0 - Nav bar is always opaque when either the freeform stack or docked stack is visible.
+         1 - Nav bar is always translucent when the freeform stack is visible, otherwise always
+         opaque.
+         -->
+    <integer name="config_navBarOpacityMode">1</integer>
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">

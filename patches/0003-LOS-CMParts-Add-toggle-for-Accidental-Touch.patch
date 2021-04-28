@@ -7,17 +7,15 @@ diff --git a/packages/apps/CMParts/res/values-ru/strings.xml b/packages/apps/CMP
 index cae770b..e2397d6 100644
 --- a/packages/apps/CMParts/res/values-ru/strings.xml
 +++ b/packages/apps/CMParts/res/values-ru/strings.xml
-@@ -197,6 +197,10 @@
-   <string name="volume_answer_call_summary">Отвечать на телефонный вызов нажатием кнопок громкости</string>
-   <string name="home_answer_call_title">Ответ на вызов</string>
-   <string name="home_answer_call_summary">Отвечать на входящий вызов нажатием кнопки «Домой»</string>
-+  <!-- ANBI -->
-+  <string name="buttons_misc_cat">Разное</string>
-+  <string name="anbi_title">Случайное касание</string>
-+  <string name="anbi_summary">Отключать взаимодействие с навигационными кнопками во время касания экрана</string>
-   <!-- Key backlight -->
-   <string name="button_backlight_title">Подсветка</string>
-   <string name="button_backlight_enabled">Подсветка кнопок</string>
+@@ -531,4 +531,8 @@
+     <string name="touchscreen_gesture_action_next_track">Перейти к следующему треку</string>
+     <string name="touchscreen_gesture_action_volume_down">Уменьшить громкость</string>
+     <string name="touchscreen_gesture_action_volume_up">Увеличить громкость</string>
++    <!-- ANBI -->
++    <string name="buttons_misc_cat">Разное</string>
++    <string name="anbi_title">Случайное касание</string>
++    <string name="anbi_summary">Отключать взаимодействие с навигационными кнопками во время касания экрана</string>
+ </resources>
 diff --git a/packages/apps/CMParts/res/values/strings.xml b/packages/apps/CMParts/res/values/strings.xml
 index 603d9ba..92bc0af 100644
 --- a/packages/apps/CMParts/res/values/strings.xml

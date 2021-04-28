@@ -39,7 +39,7 @@
 
 #include "ExynosCameraHWImpl.h"
 //#include "ExynosCameraHWInterface.h"
-#include "ExynosCameraAutoTimer.h"
+//#include "ExynosCameraAutoTimer.h"
 
 //#include "exynos_format.h"
 //#include "CameraBase.h"

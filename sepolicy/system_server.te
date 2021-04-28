@@ -43,3 +43,8 @@ allow system_server kernel:process setsched;
 
 # fimg2d
 allow system_server fimg2d_device:chr_file rw_file_perms;
+
+# Alarms
+allow system_server persist_file:dir r_dir_perms;
+allow system_server persist_alarm_file:dir rw_dir_perms;
+allow system_server persist_alarm_file:file create_file_perms;
