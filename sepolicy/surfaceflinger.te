@@ -1,2 +1,0 @@
-# HDMI
-allow surfaceflinger audio_device:chr_file { open read ioctl write };

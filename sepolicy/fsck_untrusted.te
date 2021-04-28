@@ -1,2 +1,0 @@
-# OTG / NTFS
-allow fsck_untrusted emmcblk_device:blk_file getattr;

@@ -1,5 +1,0 @@
-# ttySAC2
-allow shell device:chr_file { getattr ioctl };
-
-# SU
-allow shell su:process signal;
