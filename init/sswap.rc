@@ -1,0 +1,5 @@
+service sswap /system/vendor/bin/sswap -s
+    class core
+    user root
+    group root
+    oneshot

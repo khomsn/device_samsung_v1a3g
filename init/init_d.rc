@@ -1,0 +1,6 @@
+service init_d /system/bin/sh /system/bin/sysinit
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:sudaemon:s0

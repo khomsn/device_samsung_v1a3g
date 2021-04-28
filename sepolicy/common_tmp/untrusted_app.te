@@ -1,0 +1,29 @@
+# For SpenCommand
+allow untrusted_app input_device:chr_file { ioctl open read };
+allow untrusted_app input_device:dir { open read };
+allow untrusted_app input_device:dir search;
+
+# File manager
+allow untrusted_app block_device:dir { open read };
+allow untrusted_app device:dir { open read };
+allow untrusted_app efs_file:dir getattr;
+allow untrusted_app rootfs:dir { open read };
+allow untrusted_app sysfs:dir { open read };
+allow untrusted_app unlabeled:dir getattr;
+
+#allow untrusted_app debuggerd_exec:file { read open };
+
+allow untrusted_app exfat:dir create_dir_perms;
+allow untrusted_app exfat:file create_file_perms;
+#allow untrusted_app fuseblk:dir create_dir_perms;
+#allow untrusted_app fuseblk:file create_file_perms;
+
+allow untrusted_app debugfs:dir {read};
+
+allow untrusted_app self:udp_socket ioctl;
+#avc: denied { read } for comm="ndroid.termina" name="online" dev="sysfs" ino=34 scontext=u:r:untrusted_app:s0:c83,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="ndroid.termina" name="online" dev="sysfs" ino=34 scontext=u:r:untrusted_app:s0:c83,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+allow untrusted_app sysfs:file { open read write ioctl getattr setattr };
+#avc: denied { read } for comm="RenderThread" name="cpu" dev="sysfs" ino=32 scontext=u:r:untrusted_app_27:s0:c115,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1 app=com.android.inputmethod.latin
+#avc: denied { open } for comm="RenderThread" name="cpu" dev="sysfs" ino=32 scontext=u:r:untrusted_app_27:s0:c115,c256,c512,c768 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1 app=com.android.inputmethod.latin
+allow untrusted_app_27 sysfs:dir { open read };

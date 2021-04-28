@@ -1,0 +1,5 @@
+service gpsd /vendor/bin/hw/gpsd -c /vendor/etc/gps.xml
+    class main
+    user gps
+    group system inet net_raw wakelock
+    ioprio be 0

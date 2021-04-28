@@ -1,0 +1,2 @@
+#avc : denied { read } for comm=incidentd name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:incidentd:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+allow incidentd gpsd_exec:file { read };

@@ -1,0 +1,10 @@
+#avc : denied { write } for comm=installd name=tasks dev=tmpfs ino=3726 scontext=u:r:installd:s0 tcontext=u:object_r:device:s0 tclass=file permissive=1
+#avc : denied { open } for comm=installd name=tasks dev=tmpfs ino=3726 scontext=u:r:installd:s0 tcontext=u:object_r:device:s0 tclass=file permissive=1
+allow installd {
+    device
+    debugfs
+    }:file { open write };
+#avc : denied { read } for comm=installd name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:installd:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+allow installd gpsd_exec:file { read };
+# TbStorage (mobicore)
+allow installd tee_data_file:dir { rw_dir_perms rmdir };

@@ -1,0 +1,9 @@
+#/system/bin/adbroot
+#type adbroot, domain;
+#type adbroot_exec, exec_type, file_type;
+#avc : denied { open } for comm=adb_root name=tasks dev=tmpfs ino=3726 scontext=u:r:adbroot:s0 tcontext=u:object_r:device:s0 tclass=file permissive=1
+#avc : denied { write } for comm=adb_root name=tasks dev=tmpfs ino=3726 scontext=u:r:adbroot:s0 tcontext=u:object_r:device:s0 tclass=file permissive=1
+#allow adbroot device:file { open write };
+#avc : denied { read } for comm=adb_root name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:adbroot:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+#allow adbroot gpsd_exec:file { read };
+

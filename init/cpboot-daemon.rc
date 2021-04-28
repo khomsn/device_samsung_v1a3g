@@ -1,0 +1,5 @@
+service cpboot-daemon /system/vendor/bin/hw/cbd -d -txmm626x -bh -mh -p 13
+    class main
+    user root
+    group radio cache inet misc audio sdcard_rw log sdcard_r shell
+    disabled

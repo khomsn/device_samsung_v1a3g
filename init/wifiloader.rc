@@ -1,0 +1,3 @@
+service wifiloader /system/vendor/bin/wifiloader
+    class main
+    oneshot

@@ -1,0 +1,7 @@
+#avc: denied { read } for comm="healthd" name="present" dev="sysfs" ino=19672 scontext=u:r:healthd:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="healthd" name="present" dev="sysfs" ino=19672 scontext=u:r:healthd:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+#avc: denied { getattr } for comm="healthd" path="/sys/devices/platform/sec-battery/power_supply/battery/present" dev="sysfs" ino=19672 scontext=u:r:healthd:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+allow healthd sysfs:file { open read getattr };
+# healthd
+allow healthd device:dir rw_dir_perms;
+allow healthd rtc_device:chr_file rw_file_perms;

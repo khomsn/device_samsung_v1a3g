@@ -1,0 +1,3 @@
+#avc : denied { read } for comm=mediaextractor name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:mediaextractor:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+allow mediaextractor gpsd_exec:file { read getattr };
+allow mediaextractor fuse:file { getattr read };

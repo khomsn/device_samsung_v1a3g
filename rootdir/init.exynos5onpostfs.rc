@@ -1,0 +1,10 @@
+on post-fs
+    chown system log /proc/sec_log
+
+    # Restore contexts on /persist
+    chown system system /persist
+    chmod 0770 /persist
+    restorecon_recursive /persist
+    # create /persist/alarm if not exist
+    mkdir /persist/alarm 0771 system system
+

@@ -1,0 +1,28 @@
+# Init runs and processing these steps  
+#
+#   processing action (early-init)
+#   processing action (init)
+#   processing action (late-init)
+#   processing action (early-fs)
+#   processing action (fs)
+#   Command 'mount_all
+#   processing action (post-fs)
+#   processing action (late-fs)
+#   processing action (post-fs-data)
+#   processing action (zygote-start)
+#   processing action (firmware_mounts_complete)
+#   processing action (early-boot)
+#   processing action (boot)
+#   processing action (enable_property_trigger)
+
+import /vendor/etc/init/hw/init.exynos5onearlyinit.rc
+import /vendor/etc/init/hw/init.exynos5oninit.rc
+import /vendor/etc/init/hw/init.exynos5onfs.rc
+import /vendor/etc/init/hw/init.exynos5onpostfs.rc
+import /vendor/etc/init/hw/init.exynos5onlatefs.rc
+import /vendor/etc/init/hw/init.exynos5onpostfsdata.rc
+import /vendor/etc/init/hw/init.exynos5onearlyboot.rc
+import /vendor/etc/init/hw/init.exynos5onboot.rc
+import /vendor/etc/init/hw/init.exynos5oncharger.rc
+import /vendor/etc/init/hw/init.exynos5onproperty.rc
+

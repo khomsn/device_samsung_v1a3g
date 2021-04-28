@@ -1,0 +1,4 @@
+# OTG / NTFS
+allow fsck_untrusted emmcblk_device:blk_file getattr;
+#avc: denied { ioctl } for comm="e2fsck" path="/dev/block/vold/public:179,33" dev="tmpfs" ino=12427 ioctlcmd=125e scontext=u:r:fsck_untrusted:s0 tcontext=u:object_r:vold_device:s0 tclass=blk_file permissive=1
+allow fsck_untrusted vold_device:blk_file { ioctl };

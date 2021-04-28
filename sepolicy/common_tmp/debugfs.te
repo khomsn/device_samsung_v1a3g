@@ -1,0 +1,32 @@
+#avc: denied { write } for comm="android.hardwar" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:mediacodec:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="android.hardwar" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:mediacodec:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow mediacodec debugfs:file { open write };
+#avc: denied { read } for comm="storaged" path="/sys/kernel/debug/mmc0/mmc0:0001/ext_csd" dev="debugfs" ino=3066 scontext=u:r:storaged:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="storaged" name="ext_csd" dev="debugfs" ino=3066 scontext=u:r:storaged:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { getattr } for comm="storaged" path="/sys/kernel/debug/mmc0/mmc0:0001/ext_csd" dev="debugfs" ino=3066 scontext=u:r:storaged:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#allow storaged debugfs:file { open read getattr };
+#avc: denied { write } for comm="mediaserver" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:mediaserver:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="mediaserver" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:mediaserver:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow mediaserver debugfs:file { open write };
+#avc: denied { write } for comm="mediaswcodec" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:mediaswcodec:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="mediaswcodec" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:mediaswcodec:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow mediaswcodec debugfs:file { open write };
+#avc: denied { write } for comm="Binder:2979_3" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:netd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="Binder:2979_3" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:netd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow netd debugfs:file { open write };
+#avc: denied { read } for comm="batterystats-wo" name="wakeup_sources" dev="debugfs" ino=11 scontext=u:r:system_server:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="batterystats-wo" name="wakeup_sources" dev="debugfs" ino=11 scontext=u:r:system_server:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { getattr } for comm="batterystats-wo" path="/sys/kernel/debug/wakeup_sources" dev="debugfs" ino=11 scontext=u:r:system_server:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow system_server debugfs:file { open read getattr };
+#avc: denied { read } for comm="system_server" name="mem" dev="debugfs" ino=3046 scontext=u:r:system_server:s0 tcontext=u:object_r:debugfs:s0 tclass=dir permissive=1
+#avc: denied { open } for comm="system_server" name="mem" dev="debugfs" ino=3046 scontext=u:r:system_server:s0 tcontext=u:object_r:debugfs:s0 tclass=dir permissive=1
+allow system_server debugfs:dir { open read };
+#avc: denied { write } for comm="usbd" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:usbd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="usbd" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:usbd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow usbd debugfs:file { open write };
+#avc: denied { read } for comm="writer" name="DSP1" dev="debugfs" ino=5172 scontext=u:r:hal_audio_default:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#avc: denied { open } for comm="writer" name="DSP1" dev="debugfs" ino=5172 scontext=u:r:hal_audio_default:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+allow hal_audio_default debugfs:file { open read };
+#avc: denied { write } for comm="blank_screen" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:blank_screen:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
+#allow blank_screen debugfs:file { open write };
+

@@ -1,0 +1,568 @@
+on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+    # Reduce reserved lowmem from ~48MB to ~12MB
+    write /proc/sys/vm/lowmem_reserve_ratio "128 128"
+
+    # Set up kernel tracing, but disable it by default
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+    write /sys/kernel/debug/tracing/tracing_on 0
+
+    chown root radio /proc/cmdline
+    chmod 0644 /proc/cmdline
+
+# CS socket
+    mkdir /dev/socket/cs_socket 0770 system system
+
+# Permissions for PowerHAL
+    chown system system /sys/class/input/input10/enabled
+    chmod 0660 /sys/class/input/input10/enabled
+    chown system system /sys/class/input/input9/enabled
+    chmod 0660 /sys/class/input/input9/enabled
+    chown system system /sys/class/input/input8/enabled
+    chmod 0660 /sys/class/input/input8/enabled
+    chown system system /sys/class/input/input7/enabled
+    chmod 0660 /sys/class/input/input7/enabled
+    chown system system /sys/class/input/input6/enabled
+    chmod 0660 /sys/class/input/input6/enabled
+    chown system system /sys/class/input/input5/enabled
+    chmod 0660 /sys/class/input/input5/enabled
+    chown system system /sys/class/input/input4/enabled
+    chmod 0660 /sys/class/input/input4/enabled
+    chown system system /sys/class/input/input3/enabled
+    chmod 0660 /sys/class/input/input3/enabled
+    chown system system /sys/class/input/input2/enabled
+    chmod 0660 /sys/class/input/input2/enabled
+    chown system system /sys/class/input/input1/enabled
+    chmod 0660 /sys/class/input/input1/enabled
+
+# Permissions for TouchScreen
+    chown system radio /sys/class/sec/tsp/cmd
+    chown system radio /sys/class/sec/sec_touchscreen/set_tsp_for_inputmethod
+
+# Permissions for Touchkey
+    chown system radio /sys/class/sec/sec_touchkey/enable_disable
+    chown system radio /sys/class/sec/sec_touchkey/brightness
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_menu
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_back
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_version_panel
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_version_phone
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update_status
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_firm_update
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_threshold
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_factory_mode
+    chown system radio /sys/class/sec/sec_touchkey/touch_sensitivity
+    chown system radio /sys/class/sec/sec_touchkey/glove_mode
+    chown system radio /sys/class/sec/sec_touchkey/flip_mode
+    chown system radio /sys/class/sec/sec_touchkey/boost_level
+    chown system radio /sys/class/sec/sec_touchkey/extra_button_event
+# KeyDisabler permission
+    chown system system /sys/class/sec/sec_touchkey/touchkey_enabled
+    chmod 0660 /sys/class/sec/sec_touchkey/touchkey_enabled
+
+    chmod 0660 /dev/ttySAC2
+    chown system system /dev/ttySAC2
+
+# Permissions for gpio_keys
+    chown radio system /sys/class/sec/sec_key/wakeup_keys
+    write /sys/class/sec/sec_key/wakeup_keys 116,172
+
+# Permissions for EPEN
+    chown system system /sys/class/input/input10/enabled
+    chmod 0660 /sys/class/input/input10/enabled
+    chown system radio /sys/class/sec/sec_epen/epen_firm_update
+    chown system radio /sys/class/sec/sec_epen/epen_rotation
+    chown system radio /sys/class/sec/sec_epen/epen_hand
+    chown system radio /sys/class/sec/sec_epen/epen_reset
+    chown system radio /sys/class/sec/sec_epen/epen_reset_result
+    chown system radio /sys/class/sec/sec_epen/epen_checksum
+    chown system radio /sys/class/sec/sec_epen/epen_checksum_result
+    chown system radio /sys/class/sec/sec_epen/epen_saving_mode
+    chown system radio /sys/class/sec/sec_epen/epen_connection
+    chown system radio /sys/class/sec/sec_epen/boost_level
+    # EPEN saving mode
+    write /sys/devices/virtual/sec/sec_epen/epen_saving_mode 1
+
+# SENSORS
+# Accelerometer_sensor
+    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
+    chown system radio /sys/class/sensors/accelerometer_sensor/name
+# Proximity_sensor
+    chown system radio /sys/class/sensors/proximity_sensor/state
+    chown system radio /sys/class/sensors/proximity_sensor/raw_data
+    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
+    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
+    chown system radio /sys/class/sensors/proximity_sensor/vendor
+    chown system radio /sys/class/sensors/proximity_sensor/name
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_high
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_low
+    chown system radio /sys/class/sensors/proximity_sensor/barcode_emul_en
+# Light_sensor
+    chown system radio /sys/class/sensors/light_sensor/lux
+    chown system radio /sys/class/sensors/light_sensor/raw_data
+    chown system radio /sys/class/sensors/light_sensor/vendor
+    chown system radio /sys/class/sensors/light_sensor/name
+# Gyro_sensor
+    chown system radio /sys/class/sensors/gyro_sensor/power_on
+    chown system radio /sys/class/sensors/gyro_sensor/power_off
+    chown system radio /sys/class/sensors/gyro_sensor/temperature
+    chown system radio /sys/class/sensors/gyro_sensor/selftest
+    chown system radio /sys/class/sensors/gyro_sensor/selftest_dps
+    chown system radio /sys/class/sensors/gyro_sensor/vendor
+    chown system radio /sys/class/sensors/gyro_sensor/name
+# Barometer_sensor
+    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
+    chown system radio /sys/class/sensors/barometer_sensor/vendor
+    chown system radio /sys/class/sensors/barometer_sensor/name
+    chown system radio /sys/class/sensors/barometer_sensor/calibration
+# Magnetic_sensor
+    chown system radio /dev/akm8963
+    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
+    chown system radio /sys/class/sensors/magnetic_sensor/vendor
+    chown system radio /sys/class/sensors/magnetic_sensor/name
+# Gesture_sensor
+    chown system radio /sys/class/sensors/gesture_sensor/vendor
+    chown system radio /sys/class/sensors/gesture_sensor/name
+    chown system radio /sys/class/sensors/gesture_sensor/raw_data
+    chown system radio /sys/class/sensors/gesture_sensor/ir_current
+    chown system radio /sys/class/sensors/gesture_sensor/selftest
+# Temphumidity_sensor
+    chown system radio /sys/class/sensors/temphumidity_sensor/vendor
+    chown system radio /sys/class/sensors/temphumidity_sensor/name
+    chown system radio /sys/class/sensors/temphumidity_sensor/engine_ver
+    chown system radio /sys/class/sensors/temphumidity_sensor/send_accuracy
+# Grip_sensor
+    chown system radio /sys/class/sensors/grip_sensor/vendor
+    chown system radio /sys/class/sensors/grip_sensor/name
+    chown system radio /sys/class/sensors/grip_sensor/raw_data
+    chown system radio /sys/class/sensors/grip_sensor/calibration
+    chown system radio /sys/class/sensors/grip_sensor/threshold
+    chown system radio /sys/class/sensors/grip_sensor/onoff
+
+# Permissions Camera
+    chown system radio /sys/class/camera/rear/isp_core
+    chown system radio /sys/class/camera/rear/rear_calcheck
+    chown system radio /sys/class/camera/rear/rear_camfw
+    chown system radio /sys/class/camera/rear/rear_camfw_full
+    chown system radio /sys/class/camera/rear/rear_camtype
+
+    chown system radio /sys/class/camera/flash/rear_flash
+
+    chown system radio /sys/class/camera/front/front_camfw
+    chown system radio /sys/class/camera/front/front_camtype
+
+# Switch Device
+    chown system radio /sys/class/sec/switch/otg_test
+    chown system radio /sys/class/sec/switch/adc
+    chown system radio /sys/class/sec/switch/apo_factory
+
+# OTG_TEST
+    chown system radio /sys/class/host_notify/usb_otg/booster
+    chmod 0664 /sys/class/host_notify/usb_otg/booster
+
+# SSWAP
+    write /proc/sys/vm/swappiness 130
+
+# PMS DVFS
+    chown radio system /sys/power/cpufreq_table
+    chown radio system /sys/power/cpufreq_max_limit
+    chown radio system /sys/power/cpufreq_min_limit
+    chmod 0660 /sys/power/cpufreq_table
+    chmod 0660 /sys/power/cpufreq_max_limit
+    chmod 0660 /sys/power/cpufreq_min_limit
+    chown radio system /sys/class/devfreq/exynos5-busfreq-mif/en_monitoring
+    chown radio system /sys/class/devfreq/exynos5-busfreq-int/en_monitoring
+    chmod 0664 /sys/class/devfreq/exynos5-busfreq-mif/en_monitoring
+    chmod 0664 /sys/class/devfreq/exynos5-busfreq-int/en_monitoring
+    chown radio system /sys/class/devfreq/exynos5-busfreq-mif/freq_table
+    chown radio system /sys/class/devfreq/exynos5-busfreq-int/freq_table
+    chown radio system /sys/class/devfreq/exynos5-busfreq-mif/min_freq
+    chown radio system /sys/class/devfreq/exynos5-busfreq-int/min_freq
+    chown radio system /sys/class/devfreq/exynos5-busfreq-mif/max_freq
+    chown radio system /sys/class/devfreq/exynos5-busfreq-int/max_freq
+    chown radio system /sys/devices/platform/mali.0/dvfs_table
+    chown radio system /sys/devices/platform/mali.0/dvfs_min_lock
+    chown radio system /sys/devices/platform/mali.0/dvfs_max_lock
+    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
+    chmod 664 /sys/class/devfreq/exynos5-busfreq-mif/freq_table
+    chmod 664 /sys/class/devfreq/exynos5-busfreq-int/freq_table
+    chmod 664 /sys/class/devfreq/exynos5-busfreq-mif/min_freq
+    chmod 664 /sys/class/devfreq/exynos5-busfreq-int/min_freq
+    chmod 664 /sys/class/devfreq/exynos5-busfreq-mif/max_freq
+    chmod 664 /sys/class/devfreq/exynos5-busfreq-int/max_freq
+    chmod 664 /sys/devices/platform/mali.0/dvfs_table
+    chmod 664 /sys/devices/platform/mali.0/dvfs_min_lock
+    chmod 664 /sys/devices/platform/mali.0/dvfs_max_lock
+    chmod 664 /sys/class/thermal/thermal_zone0/boost_mode
+
+# Core Control
+    chown radio system /sys/devices/system/b.L/b.L_core_stat
+    chmod 0660 /sys/devices/system/b.L/b.L_core_stat
+    chown radio system /sys/devices/system/cpu/cpu0/cpuidle/state1/disable
+    chown radio system /sys/devices/system/cpu/cpu1/cpuidle/state1/disable
+    chown radio system /sys/devices/system/cpu/cpu2/cpuidle/state1/disable
+    chown radio system /sys/devices/system/cpu/cpu3/cpuidle/state1/disable
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpuidle/state1/disable
+    chmod 0660 /sys/devices/system/cpu/cpu1/cpuidle/state1/disable
+    chmod 0660 /sys/devices/system/cpu/cpu2/cpuidle/state1/disable
+    chmod 0660 /sys/devices/system/cpu/cpu3/cpuidle/state1/disable
+
+# Core temp sensor
+    chown radio system /sys/devices/platform/exynos5-tmu/temp
+    chown radio system /sys/devices/platform/exynos5-tmu/curr_temp
+
+# Quadrant Benchmark
+    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
+    chown radio system /sys/class/devfreq/exynos5-busfreq-mif/min_freq
+    chown radio system /sys/class/devfreq/exynos5-busfreq-int/min_freq
+    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
+    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
+    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
+    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
+    chmod 0664 /sys/class/thermal/thermal_zone0/boost_mode
+    chmod 0664 /sys/class/devfreq/exynos5-busfreq-mif/min_freq
+    chmod 0664 /sys/class/devfreq/exynos5-busfreq-int/min_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
+    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
+    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
+
+# CPU Idle
+    chown system radio /sys/devices/system/cpu/cpu0/cpuidle/state2/disable
+    chown system radio /sys/module/cpuidle/parameters/enable_mask
+
+# C-STATE
+    chown system system /sys/module/cpuidle/parameters/off
+    chmod 0660 /sys/module/cpuidle/parameters/off
+
+# ASV Group
+    chown system radio /sys/module/asv_exynos/parameters/asv_group
+
+# MTP permission
+    chmod 0660 /dev/mtp_usb
+    chown system mtp /dev/mtp_usb
+    chmod 0660 /dev/usb_mtp_gadget
+    chown system mtp /dev/usb_mtp_gadget
+    mkdir /dev/socket/mtp 0770 system mtp
+
+# terminal mode
+    chmod 0660 /sys/class/android_usb/android0/terminal_version
+    chown system system /sys/class/android_usb/android0/terminal_version
+
+# for datarouter
+    chown system system /dev/dun
+    chown system system /dev/ttyGS0
+    chown system system /dev/ttyGS1
+    chown system system /dev/ttyGS2
+    chown system system /dev/ttyGS3
+
+# GPIO DVS
+    chown radio system /sys/class/secgpio_check/secgpio_check_all/gpioinit_check
+    chown radio system /sys/class/secgpio_check/secgpio_check_all/gpiosleep_check
+    chown radio system /sys/class/secgpio_check/secgpio_check_all/checked_sleepGPIO
+
+# IR LED
+    chown system radio /sys/class/sec/sec_ir/ir_send
+    chown system radio /sys/class/sec/sec_ir/ir_send_result
+
+# Permissions for Barcode Emul
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_send
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
+
+# Disable Input Boosters
+    write /sys/class/sec/tsp/tsp_booster_enabled 0
+    write /sys/class/sec/sec_touchkey/touchkey_booster_enabled 0
+    write /sys/class/sec/sec_epen/wacom_booster_enabled 0
+
+    # Vibetonz
+    chmod 0660 /dev/tspdrv
+    chown vibe vibe /dev/tspdrv
+
+    # Change permission for interactive governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/cpu_util
+    chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/interactive/cpu_util
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/enforced_mode
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enforced_mode
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_time
+
+    # Assume HMP uses shared cpufreq policy for all LITTLE CPUs
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_exit_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/multi_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/multi_exit_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/single_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_enter_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/single_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_enter_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/single_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_exit_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/single_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/single_exit_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/mode
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/mode
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/enforced_mode
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/enforced_mode
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/param_index
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/param_index
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/cpu_util
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/cpu_util
+
+    # MSP Core Status
+    chown system system /sys/devices/system/cpu/cpu1/online
+    chown system system /sys/devices/system/cpu/cpu2/online
+    chown system system /sys/devices/system/cpu/cpu3/online
+
+    # Change permission for dvfshelper
+    chown radio system /sys/power/cpufreq_table
+    chmod 0664 /sys/power/cpufreq_table
+    chown radio system /sys/power/cpufreq_min_limit
+    chmod 0664 /sys/power/cpufreq_min_limit
+    chown radio system /sys/power/cpufreq_max_limit
+    chmod 0664 /sys/power/cpufreq_max_limit
+
+    # mobicore
+    chmod 0660 /dev/s5p-smem
+    chown system drmrpc /dev/s5p-smem
+
+#permission for TSP, Touchkey and Wacom
+    chown system radio /sys/class/sec/tsp/cmd
+    chmod 0660 /sys/class/sec/tsp/input/enabled
+    chown system system /sys/class/sec/tsp/input/enabled
+    chown system system /sys/class/sec/sec_touchkey/brightness
+    chmod 0660 /sys/class/sec/sec_epen/input/enabled
+    chown system system /sys/class/sec/sec_epen/input/enabled
+
+    # Switch Device
+    chown system radio /sys/class/sec/switch/usb_sel
+    chown system radio /sys/class/sec/switch/uart_sel
+    chown system radio /sys/class/sec/switch/uart_en
+    chown system radio /sys/class/sec/switch/otg_test
+    chown system radio /sys/class/sec/switch/apo_factory
+
+    # GPIO DVS
+    chown radio system /sys/class/secgpio_check/secgpio_check_all/gpioinit_check
+    chown radio system /sys/class/secgpio_check/secgpio_check_all/gpiosleep_check
+    chown radio system /sys/class/secgpio_check/secgpio_check_all/checked_sleepGPIO
+
+ # permission for CHARGING
+    chown system radio /sys/class/power_supply/battery/fg_full_voltage
+    chmod 0664 /sys/class/power_supply/battery/fg_full_voltage
+    chown system radio /sys/class/power_supply/battery/batt_reset_soc
+    chown system radio /sys/class/power_supply/battery/batt_slate_mode
+    chown system radio /sys/class/power_supply/battery/factory_mode
+    chown system radio /sys/class/power_supply/battery/siop_level
+    chown system radio /sys/class/power_supply/battery/siop_event
+    chown system radio /sys/class/power_supply/battery/wc_enable
+    chown system radio /sys/class/power_supply/battery/update
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/call
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/video
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/music
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/browser
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/hotspot
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/camera
+    chown system radio /sys/class/power_supply/battery/talk_wcdma
+    chown system radio /sys/class/power_supply/battery/talk_gsm
+    chown system radio /sys/class/power_supply/battery/call
+    chown system radio /sys/class/power_supply/battery/data_call
+    chown system radio /sys/class/power_supply/battery/gps
+    chown system radio /sys/class/power_supply/battery/wifi
+    chown system radio /sys/class/power_supply/battery/lte
+    chown system radio /sys/class/power_supply/battery/lcd
+    chown system radio /sys/class/power_supply/ps/status
+    chmod 0664 /sys/class/power_supply/ps/status
+    chmod 0664 /sys/class/power_supply/battery/batt_temp_table
+    chown system radio /sys/class/power_supply/battery/batt_temp_table
+    chown system radio /sys/class/power_supply/battery/batt_high_current_usb
+    chown system radio /sys/class/power_supply/battery/batt_inbat_voltage
+    chmod 0664 /sys/class/power_supply/battery/batt_high_current_usb
+    chown system radio /sys/class/power_supply/battery/hmt_ta_connected
+    chown system radio /sys/class/power_supply/battery/hmt_ta_charge
+    chown system radio /sys/class/power_supply/battery/battery_cycle
+    chown system radio /sys/class/power_supply/otg/online
+    chmod 0664 /sys/class/power_supply/otg/online
+    chown system radio /sys/class/power_supply/max77833-charger/charge_otg_control
+    chown system radio /sys/class/power_supply/battery/charge_otg_control
+    chown system radio /sys/class/power_supply/battery/batt_wireless_firmware_update
+    chown system radio /sys/class/power_supply/battery/otp_firmware_result
+    chown system radio /sys/class/power_supply/battery/wc_ic_grade
+    chown system radio /sys/class/power_supply/battery/otp_firmware_ver_bin
+    chown system radio /sys/class/power_supply/battery/otp_firmware_ver
+    chown system radio /sys/class/power_supply/battery/tx_firmware_result
+    chown system radio /sys/class/power_supply/battery/batt_tx_firmware
+    chown system radio /sys/class/power_supply/battery/batt_hv_wireless_status
+    chown system radio /sys/class/power_supply/battery/batt_hv_wireless_pad_ctrl
+    chmod 0664 /sys/class/power_supply/max77833-charger/charge_otg_control
+    chmod 0664 /sys/class/power_supply/battery/charge_otg_control
+    chmod 0664 /sys/class/power_supply/battery/batt_wireless_firmware_update
+    chmod 0664 /sys/class/power_supply/battery/otp_firmware_result
+    chmod 0664 /sys/class/power_supply/battery/wc_ic_grade
+    chmod 0664 /sys/class/power_supply/battery/otp_firmware_ver_bin
+    chmod 0664 /sys/class/power_supply/battery/otp_firmware_ver
+    chmod 0664 /sys/class/power_supply/battery/tx_firmware_result
+    chmod 0664 /sys/class/power_supply/battery/tx_firmware_ver
+    chmod 0664 /sys/class/power_supply/battery/batt_tx_firmware
+    chmod 0664 /sys/class/power_supply/battery/batt_hv_wireless_status
+    chmod 0664 /sys/class/power_supply/battery/batt_hv_wireless_pad_ctrl
+    chown system radio /sys/class/power_supply/battery/tx_firmware_result
+    chown system radio /sys/class/power_supply/battery/batt_tune_chg_limit_cur
+    chown system radio /sys/class/power_supply/battery/batt_tune_chg_temp_high
+    chown system radio /sys/class/power_supply/battery/batt_tune_chg_temp_rec
+    chown system radio /sys/class/power_supply/battery/batt_tune_coil_limit_cur
+    chown system radio /sys/class/power_supply/battery/batt_tune_coil_temp_high
+    chown system radio /sys/class/power_supply/battery/batt_tune_coil_temp_rec
+    chown system radio /sys/class/power_supply/battery/batt_tune_fast_charge_current
+    chown system radio /sys/class/power_supply/battery/batt_tune_float_voltage
+    chown system radio /sys/class/power_supply/battery/batt_tune_intput_charge_current
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_high_event
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_high_normal
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_high_rec_event
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_high_rec_normal
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_low_event
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_low_normal
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_low_rec_event
+    chown system radio /sys/class/power_supply/battery/batt_tune_temp_low_rec_normal
+    chown system radio /sys/class/power_supply/battery/batt_tune_ui_term_cur_1st
+    chown system radio /sys/class/power_supply/battery/batt_tune_ui_term_cur_2nd
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_chg_limit_cur
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_chg_temp_high
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_chg_temp_rec
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_coil_limit_cur
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_coil_temp_high
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_coil_temp_rec
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_fast_charge_current
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_float_voltage
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_intput_charge_current
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_high_event
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_high_normal
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_high_rec_event
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_high_rec_normal
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_low_event
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_low_normal
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_low_rec_event
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_temp_low_rec_normal
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_ui_term_cur_1st
+    chmod 0664 /sys/class/power_supply/battery/batt_tune_ui_term_cur_2nd
+
+
+# Bluetooth Audio (AVRCP)
+    chown system system /sys/class/input/input12/enabled
+    chmod 0660 /sys/class/input/input12/enabled
+
+# Bluetooth Keyboard
+    chown system radio /sys/class/input/input11/enabled
+    chmod 0660 /sys/class/input/input11/enabled
+
+# Headphones (Headset)
+    chown system system /sys/class/input/input10/enabled
+    chmod 0660 /sys/class/input/input10/enabled
+
+# S-Pen (sec_e-pen)
+    chown system system /sys/class/input/input9/enabled
+    chmod 0660 /sys/class/input/input9/enabled
+
+# Physical Home Button (gpio-keys)
+    chown system system /sys/class/input/input8/enabled
+    chmod 0660 /sys/class/input/input8/enabled
+
+# Light Sensor
+    chown system system /sys/class/input/input7/enabled
+    chmod 0660 /sys/class/input/input7/enabled
+
+# Magnetic Sensor
+    chown system system /sys/class/input/input6/enabled
+    chmod 0660 /sys/class/input/input6/enabled
+
+# Gyro Sensor
+    chown system system /sys/class/input/input5/enabled
+    chmod 0660 /sys/class/input/input5/enabled
+
+# Accelerometer sensor
+    chown system system /sys/class/input/input4/enabled
+    chmod 0660 /sys/class/input/input4/enabled
+
+# MHL (sii8240_rcp)
+    chown system system /sys/class/input/input3/enabled
+    chmod 0660 /sys/class/input/input3/enabled
+
+# Touchscreen (sec_touchscreen)
+    chown system system /sys/class/input/input2/enabled
+    chmod 0660 /sys/class/input/input2/enabled
+
+# Micro-USB IC (max77803-muic)
+    chown system system /sys/class/input/input0/enabled
+    chmod 0660 /sys/class/input/input0/enabled
+
+# Wolfson DAC Settings
+    write /sys/class/misc/wolfson_control/switch_eq_speaker  1 # Toggle EQ
+    write /sys/class/misc/wolfson_control/speaker_gain_left 5 # Set Left Speaker Gain
+    write /sys/class/misc/wolfson_control/speaker_gain_right 5 # Set Right Speaker Gain
+    write /sys/class/misc/wolfson_control/eq_sp_gain_1 4 # Low Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_2 4 # Low-Mid Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_3 4 # Mid Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_4 5 # Mid-High Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_5 4 # High Band
+
+# USB FS Function
+    write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
+    write /sys/class/android_usb/android0/iProduct ${ro.product.model}
+    write /sys/class/android_usb/android0/iSerial Galaxy-P901
+    write /sys/class/android_usb/f_mass_storage/inquiry_string "Samsung"
+    # f_acm instances to 0
+    write /sys/devices/virtual/android_usb/android0/f_acm/instances 0
+
+# Define default initial receive window size in segments.
+    setprop net.tcp.default_init_rwnd 60
+    setprop wifi.interface wlan0
+

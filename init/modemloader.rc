@@ -1,0 +1,7 @@
+# Parse hardware revision (needs to happen before cbd starts)
+
+service modemloader /system/vendor/bin/modemloader
+    class core
+    user system
+    group system
+    oneshot

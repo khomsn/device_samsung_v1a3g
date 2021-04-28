@@ -1,0 +1,3 @@
+#avc : denied { read } for comm=idmap2d name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:idmap:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+allow idmap gpsd_exec:file { read getattr };
+allow idmap debugfs:file { write };

@@ -1,0 +1,14 @@
+# /system/vendor/lib/liblvverx_3.20.03.so
+allow audioserver system_file:file execmod;
+# Allow audioserver to connect to rild
+unix_socket_connect(audioserver, rild, rild)
+
+#avc: denied { read write } for comm="ce" name="video16" dev="tmpfs" ino=5802 scontext=u:r:hal_audio_default:s0 tcontext=u:object_r:video_device:s0 tclass=chr_file permissive=1
+#avc: denied { open } for comm="ce" name="video16" dev="tmpfs" ino=5802 scontext=u:r:hal_audio_default:s0 tcontext=u:object_r:video_device:s0 tclass=chr_file permissive=1
+allow hal_audio_default video_device:chr_file { read write open };
+
+unix_socket_connect(audioserver, property, rild)
+allow audioserver { efs_file sec_efs_file }:dir r_dir_perms;
+allow audioserver { efs_file sec_efs_file }:file r_file_perms;
+allow audioserver debugfs:file { read write open };
+allow audioserver gpsd_exec:file { read getattr };

@@ -1,0 +1,8 @@
+# Radio daemon for SIM 1
+service ril-daemon /vendor/bin/hw/rild -c 1 -l ${rild.libpath}
+    class main
+    user radio
+    group radio cache inet misc audio sdcard_r sdcard_rw log vpn system readproc wakelock
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+	onrestart restart cpboot-daemon
+    disabled

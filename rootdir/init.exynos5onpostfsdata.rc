@@ -1,0 +1,196 @@
+on post-fs-data
+
+# mobicore
+    mkdir /data/app/mcRegistry 0775 system system
+    chmod 0775 /data/app/mcRegistry
+    chown system system /data/app/mcRegistry
+    mkdir /efs/TEE 0770 radio system
+    chmod 0770 /efs/TEE
+    chown radio system /efs/TEE
+    chmod 0700 /dev/mobicore
+    chmod 0666 /dev/mobicore-user
+    chmod 0660 /dev/s5p-smem
+    chown system system /dev/mobicore
+    chown radio system /dev/mobicore-user
+    chown system drmrpc /dev/s5p-smem
+# DRK permission
+    mkdir /efs/prov 0770 radio system
+    chmod 0770 /efs/prov
+    chown radio system /efs/prov
+    mkdir /efs/prov_data 0770 radio system
+    chmod 0770 /efs/prov_data
+    chown radio system /efs/prov_data
+    chmod 0770 /efs/prov_data
+    mkdir /efs/prov_data/dev_root 0770 radio system
+    chown radio system /efs/prov_data/dev_root
+    chmod 0770 /efs/prov_data/dev_root
+    chown radio system /efs/prov_data/dev_root/dev_root.dat
+    chmod 0640 /efs/prov_data/dev_root/dev_root.dat
+    chown radio system /efs/prov/libdevkm.lock
+    chmod 0660 /efs/prov/libdevkm.lock
+    write /efs/prov/ffffffff00000000000000000000000c.tlbin 0
+    chown radio system /efs/prov/ffffffff00000000000000000000000c.tlbin
+    chmod 0660 /efs/prov/ffffffff00000000000000000000000c.tlbin
+
+# create camera directory
+    mkdir /data/camera 0770 media system
+    
+# GPS
+    mkdir /data/system 0771 system system
+    chown system system /data/system
+    mkdir /data/system/gps 0771 system system
+    chown system system /data/system/gps
+    rm /data/system/gps/gps_started
+    rm /data/system/gps/glonass_started
+    rm /data/system/gps/beidou_started
+    rm /data/system/gps/smd_started
+    rm /data/system/gps/sv_cno.info
+
+# sec_efs_file
+    mkdir /efs/sec_efs 0775 radio system
+    chmod 0775 /efs/sec_efs
+    chown radio system /efs/sec_efs
+
+# Latin SSMS feature
+    mkdir /efs/SMS 0775 radio system
+    chmod 0775 /efs/SMS
+    chown radio system /efs/SMS
+
+# PMK permission
+    mkdir /efs/mc 0770 radio system
+    chown radio system /efs/mc
+    chmod 0770 /efs/mc
+    chown radio system /efs/mc/mc.dat
+    chmod 0640 /efs/mc/mc.dat
+
+    mkdir /data/misc/bluedroiddump 0770 system system
+
+    chown system system /dev/tzic
+
+# h2k
+    chmod 0644 /efs/redata.bin
+    chown radio radio /efs/redata.bin
+    chmod 0644 /efs/h2k.dat
+    chown radio radio /efs/h2k.dat
+    chown system system /efs/drm/h2k
+
+#SideSync
+    chown system system /dev/android_ssusbcon
+    chmod 0660 /dev/android_ssusbcon
+
+# SA, System SW, SAMSUNG
+    # create log directory
+    mkdir /data/log 0775 system log
+    chmod 0775 /data/log
+    chown system log /data/log
+    mkdir /data/anr 0775 system system
+    chmod 0775 /data/anr
+    chown system system /data/anr
+    restorecon /data/log
+    restorecon /data/anr
+
+    #create uibc dir
+    mkdir /dev/socket/uibc 0775 media system
+    chmod 0775 /dev/socket/uibc
+    chown media system /dev/socket/uibc
+
+# [ SEC_MM_DRM
+    # OMA DB directory creation
+    mkdir /data/system/databases 0775 system system
+    chmod 0775 /data/system/databases
+    chown system system /data/system/databases
+
+    restorecon_recursive /efs
+    restorecon_recursive /carrier
+    restorecon_recursive /data/misc/keystore
+    restorecon_recursive /data/property
+    restorecon_recursive /data/security
+# ]
+
+    mkdir /mnt/shell 0750 shell shell
+    chown shell shell /mnt/shell
+    chmod 0750 /mnt/shell
+
+    mkdir /mnt/media_rw 0771 media_rw media_rw
+    chown media_rw media_rw /mnt/media_rw
+    chmod 0771 /mnt/media_rw
+
+#drm permission
+# [ SEC_MM_DRM
+    # sdrm
+    mkdir /efs/drm 0774 drm system
+    mkdir /efs/drm/sdrm 0774 drm system
+    mkdir /efs/drm/sdrm/data_agent 0774 drm system
+    restorecon /efs/drm
+    restorecon /efs/drm/sdrm
+    restorecon /efs/drm/data_agent
+    restorecon -R /efs
+#]
+
+# Permissions for bluetooth
+    chown bluetooth ro.bt.bdaddr_path
+    chown radio bluetooth /efs/bluetooth/bt_addr
+    chmod 0640 /efs/bluetooth/bt_addr
+    chown bluetooth /dev/ttySAC0
+    chmod 0660 /dev/ttySAC0
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth /sys/class/rfkill/rfkill0/type
+
+# For kernel lock in BT/WiFi race condtion
+    chmod 0600 /dev/btlock
+    chown bluetooth bluetooth /dev/btlock
+
+    #Create directory for hostapd
+    mkdir /data/hostapd 0770 system wifi
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/misc/wifi 0770 wifi wifi
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0775 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+
+    # for WIFI TRP/TIS
+    chown system root /data/.psm.info
+    chmod 0664 /data/.psm.info
+
+    # for WIFI Antenna Selection
+    chown system root /data/.ant.info
+    chmod 0664 /data/.ant.info
+
+    # for WIFI Version
+    write /data/.wifiver.info 0
+    chown system root /data/.wifiver.info
+    chmod 0666 /data/.wifiver.info
+
+    # for WIFI Cert
+    chmod 0664 /data/.bustxglom.info
+    chmod 0664 /data/.roamoff.info
+    chmod 0664 /data/.frameburst.info
+    chmod 0664 /data/.txbf.info
+    # for WIFI MAC address
+    mkdir /efs/wifi 0775 radio system
+    chown system system /efs/wifi/.mac.info
+    chmod 0664 /efs/wifi/.mac.info
+
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/dhd/parameters/firmware_path
+
+# Baseband Modem
+    # Remove symlinks to avoid issues with migrate after nandroid restores
+    # Will be recreated at end of boot
+    rmdir /data/data/com.android.providers.telephony/databases
+    rmdir /data/data/com.android.providers.telephony/shared_prefs
+    rm /data/data/com.android.providers.telephony/databases
+    rm /data/data/com.android.providers.telephony/shared_prefs
+
+    setprop vold.post_fs_data_done 1
+    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
+
+# Mark wifi driver as unloaded - "ok" indicates loaded
+    setprop wlan.driver.status not_ok
+

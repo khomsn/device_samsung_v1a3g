@@ -1,0 +1,46 @@
+on init
+    # RIL <-> audioserver comm
+    chmod 0644 /proc/cmdline
+	mkdir /efs 0771 radio system
+
+    symlink /dev/block/platform/dw_mmc.0/by-name/RADIO /dev/mbin0
+    restorecon /dev/mbin0
+    symlink /sys/devices/platform/s5p-ehci/ehci_power /dev/ehci_power
+
+    # Support legacy paths
+    symlink /data/app /factory
+
+    # Make param link
+    symlink /dev/block/mmcblk0p8 /dev/block/param
+
+    export MC_AUTH_TOKEN_PATH /efs
+
+    # SEC_SELINUX
+    # for audit message
+    chown system system /proc/avc_msg
+    chmod 0660 /proc/avc_msg
+
+    # reset_reason
+    chown system system /proc/reset_reason
+    chmod 0600 /proc/reset_reason
+    chown system system /proc/reset_reason_extra_info
+    chmod 0600 /proc/reset_reason_extra_info
+    
+#***********************************************USB functions*************************************#
+
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 6860
+    write /sys/class/android_usb/android0/functions adb
+    write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
+    write /sys/class/android_usb/android0/iProduct ${ro.product.model}
+    write /sys/class/android_usb/android0/iSerial Galaxy-P901
+    write /sys/class/android_usb/android0/f_mass_storage/inquiry_string "Samsung"
+    write /sys/class/android_usb/android0/f_rndis/manufacturer Samsung
+    write /sys/class/android_usb/android0/f_rndis/vendorID 04E8
+    write /sys/class/android_usb/android0/f_rndis/wceis 1
+
+    write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 1
+    write /sys/class/net/rmnet1/queues/rx-0/rps_cpus 1
+    write /sys/class/net/rmnet2/queues/rx-0/rps_cpus 1
+    write /proc/sys/net/core/netdev_max_backlog 2048

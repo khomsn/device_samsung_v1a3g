@@ -1,0 +1,2 @@
+#avc: denied { transfer } for comm="vice" scontext=u:r:system_suspend:s0 tcontext=u:r:init:s0 tclass=binder permissive=1
+#allow system_suspend init:binder { transfer };

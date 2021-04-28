@@ -1,0 +1,2 @@
+#avc : denied { write } for comm=lmkd name=minfree dev=sysfs ino=2146 scontext=u:r:lmkd:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+allow lmkd sysfs:file { open write };

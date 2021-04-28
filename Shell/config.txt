@@ -1,0 +1,8 @@
+#Check/fix FS
+e2fsck -fy /dev/block/mmcblk1p1
+
+#Bind Mount from Internal to External storage
+from_to TitaniumBackup .fbind/TitaniumBackup
+from_to Finance .fbind/Finance
+from_to Download Download
+

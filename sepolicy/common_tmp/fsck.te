@@ -1,0 +1,5 @@
+# /dev/block/mmcblk0p3
+allow fsck emmcblk_device:blk_file { open read write getattr ioctl };
+allow fsck efs_block_device:blk_file { ioctl open read write };
+allow fsck block_device:blk_file { open read write getattr ioctl };
+allow fsck gpsd_exec:file { open read getattr };

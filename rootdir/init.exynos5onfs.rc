@@ -1,0 +1,107 @@
+on fs
+# mobicore
+    mkdir /system/app/mcRegistry/TbStorage 0775 system system
+    chmod 0775 /system/app/mcRegistry/TbStorage
+    chown system system /system/app/mcRegistry/TbStorage
+# [ SEC_MM_DRM
+    # DRM directory creation
+    mkdir /system/etc/security/.drm 0775
+    chown root root /system/etc/security/.drm
+    chmod 0775 /system/etc/security/.drm
+
+    # Added drm folder to copy drm plugins
+    mkdir /system/lib/drm 0775
+    chown root root /system/lib/drm
+    chmod 0775 /system/lib/drm
+#]
+
+# Mount All File system from fstab.
+    mount_all /system/vendor/etc/fstab.universal5420
+    setprop ro.crypto.fuse_sdcard true
+
+    chown radio system /efs
+    chmod 0771 /efs
+    chmod 0774 /preload
+    chown root root /preload
+    chmod 0774 /misc
+    chown root root /misc
+
+    chown radio radio /sys/devices/virtual/misc/multipdp/waketime
+    chown radio radio /sys/devices/platform/s5p-ehci/ehci_cpu_core
+
+# Permissions for backlight
+    chown system system /sys/class/backlight/panel/brightness
+    chown system system /sys/class/backlight/panel/auto_brightness
+
+# Permissions for torch
+    chown system camera /sys/class/leds/torch-sec1/brightness
+    chmod 0666 /sys/class/leds/torch-sec1/brightness
+
+# Permissions for LCD
+    chown system radio /sys/class/lcd/panel/contrast
+    chown system radio /sys/class/lcd/panel/lcd_power
+    chown system radio /sys/class/lcd/panel/lcd_type
+    chown system system /sys/class/lcd/panel/power_reduce
+    chown system system /sys/class/lcd/panel/siop_enable
+    chown system system /sys/class/lcd/panel/temperature
+    chown system radio /sys/class/lcd/panel/max_contrast
+    chown system radio /sys/class/lcd/panel/window_type
+
+# Permissions for MDNIE
+    chown system system /sys/class/mdnie/mdnie/accessibility
+    chown system system /sys/class/mdnie/mdnie/bypass
+    chown system system /sys/class/mdnie/mdnie/cabc
+    chown system system /sys/class/mdnie/mdnie/auto_brightness
+    chown system system /sys/class/mdnie/mdnie/sensorRGB
+    chown system system /sys/class/mdnie/mdnie/color_correct
+    chown system system /sys/class/mdnie/mdnie/tuning
+    chown system media_rw /sys/class/mdnie/mdnie/mode
+    chown system media_rw /sys/class/mdnie/mdnie/scenario
+
+ # Permissions for TCON
+    chown system system /sys/class/tcon/tcon/lux
+    chown system system /sys/class/tcon/tcon/auto_br
+    chown system media_rw /sys/class/tcon/tcon/mode
+
+# Switch Device
+    chown system radio /sys/class/sec/switch/uart_sel
+    chown system radio /sys/class/sec/switch/usb_sel
+    chown system radio /sys/class/sec/switch/usb_state
+    chown system radio /sys/class/sec/switch/chg_type
+
+# Audio (Earjack)
+    chown system radio /sys/class/audio/earjack/select_jack
+    chown system radio /sys/class/audio/earjack/key_state
+    chown system radio /sys/class/audio/earjack/state
+
+# GPS
+    chown root system /dev/ttySAC1
+    chmod 0660 /dev/ttySAC1
+    chown root system /sys/class/sec/gps/GPS_PWR_EN/value
+    chmod 0664 /sys/class/sec/gps/GPS_PWR_EN/value
+
+# Vibrator
+    chmod 0644 /sys/class/timed_output/vibrator/pwm_value
+    chown system system /sys/class/timed_output/vibrator/pwm_value
+    chmod 0644 /sys/class/timed_output/vibrator/pwm_max
+    chown system system /sys/class/timed_output/vibrator/pwm_max
+    chmod 0644 /sys/class/timed_output/vibrator/pwm_min
+    chown system system /sys/class/timed_output/vibrator/pwm_min
+    chmod 0644 /sys/class/timed_output/vibrator/pwm_default
+    chown system system /sys/class/timed_output/vibrator/pwm_default
+    chmod 0644 /sys/class/timed_output/vibrator/pwm_threshold
+    chown system system /sys/class/timed_output/vibrator/pwm_threshold
+
+# USB 
+    mkdir /dev/usb-ffs 0770 shell shell
+    mkdir /dev/usb-ffs/adb 0770 shell shell
+    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
+
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04E8
+    write /sys/class/android_usb/android0/idProduct 6860
+    write /sys/class/android_usb/android0/f_ffs/aliases adb
+    write /sys/class/android_usb/android0/functions adb
+    write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
+    write /sys/class/android_usb/android0/iProduct ${ro.product.model}
+    write /sys/class/android_usb/android0/iSerial Galaxy-P901
