@@ -1532,6 +1532,9 @@
          the config_minimumBrightnessCurveNits array. -->
     <array name="config_minimumBrightnessCurveLux">
         <item>0.0</item>
+        <item>200.0</item>
+        <item>800.0</item>
+        <item>1000.0</item>
         <item>2000.0</item>
         <item>4000.0</item>
     </array>
@@ -1545,6 +1548,9 @@
          config_minimumBrightnessCurveLux array. -->
     <array name="config_minimumBrightnessCurveNits">
         <item>0.0</item>
+        <item>20.0</item>
+        <item>30.0</item>
+        <item>45.0</item>
         <item>50.0</item>
         <item>90.0</item>
     </array>
