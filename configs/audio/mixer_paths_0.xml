@@ -19,7 +19,7 @@ BluetoothLink 2
 
 <!-- Version : 20 -->
 <mixer>
-    <pcmdai playback_link="3" />
+    <pcmdai playback_link="0" />
     <pcmdai playback_deep_link="3" />
     <pcmdai capture_link="0" />
     <pcmdai baseband_link="1" />
@@ -424,22 +424,9 @@ BluetoothLink 2
         <ctl name="HPOUT1R Input 2" value="ASRC2R" />
     </path>
 <!-- ******************************** Output Device Path ********************************* -->
-    <path name="OP-Speaker-Enable">
-	    <ctl name="SPK Switch" value="1" />
-    </path>
-
-    <path name="OP-Headphone-Enable">
-	    <ctl name="HP Switch" value="1" />
-    </path>
-
     <path name="OP-Analogue-Dock-Out-Enable">
 	    <ctl name="VPS Switch" value="1" />
     </path>
-
-    <path name="OP-AUX Digital Out-Enable">
-	    <ctl name="HDMI Switch" value="1" />
-    </path>
-
 <!-- ********************************* Input Devices SYSTEM/NORMAL USES ************************************ -->
     <path name="Builtin_Mic-Enable">
         <!-- Main Mic uses Input 1 & FILTER 1+2 as BPF -->
@@ -452,6 +439,7 @@ BluetoothLink 2
     <path name="Headset_In-Enable">
         <!-- Headset Mic uses Input 2 & FILTER 1+2 as BPF -->
 	    <ctl name="Headset Mic Switch" value="1" />
+        <ctl name="Main Mic Switch" value="0" />
         <ctl name="LHPF1 Input 2" value="IN1R" />
         <ctl name="LHPF2 Input 2" value="LHPF1" />
     </path>
@@ -491,6 +479,7 @@ BluetoothLink 2
     <path name="VHeadsetMic">
         <!-- Headset Mic uses Input 2 & FILTER 3+4 as BPF -->
         <ctl name="Headset Mic Switch" value="1" />
+        <ctl name="Main Mic Switch" value="0" />
         <ctl name="LHPF3 Input 2" value="IN1R" />
         <ctl name="LHPF4 Input 2" value="LHPF3" />
         <!-- Mic is @ system rate must change rate with ASRC1 to Modem Rate (Slave Mode) -->
@@ -518,29 +507,31 @@ BluetoothLink 2
 
     <path name="speaker">
         <!-- FOR NORMAL SYSTEM -->
-        <path name="OP-Speaker-Enable" />
+        <ctl name="SPK Switch" value="1" />
         <ctl name="Speaker Digital Volume" value="130" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
+        <ctl name="Speaker Digital Switch" value="1" />
     </path>
 
     <path name="headphones">
         <!-- FOR NORMAL SYSTEM -->
-        <path name="OP-Headphone-Enable" />
+        <ctl name="HP Switch" value="1" />
         <ctl name="Noise Gate Switch" value="0" />
         <ctl name="HPOUT1 Digital Volume" value="128" />
         <ctl name="HPOUT1L Input 1 Volume" value="32" />
         <ctl name="HPOUT1R Input 1 Volume" value="32" />
+        <ctl name="Speaker Digital Switch" value="0" />
     </path>
 
     <path name="speaker-and-headphones">
         <!-- FOR NORMAL SYSTEM -->
-        <path name="OP-Speaker-Enable" />
+        <ctl name="SPK Switch" value="1" />
         <ctl name="Speaker Digital Volume" value="128" />
         <ctl name="SPKOUTL Input 1 Volume" value="32" />
         <ctl name="SPKOUTR Input 1 Volume" value="32" />
         
-        <path name="OP-Headphone-Enable" />
+        <ctl name="HP Switch" value="1" />
         <ctl name="Noise Gate Switch" value="0" />
         <ctl name="HPOUT1 Digital Volume" value="128" />
         <ctl name="HPOUT1L Input 1 Volume" value="32" />
@@ -558,9 +549,10 @@ BluetoothLink 2
     <path name="voice-call-speaker">
         <!-- FOR VOICE PHONE CALL -->
         <!-- For voice phone call OUTPUT Path -->
-        <path name="OP-Speaker-Enable" />
+        <ctl name="SPK Switch" value="1" />
         <path name="VC-HpSp" />
         <ctl name="Speaker Digital Volume" value="128" />
+        <ctl name="Speaker Digital Switch" value="1" />
         <!-- #CP RX -->
         <ctl name="SPKOUTL Input 2 Volume" value="42" />
         <ctl name="SPKOUTR Input 2 Volume" value="42" />
@@ -575,7 +567,7 @@ BluetoothLink 2
     <path name="voice-call-headphones">
         <!-- FOR VOICE PHONE CALL -->
         <!-- For voice phone call OUTPUT Path -->
-        <path name="OP-Headphone-Enable" />
+        <ctl name="HP Switch" value="1" />
         <path name="VC-HpSp" />
         <ctl name="Noise Gate Switch" value="0" />
         <ctl name="HPOUT1 Digital Volume" value="128" />
@@ -583,6 +575,7 @@ BluetoothLink 2
         <ctl name="HPOUT1L Input 2 Volume" value="42" />
         <ctl name="HPOUT1R Input 2 Volume" value="42" />
         <path name="Verb-Voicecall" />
+        <ctl name="Speaker Digital Switch" value="0" />
     </path>
 
     <path name="voice-call-headphones-wb">
@@ -605,7 +598,7 @@ BluetoothLink 2
 
     <path name="hdmi">
         <!-- FOR NORMAL SYSTEM -->
-        <path name="OP-AUX Digital Out-Enable" />
+        <ctl name="HDMI Switch" value="1" />
     </path>
 
     <path name="speaker-and-hdmi">
@@ -618,8 +611,17 @@ BluetoothLink 2
         <!-- FOR VOIP SYSTEM -->
         <!-- VOICE_COMMUNICATION -->
         <ctl name="AIF2 Mode" value="Slave" />
+
         <ctl name="AIF3TX1 Input 1 Volume" value="64" />
         <ctl name="AIF3TX2 Input 1 Volume" value="64" />
+        <ctl name="Speaker Digital Switch" value="0" />
+    </path>
+
+    <path name="speaker-and-bt-sco-headset">
+        <!-- FOR NORMAL SYSTEM -->
+        <path name="speaker" />
+        <path name="bt-sco-headset" />   
+        <ctl name="Speaker Digital Switch" value="1" />
     </path>
 
 <!-- ############################### Capture ###################################### -->
@@ -711,6 +713,8 @@ BluetoothLink 2
     <path name="voice-call-bt-sco-mic">
         <!-- FOR VOICE PHONE CALL -->
         <!-- For voice phone call INPUT Path -->
+        <ctl name="Headset Mic Switch" value="0" />
+        <ctl name="Main Mic Switch" value="0" />
         <ctl name="AIF2TX1 Input 4 Volume" value="64" /><!-- BT MIC input to Modem-->
         <ctl name="AIF2TX2 Input 4 Volume" value="64" /><!-- BT MIC input to Modem-->
     </path>
@@ -728,6 +732,8 @@ BluetoothLink 2
     <path name="bt-sco-mic">
         <!-- FOR VOIP SYSTEM -->
         <!-- VOICE_COMMUNICATION -->
+        <ctl name="Headset Mic Switch" value="0" />
+        <ctl name="Main Mic Switch" value="0" />
         <ctl name="AIF1TX1 Input 4 Volume" value="64" />
         <ctl name="AIF1TX2 Input 4 Volume" value="64" />
     </path>

@@ -4,7 +4,7 @@
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable=true \
+    audio.offload.disable=1 \
     ro.config.vc_call_vol_steps=50 \
     ro.config.media_vol_steps=50 \
     ro.config.ring_vol_steps=50 \
@@ -13,13 +13,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.bt_sco_vol_steps=15 \
     ro.config.system_vol_steps=50 \
     audio_hal.disable_two_mic=true \
-    audio_hal.force_voice_config=wide \
+    audio_hal.force_voice_config=narrow \
     af.fast_track_multiplier=1 \
     persist.bluetooth.disableabsvol=false
 
 # AptXHD
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.bt.enableAptXHD=true
+
+#PRODUCT_PROPERTY_OVERRIDES += \
+	ro.bt.bdaddr_path="/efs/bluetooth/bt_addr"
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
@@ -72,10 +75,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwc.winupdate=1 \
     debug.hwc.otf=1
-
-# Adaptive backlight
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lineage.hardware.cabc=/sys/class/mdnie/mdnie/cabc
 
 # Legacy stagefright media
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -188,4 +187,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Widevine
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
-

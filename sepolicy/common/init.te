@@ -1,51 +1,92 @@
-# This really is necessary for init.qcom.rc to manually restorecon the
-# /data/data/com.android.providers.telephony/(databases|shared_prefs)
-# symlinks. Without the manual restorecon, we would have to allow rild
-# to read any system_data_file:lnk_file.
-selinux_check_context(init)
+# /dev/block/mmcblk0p[0-9]
+allow init {
+    emmcblk_device
+    block_device
+    }:blk_file rw_file_perms;
+
+# LD_SHIM_LIBS
+allow init mediaserver:process { noatsecure };
 
 allow init {
-    sysfs_iio
-    sysfs_sec_tsp
-    sysfs_sensors
-}:lnk_file read;
+    debugfs
+    efs_file
+    persist_file
+    }:dir { mounton };
 
 allow init {
-    sysfs_audio
-    sysfs_batteryinfo
-    sysfs_bluetooth_writable
-    sysfs_camera
-    sysfs_graphics
-    sysfs_hal_pwr
-    sysfs_iio
-    sysfs_input
-    sysfs_kgsl
-    sysfs_leds
-    sysfs_mdnie
-    sysfs_msmuart_file
-    sysfs_sec_bamdmux
-    sysfs_sec_barcode_emul
-    sysfs_sec_epen
-    sysfs_sec_ir
-    sysfs_sec_key
-    sysfs_sec_led
-    sysfs_sec_switch
-    sysfs_sec_thermistor
-    sysfs_sec_touchkey
-    sysfs_sec_tsp
-    sysfs_sensors
-    sysfs_socinfo
-    sysfs_usb_otg
-    sysfs_wifi_writeable
-}:file setattr;
+    debugfs
+    sdcardd_exec
+    camera_device
+    video_device
+    wifi_efs_file
+    sysfs
+    vendor_file
+    system_data_file
+    gps_data_file
+    }:file { open read append write execute_no_trans setattr getattr relabelto lock };
+
+allow init hwservicemanager:binder { call transfer };
 
 allow init {
-    sysfs_cpu_boost
-    sysfs_devices_system_cpu
-    sysfs_lowmemorykiller
-    sysfs_mmc_host
-    sysfs_msm_perf
-    sysfs_msm_power
-    sysfs_sec_key
-    sysfs_thermal
-}:file w_file_perms;
+    sysfs_writable
+    tmpfs
+    }:lnk_file { create read setattr };
+
+allow init {
+    device
+    vndbinder_device
+    sysfs_mdnie_writable
+    mif_device
+    }:chr_file { open read write ioctl };
+    
+allow init {
+    hal_power_stats_hwservice
+    hal_lineage_livedisplay_hwservice
+    hal_light_hwservice
+    hal_sensors_hwservice
+    hal_ir_hwservice
+    hal_power_hwservice
+    hal_telephony_hwservice
+    hidl_base_hwservice
+    hal_drm_hwservice
+    }:hwservice_manager { add find };
+    
+allow init sysfs_sec:lnk_file read;
+allow init socket_device:sock_file { create setattr unlink };
+
+allow init mediadrmserver:binder call;
+allow init secmem_device:chr_file ioctl;
+
+allow vendor_init {
+    camera_data_file
+    system_file
+    system_lib_file
+    bluetooth_data_file
+    unlabeled
+    apk_data_file
+    system_data_file
+    anr_data_file
+    keystore_data_file
+    property_data_file
+    tmpfs
+    wifi_data_file
+    wpa_socket
+    dhcp_data_file
+    radio_data_file
+    rootfs
+    }:dir { open search write remove_name add_name create setattr getattr };
+
+allow vendor_init {
+    gpsd_exec
+    debugfs
+    video_device
+    proc
+    bluetooth_data_file
+    wifi_data_file
+    system_data_file
+    }:file { open write read getattr setattr create };
+    
+allow vendor_init system_data_file:lnk_file { create unlink };
+
+#allow fsverity_init gpsd_exec:file { read getattr };
+    

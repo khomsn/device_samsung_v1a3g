@@ -88,13 +88,20 @@ PRODUCT_PACKAGES += \
     libantradio
 
 # Audio ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio@2.0-service \
     android.hardware.audio@5.0-impl \
     android.hardware.audio.common@5.0 \
     android.hardware.audio.common@5.0-util \
     android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio.effect@5.0 \
+    android.hardware.audio.effect@5.0-impl
+    
+PRODUCT_PACKAGES += \
+    android.hardware.audio@5.0-impl \
+    android.hardware.audio.common@5.0 \
+    android.hardware.audio.common@5.0-util \
     android.hardware.audio.effect@5.0 \
     android.hardware.audio.effect@5.0-impl
 
@@ -264,15 +271,14 @@ PRODUCT_PACKAGES += \
 # IR
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
+    android.hardware.ir@1.0-service \
     consumerir.universal5420
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-service.samsung
 
-# Lights
-#PRODUCT_PACKAGES += \
-    lights.universal5420
 
+# Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.samsung
 
@@ -344,14 +350,6 @@ PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
 
-# Bluetooth
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/bluetooth/bt_vendor.conf
-
-PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl \
-    libbt-vendor
-
 # MobiCore
 PRODUCT_PACKAGES += \
     mcDriverDaemon
@@ -389,20 +387,20 @@ PRODUCT_PACKAGES += \
 
 # Init Services
 PRODUCT_PACKAGES += \
-    gpsd.rc \
-    mobicore.rc \
-    init_d.rc \
-    spen-d.rc \
-    cpboot-daemon.rc \
-    sswap.rc \
-    modemloader.rc \
-    watchdogd.rc \
     charger.rc \
-    wpa_supplicant.rc \
-    cs_service.rc
-
-PRODUCT_PACKAGES += \
+    cpboot-daemon.rc \
+    cs_service.rc \
+    gpsd.rc \
+    init_d.rc \
+    init.fbind.rc \
+    init.v4afx.rc \
+    mobicore.rc \
+    modemloader.rc \
     rild.legacy.rc \
+    spen-d.rc \
+    sswap.rc \
+    watchdogd.rc \
+    wpa_supplicant.rc \
 
 # first_stage_mount
 PRODUCT_COPY_FILES += \
@@ -413,6 +411,7 @@ PRODUCT_COPY_FILES += \
 #PRODUCT_PACKAGES += \
     com.cyanogenmod.keyhandler
 
+#***************************Wireless Connection***************************#
 # Radio ---------with xmm6262------------------
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.0 \
@@ -433,6 +432,31 @@ PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl-universal5420 \
+    android.hardware.bluetooth@1.0-service \
+    libbt-vendor
+
+#PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/bluetooth/bt_vendor.conf
+
+# Wifi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
+
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service.legacy \
+    hostapd \
+    wificond \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
+PRODUCT_PACKAGES += \
+    libnetcmdiface \
+
+#***************************Wireless Connection End***************************#
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl.samsung5420 \
@@ -470,65 +494,6 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
     libstlport
 
-# Wifi
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf:$(TARGET_COPY_OUT_VENDOR)/etc/hostapd/hostapd_default.conf
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
-
-#PRODUCT_PACKAGES += \
-    dhcpcd.conf \
-    hostapd_default.conf \
-    dhcpcd-6.8.2 \
-    dhcpcd-run-hooks \
-    libwpa_client \
-    macloader \
-
-PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service.legacy \
-    hostapd \
-    wificond \
-    wpa_supplicant \
-    wpa_supplicant.conf
-
-PRODUCT_PACKAGES += \
-    libnetcmdiface \
-    wifiloader \
-
-
-# DHCPCD   
-#DHCPCD_USE_SCRIPT := yes
-#DHCPCD_USE_IPV6 := yes
-
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/dhcpcd-6.8.2/dhcpcd-hooks/20-dns.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/dhcpcd-6.8.2/dhcpcd-hooks/20-dns.conf \
-    $(LOCAL_PATH)/dhcpcd-6.8.2/dhcpcd-hooks/95-configured:$(TARGET_COPY_OUT_SYSTEM)/etc/dhcpcd-6.8.2/dhcpcd-hooks/95-configured
-
-#olsrd-0.9.6.2
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/bin/olsrd:$(TARGET_COPY_OUT_SYSTEM)/bin/olsrd \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/bin/sgw_policy_routing_setup.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/sgw_policy_routing_setup.sh \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_watchdog.so.0.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_watchdog.so.0.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_pgraph.so.1.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_pgraph.so.1.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_jsoninfo.so.1.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_jsoninfo.so.1.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_mini.so.0.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_mini.so.0.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_secure.so.0.6:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_secure.so.0.6 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_p2pd.so.0.1.0:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_p2pd.so.0.1.0 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_httpinfo.so.0.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_httpinfo.so.0.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_dyn_gw_plain.so.0.4:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_dyn_gw_plain.so.0.4 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_sgwdynspeed.so.1.0.0:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_sgwdynspeed.so.1.0.0 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_nameservice.so.0.4:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_nameservice.so.0.4 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_dyn_gw.so.0.5:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_dyn_gw.so.0.5 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_netjson.so.1.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_netjson.so.1.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_txtinfo.so.1.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_txtinfo.so.1.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_dot_draw.so.0.3:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_dot_draw.so.0.3 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_arprefresh.so.0.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_arprefresh.so.0.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_bmf.so.1.7.0:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_bmf.so.1.7.0 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/lib/olsrd_mdns.so.1.0.1:$(TARGET_COPY_OUT_SYSTEM)/lib/olsrd_mdns.so.1.0.1 \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/etc/wifi/olsrd.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/olsrd.conf \
-    $(LOCAL_PATH)/olsrd-0.9.6.2/etc/wifi/olsrd.sgw.speed.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/olsrd.sgw.speed.conf
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/samsung/v1a3g/v1a3g-vendor.mk)

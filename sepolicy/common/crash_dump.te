@@ -1,0 +1,11 @@
+allow crash_dump { 
+    debugfs 
+    hwservicemanager_prop
+    bluetooth_prop
+    device_config_runtime_native_prop
+    bluetooth_data_file
+    runtime_event_log_tags_file
+    resourcecache_data_file
+    device_config_runtime_native_boot_prop
+    }:file  { open write getattr };
+    

@@ -35,10 +35,10 @@ repo init -u git://github.com/LineageOS/android.git -b lineage-17.1
   <project name="khomsn/android_device_samsung_v1a3g" path="device/samsung/v1a3g" remote="github" />
   <project name="khomsn/android_kernel_samsung_exynos5420" path="kernel/samsung/exynos5420" remote="github" />
   <project name="khomsn/android_vendor_samsung_v1a3g" path="vendor/samsung/v1a3g" remote="github" />
-  <project name="khomsn/android_hardware_samsung_slsi_exynos" path="hardware/samsung_slsi/exynos" remote="github" />
-  <project name="khomsn/android_hardware_samsung_slsi_exynos5" path="hardware/samsung_slsi/exynos5" remote="github" />
-  <project name="khomsn/android_hardware_samsung_slsi_exynos5420" path="hardware/samsung_slsi/exynos5420" remote="github" />
-  <project name="khomsn/android_hardware_samsung_slsi_openmax" path="hardware/samsung_slsi/openmax" remote="github" />
+  <project name="khomsn/android_hardware_samsung_slsi-cm_exynos" path="hardware/samsung_slsi-cm/exynos" remote="github" />
+  <project name="khomsn/android_hardware_samsung_slsi-cm_exynos5" path="hardware/samsung_slsi-cm/exynos5" remote="github" />
+  <project name="khomsn/android_hardware_samsung_slsi-cm_exynos5420" path="hardware/samsung_slsi-cm/exynos5420" remote="github" />
+  <project name="khomsn/android_hardware_samsung_slsi-cm_openmax" path="hardware/samsung_slsi-cm/openmax" remote="github" />
   <project name="LineageOS/android_hardware_samsung" path="hardware/samsung" remote="github" />
 </manifest>
 ```

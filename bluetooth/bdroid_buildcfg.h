@@ -1,8 +1,7 @@
 /*
  * Copyright (C) 2012 The Android Open Source Project
- * Copyright (C) 2017 The LineageOS Project
  * Copyright (C) 2013 The CyanogenMod Project
- * Copyright (C) 2016 The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +19,14 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Samsung Galaxy Note Pro 12.2 SM-P901"
+#define BTM_DEF_LOCAL_NAME   "Galaxy Note Pro 12.2 SM-P901"
 
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
-// Networking, Capturing, Object Transfer
+// SERVICE_CLASS:0x5A (Bit17 -Networking,Bit19 - Capturing,Bit20 -Object Transfer,Bit22 -Telephony)
 // MAJOR CLASS: COMPUTER
 // MINOR CLASS: LAPTOP
-#define BTA_DM_COD {0x1A, 0x01, 0x0C}
-
-#define BTM_WBS_INCLUDED TRUE       /* Enable WBS */
-#define BTIF_HF_WBS_PREFERRED TRUE  /* Use WBS    */
-
+#define BTA_DM_COD {0x5A, 0x01, 0x0C}
+#define DISABLE_WBS TRUE
 #define BLE_VND_INCLUDED TRUE
 #define BTM_SCO_ENHANCED_SYNC_ENABLED FALSE
 

@@ -1,2 +1,8 @@
-allow system_app sysfs_mdnie:dir search;
-allow system_app sysfs_mdnie:file rw_file_perms;
+allow system_app sysfs_mdnie_writable:{ file lnk_file } rw_file_perms;
+allow system_app sysfs_mdnie_writable:dir search;
+allow system_app wificond:binder call;
+allow system_app init:binder call;
+
+allow system_app sysfs:dir { open read getattr };
+allow system_app sysfs:file rw_file_perms;
+allow system_app system_suspend_control_service:service_manager  { find };

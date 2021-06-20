@@ -35,6 +35,8 @@ static const std::vector<std::string> cpuInteractivePaths = {
     "/sys/devices/system/cpu/cpufreq/interactive"
 };
 
+#define PANEL_BRIGHTNESS_NODE "/sys/class/backlight/panel/brightness"
+
 /* double tap to wake node */
 //#define TAP_TO_WAKE_NODE "/sys/class/sec/tsp/dt2w_enable"
 

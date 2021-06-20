@@ -43,9 +43,10 @@ TARGET_USES_64_BIT_BINDER := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
+#--------hardware/broadcom/libbt-----------#
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 BOARD_CUSTOM_BT_CONFIG := $(LOCAL_PATH)/bluetooth/libbt_vndcfg.txt
+#--------hardware/broadcom/libbt , system/bt-----------
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Bootloader
@@ -76,7 +77,6 @@ BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
 TARGET_KERNEL_CONFIG := lineageos_v1a3g_khomsn_v1_defconfig
-#TARGET_KERNEL_SOURCE := kernel/samsung/v1a3g
 #KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/gcc-linaro-7.2.1-2017.11-x86_64_arm-eabi/bin
 #KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-linux-eabi-UB-5.3/bin
 #KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
@@ -303,7 +303,7 @@ WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/etc/wifi/bcmdh
 WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/vendor/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/vendor/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/etc/wifi/bcmdhd_apsta.bin"
-WPA_SUPPLICANT_USE_HIDL          := true
+#WPA_SUPPLICANT_USE_HIDL          := true
 
 # Network Routing
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true

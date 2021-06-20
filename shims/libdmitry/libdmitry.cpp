@@ -187,7 +187,7 @@ void *CRYPTO_malloc(uint32_t sz, const char *file, uint32_t line)
  */
 void libEvtLoading(void)
 {
-    ALOGI("Samsung GPS interposition library loaded. Your GPS should work in M now.");
+    ALOGI("Samsung GPS interposition library loaded. Your GPS should work in M / Q now.");
 }
 
 long (*SSL_CTX_ctrl)(void *ctx, int cmd, long larg, void *parg);

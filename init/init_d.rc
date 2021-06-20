@@ -1,6 +1,6 @@
-service init_d /system/bin/sh /system/bin/sysinit
+service init_d /system/bin/sysinit
+    class main
     user root
     group root
     disabled
     oneshot
-    seclabel u:r:sudaemon:s0

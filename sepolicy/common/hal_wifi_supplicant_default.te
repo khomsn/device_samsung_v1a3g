@@ -1,1 +1,2 @@
-allow hal_wifi_supplicant_default wlan_device:chr_file r_file_perms;
+allow hal_wifi_supplicant_default { gpsd_exec debugfs }:file { open read write getattr };
+allow hal_wifi_supplicant_default rfkill_device:chr_file { open read };

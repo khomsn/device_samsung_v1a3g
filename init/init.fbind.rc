@@ -1,0 +1,9 @@
+# Run init.d scripts
+service fbind /system/bin/fbind_service.sh
+    class late_start
+    seclabel u:r:shell:s0
+    user root
+    group root
+    oneshot
+    disabled
+

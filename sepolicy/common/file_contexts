@@ -1,90 +1,119 @@
-# block devices
-/dev/block/platform/msm_sdcc\.1/by-name/efs             u:object_r:efs_block_device:s0
-/dev/block/platform/msm_sdcc\.1/by-name/fota            u:object_r:misc_block_device:s0
+#===================== Devives dev Part ======================================#
+# ALP
+/dev/srp								u:object_r:audio_device:s0
 
-# data files
-/data/.cid.info                                         u:object_r:wifi_data_file:s0
-/data/.wifiver.info                                     u:object_r:wifi_data_file:s0
+/dev/mali0								u:object_r:gpu_device:s0
 
-# device nodes
-/dev/batch_io                                           u:object_r:sensors_device:s0
-/dev/bcm2079x                                           u:object_r:nfc_device:s0
-/dev/btlock                                             u:object_r:bluetooth_device:s0
-/dev/pn547                                              u:object_r:nfc_device:s0
-/dev/rfkill                                             u:object_r:wlan_device:s0
-/dev/sec-nfc                                            u:object_r:nfc_device:s0
+/dev/ttySAC0							u:object_r:hci_attach_dev:s0
+/dev/ttySAC1							u:object_r:gps_device:s0
+/dev/s5p-smem							u:object_r:secmem_device:s0
+/dev/ump								u:object_r:ump_device:s0
 
-# efs files
-/efs/bluetooth(/.*)?                                    u:object_r:bluetooth_efs_file:s0
-/efs/wifi(/.*)?                                         u:object_r:wifi_efs_file:s0
+/dev/mobicore							u:object_r:tee_device:s0
+/dev/mobicore-user						u:object_r:tee_device:s0
 
-# executeables
-/system/vendor/bin/macloader                            u:object_r:macloader_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.sensors@1\.0-service.samsung8974        u:object_r:hal_sensors_default_exec:s0
+/dev/v4l-subdev[0-9]*					u:object_r:video_device:s0
+/dev/media[0-2]*						u:object_r:video_device:s0
 
-# firmware
-/system/vendor/firmware/bcm(.*).hcd                     u:object_r:bt_fw_file:s0
-/system/vendor/firmware/bcm2079x(.*).ncd                u:object_r:nfc_fw_file:s0
-/system/vendor/firmware/libpn547_fw.so                  u:object_r:nfc_fw_file:s0
+/dev/video16							u:object_r:video_device:s0
+/dev/video17							u:object_r:video_device:s0
+/dev/video18							u:object_r:video_device:s0
+/dev/video19							u:object_r:video_device:s0
 
-# sysfs
-/sys/devices/[a-f0-9]+\.uart(/.*)?                               u:object_r:sysfs_msmuart_file:s0
-/sys/devices/platform/bcm[0-9]+_bluetooth/rfkill/rfkill0(/.*)?   u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/virtual/camera(/.*)?                                u:object_r:sysfs_camera:s0
-/sys/devices/virtual/input(/.*)?                                 u:object_r:sysfs_input:s0
-/sys/module/dhd/parameters/firmware_path                         u:object_r:sysfs_wifi_writeable:s0
-/sys/module/dhd/parameters/nvram_path                            u:object_r:sysfs_wifi_writeable:s0
+/dev/fimg2d								u:object_r:fimg2d_device:s0
 
-# sysfs - battery/charger
-/sys/devices/battery\.[0-9]+/power_supply(/.*)?         u:object_r:sysfs_batteryinfo:s0
-/sys/devices/i2c\.[0-9]+/i2c-[0-9]+/[0-9]+-[a-z0-9]+/max[a-z0-9]+-charger/power_supply(/.*)? u:object_r:sysfs_batteryinfo:s0
-/sys/devices/i2c\.[0-9]+/i2c-[0-9]+/[0-9]+-[a-z0-9]+/power_supply(/.*)?                      u:object_r:sysfs_batteryinfo:s0
-/sys/devices/msm_dwc3/power_supply(/.*)?                u:object_r:sysfs_batteryinfo:s0
+/dev/video40							u:object_r:camera_device:s0
+/dev/video41							u:object_r:camera_device:s0
+/dev/video42							u:object_r:camera_device:s0
+/dev/video43							u:object_r:camera_device:s0
+/dev/video44							u:object_r:camera_device:s0
+/dev/media2								u:object_r:camera_device:s0
 
-# sysfs - block/storage
-/sys/devices/msm_sdcc\.[0-9]/mmc_host/mmc[0-9]/power(/.*)?                                   u:object_r:sysfs_mmc_host:s0
+/dev/block/mmcblk0p[0-8]*				u:object_r:emmcblk_device:s0
+/dev/block/mmcblk0p9					u:object_r:boot_block_device:s0
+/dev/block/mmcblk0p10					u:object_r:recovery_block_device:s0
+/dev/block/mmcblk0p13                   u:object_r:radio_block_device:s0
+/dev/block/mmcblk0p18					u:object_r:system_block_device:s0
+/dev/block/mmcblk0p19					u:object_r:cache_block_device:s0
+/dev/block/mmcblk0p21					u:object_r:userdata_block_device:s0
 
-# sysfs - cpu/perf
-/sys/devices/system/soc/soc0(/.*)?                      u:object_r:sysfs_socinfo:s0
+/dev/umts.*								u:object_r:mif_device:s0
+/dev/ehci_power							u:object_r:mif_device:s0
 
-# sysfs - graphics/panel
-/sys/class/mhl(/.*)?                                    u:object_r:sysfs_graphics:s0
-/sys/devices/mdp\.[0-9](/.*)?                           u:object_r:sysfs_graphics:s0
-/sys/devices/virtual/graphics/fb0/csc_cfg               u:object_r:sysfs_graphics:s0
-/sys/devices/virtual/lcd/panel(/.*)?                    u:object_r:sysfs_graphics:s0
+/dev/link_pm							u:object_r:radio_device:s0
+/dev/network_throughput					u:object_r:radio_device:s0
 
-# sysfs - iio
-/sys/bus/iio/devices(/.*)?                                                          u:object_r:sysfs_iio:s0
-/sys/devices/[a-f0-9]+\.spi/spi_master/spi[0-9]+/spi[0-9]+\.0/iio:device[0-9](/.*)? u:object_r:sysfs_iio:s0
+# For SpenCommand
+/dev/input/event1						u:object_r:input_device:s0
 
-# sysfs - leds
-/sys/devices/i2c\.[0-9]+/i2c-[0-9]+/[0-9]+-[a-z0-9]+/leds(/.*)?  u:object_r:sysfs_leds:s0
-/sys/devices/i2c\.[0-9]+/i2c-[0-9]+/[0-9]+-[a-z0-9]+/max[a-z0-9]+-led/leds(/.*)? u:object_r:sysfs_leds:s0
+#=========================== Partition and folders ===================================================#
+/persist(/.*)?							u:object_r:persist_file:s0
+/persist/alarm(/.*)?					u:object_r:persist_alarm_file:s0
+/firmware(/.*)?                         u:object_r:firmware_file:s0
+/firmware-modem(/.*)?                   u:object_r:firmware_file:s0
+/misc(/.*)?                             u:object_r:persist_file:s0
+/preload(/.*)?                          u:object_r:persist_file:s0
 
-# sysfs - mdnie
-/sys/devices/virtual/mdnie/mdnie(/.*)?                  u:object_r:sysfs_mdnie:s0
+/efs/FactoryApp(/.*)?			        u:object_r:app_efs_file:s0
+/efs/FactoryApp/baro_delta				u:object_r:baro_delta_factoryapp_efs_file:s0
+/efs/FactoryApp/factorymode				u:object_r:factorymode_factoryapp_efs_file:s0
+/efs/FactoryApp/fdata					u:object_r:radio_factoryapp_efs_file:s0
+/efs/FactoryApp/hist_nv					u:object_r:radio_factoryapp_efs_file:s0
+/efs/FactoryApp/test_nv					u:object_r:radio_factoryapp_efs_file:s0
 
-# sysfs - sec
-/sys/devices/platform/sec-thermistor(/.*)?              u:object_r:sysfs_sec_thermistor:s0
-/sys/devices/virtual/sec/bamdmux(/.*)?                  u:object_r:sysfs_sec_bamdmux:s0
-/sys/devices/virtual/sec/led(/.*)?                      u:object_r:sysfs_sec_led:s0
-/sys/devices/virtual/sec/sec_barcode_emul(/.*)?         u:object_r:sysfs_sec_barcode_emul:s0
-/sys/devices/virtual/sec/sec_epen(/.*)?                 u:object_r:sysfs_sec_epen:s0
-/sys/devices/virtual/sec/sec_ir(/.*)?                   u:object_r:sysfs_sec_ir:s0
-/sys/devices/virtual/sec/sec_key(/.*)?                  u:object_r:sysfs_sec_key:s0
-/sys/devices/virtual/sec/sec_touchkey(/.*)?             u:object_r:sysfs_sec_touchkey:s0
-/sys/devices/virtual/sec/switch(/.*)?                   u:object_r:sysfs_sec_switch:s0
-/sys/devices/virtual/sec/tsp(/.*)?                      u:object_r:sysfs_sec_tsp:s0
+/efs/bluetooth(/.*)?					u:object_r:bluetooth_data_file:s0
+/efs/drm(/.*)?							u:object_r:drm_efs_file:s0
+/efs/gyro_cal_data						u:object_r:sensor_efs_file:s0
+/efs/h2k\.dat							u:object_r:cpk_efs_file:s0
+/efs/imei(/.*)?							u:object_r:imei_efs_file:s0
+/efs/nv_data.bin(.*)					u:object_r:bin_nv_data_efs_file:s0
+/efs/prov(/.*)?							u:object_r:prov_efs_file:s0
+/efs/prov_data(/.*)?					u:object_r:prov_efs_file:s0
+/efs/sec_efs(/.*)?                      u:object_r:sec_efs_file:s0
+/efs/wifi(/.*)?							u:object_r:wifi_efs_file:s0
+/efs/wv\.keys							u:object_r:cpk_efs_file:s0
 
-# sysfs - sensors
-/sys/devices/virtual/sensors(/.*)?                      u:object_r:sysfs_sensors:s0
+# Widevine
+/efs/cpk(/.*)							u:object_r:cpk_efs_file:s0
+/efs/h2k.dat							u:object_r:cpk_efs_file:s0
+/efs/wv.keys							u:object_r:cpk_efs_file:s0
 
-# sysfs - usb
-/sys/devices/virtual/host_notify/usb_otg(/.*)?               u:object_r:sysfs_usb_otg:s0
+#----------------System sys folder ---------------------------------------------#
+/sys/class/tcon/tcon/psr_hsync					u:object_r:sysfs_writable:s0
+/sys/class/mdnie/mdnie/scenario					u:object_r:sysfs_mdnie_writable:s0
+/sys/class/lcd(/.*)?							u:object_r:sysfs_writable:s0
+/sys/class/sec(/.*)?                              -- u:object_r:sysfs_sec:s0
 
-# sysfs
-/sys/devices(/.*)?/input/input[1-2]/enabled             u:object_r:sysfs_hal_pwr:s0
+/sys/devices/virtual/camera(/.*)?                       u:object_r:sysfs_camera:s0
+/sys/devices/virtual/camera/.*/.*_camfw					u:object_r:video_device:s0
+/sys/devices/virtual/misc/multipdp(/.*)					u:object_r:sysfs_multipdp_writable:s0
+/sys/devices/virtual/sec/sec_touchkey/tsp_keys_enabled	u:object_r:sysfs_input_file:s0
+/sys/devices/15510000.usb/ehci_power					u:object_r:sysfs_usb_power_writable:s0
+/sys/devices/10f24000.mipi-lli/lli_control				u:object_r:sysfs_mipi_writable:s0
+/sys/devices/platform/exynos-sysmmu.30/exynos-sysmmu.11/exynos5-fb.1/mdnie/mdnie/mdnie/scenario u:object_r:sysfs_mdnie_writable:s0
+/sys/devices/platform/bcm4339_bluetooth/rfkill/rfkill0/state	u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/platform/bcm4339_bluetooth/rfkill/rfkill0/type		u:object_r:sysfs_bluetooth_writable:s0
 
-/firmware(/.*)?              u:object_r:firmware_file:s0
-/firmware-modem(/.*)?        u:object_r:firmware_file:s0
-/misc(/.*)?                  u:object_r:persist_misc_file:s0
+#-------------------- data partion files and folders -------------------------#
+/data/\.gps\.interface\.pipe\.to_gpsd		u:object_r:gps_data_file:s0
+/data/\.gps\.interface\.pipe\.to_jni		u:object_r:gps_data_file:s0
+/data/system/gps(/.*)?						u:object_r:gps_data_file:s0
+
+/data/app/tlcd_sock							u:object_r:drmserver_socket:s0
+
+/data/\.cid\.info							u:object_r:wifi_data_file:s0
+/data/\.wifiver\.info						u:object_r:wifi_data_file:s0
+/data/camera(/.*)?							u:object_r:camera_data_file:s0
+/data/misc/radio(/.*)?						u:object_r:radio_data_file:s0
+
+#======================Program EXEC files ============================================#
+/system/bin/adbroot                         u:object_r:adbroot_exec:s0
+/system/vendor/bin/mcDriverDaemon			u:object_r:tee_exec:s0
+
+/system/vendor/bin/modemloader				u:object_r:modemloader_exec:s0
+#/system/vendor/bin/macloader				u:object_r:macloader_exec:s0
+/system/vendor/bin/hw/cbd					u:object_r:cpboot-daemon_exec:s0
+/system/vendor/bin/hw/gpsd					u:object_r:gpsd_exec:s0
+#/system/vendor/bin/wifiloader				u:object_r:wifiloader_exec:s0
+# LiveDisplay HAL
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay@[0-9]\.[0-9]-service\.samsung-exynos    u:object_r:hal_lineage_livedisplay_exynos_exec:s0

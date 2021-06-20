@@ -1,0 +1,13 @@
+# s5p-mem
+allow mediadrmserver secmem_device:chr_file rw_file_perms;#{ { getattr open read ioctl lock map watch watch_reads } { open append write lock map } };
+
+# traverse /efs directory list
+allow mediadrmserver efs_file:dir r_dir_perms;
+
+# /efs/wv.keys /etc/cpk/ /efs/h2k.dat
+allow mediadrmserver cpk_efs_file:dir r_dir_perms;
+allow mediadrmserver cpk_efs_file:file r_file_perms;
+
+#avc : denied { read } for comm=mediadrmserver name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:mediadrmserver:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+allow mediadrmserver gpsd_exec:file { read };
+allow mediadrmserver init:binder { transfer };

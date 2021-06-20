@@ -1,0 +1,6 @@
+service spen-d /system/xbin/bash /system/xbin/spenindetection.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:sudaemon:s0

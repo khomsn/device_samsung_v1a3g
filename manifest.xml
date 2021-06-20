@@ -1,19 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Comments, Legal notices, etc. here -->
 <manifest version="1.0" type="device">
-    <!--
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <transport arch="32">passthrough</transport>
-        <version>4.0</version>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.audio.effect</name>
-        <transport arch="32">passthrough</transport>
-        <version>4.0</version>
-    </hal>
-    -->
-    <hal format="hidl">
-        <name>android.hardware.audio</name>
+        <!-- hwbinder with result in crash when using bluetooth sco
         <transport>hwbinder</transport>
+        -->
+        <transport arch="32">passthrough</transport>
         <version>5.0</version>
         <interface>
             <name>IDevicesFactory</name>
@@ -22,7 +15,9 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
-        <transport>hwbinder</transport>
+        <!-- hwbinder with result in crash when using bluetooth sco -->
+        <!--transport>hwbinder</transport-->
+        <transport arch="32">passthrough</transport>
         <version>5.0</version>
         <interface>
             <name>IEffectsFactory</name>
@@ -58,18 +53,22 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.drm</name>
-        <transport arch="32">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>ICryptoFactory</name>
-            <instance>widevine</instance>
             <instance>default</instance>
         </interface>
         <interface>
-             <name>IDrmFactory</name>
-             <instance>widevine</instance>
-             <instance>default</instance>
-         </interface>
+            <name>IDrmFactory</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::ICryptoFactory/default</fqname>
+        <fqname>@1.0::IDrmFactory/default</fqname>
+        <fqname>@1.1::ICryptoFactory/widevine</fqname>
+        <fqname>@1.1::IDrmFactory/widevine</fqname>
+        <fqname>@1.2::ICryptoFactory/clearkey</fqname>
+        <fqname>@1.2::IDrmFactory/clearkey</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.gnss</name>
@@ -108,20 +107,20 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.ir</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IConsumerIr</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.health</name>
         <transport arch="32">passthrough</transport>
         <version>2.0</version>
         <interface>
             <name>IHealth</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.ir</name>
+        <transport arch="32">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IConsumerIr</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -171,15 +170,6 @@
         <version>1.0</version>
         <interface>
             <name>IPower</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.lineage.power</name>
-        <transport arch="32">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ILineagePower</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -254,7 +244,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
+<!--    <hal format="hidl">
         <name>android.hardware.wifi.hostapd</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
@@ -262,13 +252,47 @@
             <name>IHostapd</name>
             <instance>default</instance>
         </interface>
-    </hal>
+    </hal> -->
     <hal format="hidl">
         <name>android.hardware.wifi.supplicant</name>
         <transport>hwbinder</transport>
         <version>1.2</version>
         <interface>
             <name>ISupplicant</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.lineage.livedisplay</name>
+        <transport>hwbinder</transport>
+        <version>2.0</version>
+        <interface>
+            <name>IAdaptiveBacklight</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IDisplayColorCalibrationExynos</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IDisplayModes</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IReadingEnhancement</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>ISunlightEnhancementExynos</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.lineage.power</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ILineagePower</name>
             <instance>default</instance>
         </interface>
     </hal>

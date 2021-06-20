@@ -1,0 +1,3 @@
+#avc: denied { read } for name="gpsd" dev="mmcblk0p18" ino=3471 scontext=u:r:wificond:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+#avc: denied { getattr } for path="/system/vendor/bin/hw/gpsd" dev="mmcblk0p18" ino=3471 scontext=u:r:wificond:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+allow wificond { debugfs gpsd_exec }:file { getattr read write };

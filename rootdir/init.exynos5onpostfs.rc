@@ -7,4 +7,5 @@ on post-fs
     restorecon_recursive /persist
     # create /persist/alarm if not exist
     mkdir /persist/alarm 0771 system system
+    
 

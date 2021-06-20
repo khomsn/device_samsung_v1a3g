@@ -17,8 +17,10 @@
 #include device/qcom/sepolicy-legacy-um/sepolicy.mk
 
 # Board specific SELinux policy variable definitions
-#BOARD_SEPOLICY_DIRS += \
-#    device/samsung/v1a3g/sepolicy/common
-
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/v1a3g/sepolicy/common_tmp
+    device/samsung/v1a3g/sepolicy/common
+
+BOARD_SEPOLICY_TEE_FLAVOR := mobicore
+
+BOARD_VENDOR_SEPOLICY_DIRS += device/samsung/v1a3g/sepolicy/vendor
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/samsung/v1a3g/sepolicy/private

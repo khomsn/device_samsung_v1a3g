@@ -21,3 +21,10 @@ on charger
     hostname localhost
     domainname localdomain
 
+#***************************************** Boot from Charger Mode **********************************************************************#
+
+# This is the proper way to reboot on charging mode to normal mode, 
+# if use setprop and trigger condition this device cannot function properly.
+# Because kernel boot command is not fully set.
+
+    setprop sys.powerctl reboot,leaving-off-mode-charging

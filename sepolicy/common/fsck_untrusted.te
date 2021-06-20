@@ -1,2 +1,4 @@
-# /data/media
-allow fsck_untrusted media_rw_data_file:dir getattr;
+# OTG / NTFS
+allow fsck_untrusted emmcblk_device:blk_file getattr;
+allow fsck_untrusted vold_device:blk_file { ioctl };
+allow fsck_untrusted proc_swaps:file { open read };

@@ -1,0 +1,788 @@
+<!-- // Controls that can be set once at system startup.  As the WM8994/WM1811 -->
+<!-- // outputs don't conflict with each other we set up most of our routing -->
+<!-- // statically at system startup. -->
+
+<!-- // For WM5102 on P90x -->
+<!-- // AIF1 is the port for System IN/OUT signal , System gives OUT signal only to AIF1RX1 for Left channel and AIF1RX2 for Right channel -->
+<!-- // AIF2 is the port for System <-> Voice GSM-Modem IN/OUT signal -->
+<!-- // AIF3 is the port for System <-> Bluetooth IN/OUT signal -->
+<!--
+InputRate 44100
+OutputRate 44100
+PlaybackLink 3
+CaptureLink 0
+DeepBufLink 3
+HDMILink 0
+BasebandLink 1
+BluetoothLink 2
+-->
+
+<!-- Version : 20 -->
+<mixer>
+    <pcmdai playback_link="0" />
+    <pcmdai playback_deep_link="3" />
+    <pcmdai capture_link="0" />
+    <pcmdai baseband_link="1" />
+    <pcmdai bluetooth_link="2" />
+
+<!-- ########## Initial mixer settings ########## -->
+
+<!--  Noise gate control  -->
+    <ctl name="Noise Gate Switch" value="0" />
+    <ctl name="HPOUT1L NG HPOUT1L Switch" value="0" />
+    <ctl name="HPOUT1R NG HPOUT1R Switch" value="0" />
+    <ctl name="HPOUT2L NG HPOUT2L Switch" value="0" />
+    <ctl name="HPOUT2R NG HPOUT2R Switch" value="0" />
+    <ctl name="EPOUT NG EPOUT Switch" value="0" />
+    <ctl name="SPKOUTL NG SPKOUTL Switch" value="0" />
+    <ctl name="SPKOUTR NG SPKOUTR Switch" value="0" />
+    <ctl name="SPKDAT1L NG SPKDAT1L Switch" value="0" />
+    <ctl name="SPKDAT1R NG SPKDAT1R Switch" value="0" />
+    <ctl name="Noise Gate Threshold Volume"  value="3" />
+
+<!-- *****************Preset Volume************************ -->
+    <!-- Volume only is PGA for Analogue volume range from 20h to 50h = 32 to 80 Default is 40h=64 -->
+    <!-- Digital volume is 00h-BFh = 0-191 -->
+    <!-- Digital CORE Volume range from 20h to 50h = 32 to 80 Default is 40h=64 -->
+<!--  common digital volume  -->
+<!--  don't change this common volume  -->
+    <ctl name="AIF1TX1 Input 1 Volume" value="32" />
+    <ctl name="AIF1TX1 Input 2 Volume" value="32" />
+    <ctl name="AIF1TX1 Input 3 Volume" value="32" />
+    <ctl name="AIF1TX1 Input 4 Volume" value="32" />
+    <ctl name="AIF1TX2 Input 1 Volume" value="32" />
+    <ctl name="AIF1TX2 Input 2 Volume" value="32" />
+    <ctl name="AIF1TX2 Input 3 Volume" value="32" />
+    <ctl name="AIF1TX2 Input 4 Volume" value="32" />
+    <ctl name="AIF2TX1 Input 1 Volume" value="32" />
+    <ctl name="AIF2TX1 Input 2 Volume" value="32" />
+    <ctl name="AIF2TX1 Input 3 Volume" value="32" />
+    <ctl name="AIF2TX1 Input 4 Volume" value="32" />
+    <ctl name="AIF2TX2 Input 1 Volume" value="32" />
+    <ctl name="AIF2TX2 Input 2 Volume" value="32" />
+    <ctl name="AIF2TX2 Input 3 Volume" value="32" />
+    <ctl name="AIF2TX2 Input 4 Volume" value="32" />
+    <ctl name="AIF3TX1 Input 1 Volume" value="32" />
+    <ctl name="AIF3TX1 Input 2 Volume" value="32" />
+    <ctl name="AIF3TX1 Input 3 Volume" value="32" />
+    <ctl name="AIF3TX1 Input 4 Volume" value="32" />
+    <ctl name="AIF3TX2 Input 1 Volume" value="32" />
+    <ctl name="AIF3TX2 Input 2 Volume" value="32" />
+    <ctl name="AIF3TX2 Input 3 Volume" value="32" />
+    <ctl name="AIF3TX2 Input 4 Volume" value="32" />
+
+    <ctl name="Input Ramp Up" value="8ms/6dB" />
+
+    <ctl name="RCV Switch" value="0" /><!-- not in kernel control -->
+    <ctl name="SPK Switch" value="0" />
+    <ctl name="HP Switch" value="0" />
+    <ctl name="VPS Switch" value="0" />
+    <ctl name="HDMI Switch" value="0" />
+    <ctl name="Main Mic Switch" value="0" />
+    <ctl name="Sub Mic Switch" value="0" />
+    <ctl name="3rd Mic Switch" value="0" />
+    <ctl name="Headset Mic Switch" value="0" />
+    <!-- set to Master only for SCO voice -->
+    <ctl name="AIF2 Mode" value="Master" />
+    
+<!--   Gain for main and headset mics  -->
+    <!-- Default to 40h = 64 / Digital volume at 80h = 128-->
+    <ctl name="IN1L Volume" value="25" />
+    <ctl name="IN1R Volume" value="25" />
+
+<!--   Gain for sub and 3rd mic  -->
+    <ctl name="IN2L Volume" value="25" />
+    <ctl name="IN2R Volume" value="25" />
+
+<!-- **************************SET LHPF parameters******************** -->
+<!--  LHPFn Mode "High-pass" or "Low-pass" -->
+    <ctl name="LHPF1 Mode" value="Low-pass" /><!-- NORMAL USE -->
+    <ctl name="LHPF2 Mode" value="High-pass" /><!-- NORMAL USE -->
+    <ctl name="LHPF3 Mode" value="Low-pass" /><!-- VOICE CALL USE -->
+    <ctl name="LHPF4 Mode" value="High-pass" /><!-- VOICE CALL USE -->
+
+<!--  Filter cutoff frequency [Fc] "4Hz","13Hz","22Hz", "54Hz", "130Hz", "200Hz",
+    "250Hz", "400Hz", "550Hz", "800Hz", "1062Hz", "1.5kHz", "2kHz", "2.5kHz", "3kHz",
+    "3.5kHz", "5kHz", "7.5kHz", "9kHz", "12.5kHz", "15kHz", "user defined1", "user defined2" -->
+<!-- The voiced speech of a typical adult male will have a fundamental frequency from 85 to 180 Hz, 
+    and that of a typical adult female from 165 to 255 Hz. 5th harmonic of 255 is 1275Hz
+    voice frequency band ranges from approximately 300 to 3400 Hz,
+    So set voice cutoff frequency to 13 - 1500 Hz. -->
+    <ctl name="LHPF1 COEFF FILTER" value="15kHz" />
+    <ctl name="LHPF2 COEFF FILTER" value="13Hz" />
+    <ctl name="LHPF3 COEFF FILTER" value="1.5kHz" />
+    <ctl name="LHPF4 COEFF FILTER" value="13Hz" />
+<!--   
+    <ctl name="LHPF1 Coefficients" value="1" />
+    <ctl name="LHPF2 Coefficients" value="1" />
+    <ctl name="LHPF3 Coefficients" value="1" />
+    <ctl name="LHPF4 Coefficients" value="1" />
+-->
+    <ctl name="LHPF1 Input 1 Volume" value="32" />
+    <ctl name="LHPF1 Input 2 Volume" value="32" />
+    <ctl name="LHPF1 Input 3 Volume" value="32" />
+    <ctl name="LHPF1 Input 4 Volume" value="32" />
+    <ctl name="LHPF2 Input 1 Volume" value="32" />
+    <ctl name="LHPF2 Input 2 Volume" value="32" />
+    <ctl name="LHPF2 Input 3 Volume" value="32" />
+    <ctl name="LHPF2 Input 4 Volume" value="32" />
+    <ctl name="LHPF3 Input 1 Volume" value="32" />
+    <ctl name="LHPF3 Input 2 Volume" value="32" />
+    <ctl name="LHPF3 Input 3 Volume" value="32" />
+    <ctl name="LHPF3 Input 4 Volume" value="32" />
+    <ctl name="LHPF4 Input 1 Volume" value="32" />
+    <ctl name="LHPF4 Input 2 Volume" value="32" />
+    <ctl name="LHPF4 Input 3 Volume" value="32" />
+    <ctl name="LHPF4 Input 4 Volume" value="32" />
+<!--  ************** DRC *************************** -->
+    <ctl name="DRC1L Input 1 Volume" value="32" />
+    <ctl name="DRC1L Input 2 Volume" value="32" />
+    <ctl name="DRC1L Input 3 Volume" value="32" />
+    <ctl name="DRC1L Input 4 Volume" value="32" />
+    <ctl name="DRC1R Input 1 Volume" value="32" />
+    <ctl name="DRC1R Input 2 Volume" value="32" />
+    <ctl name="DRC1R Input 3 Volume" value="32" />
+    <ctl name="DRC1R Input 4 Volume" value="32" />
+<!--  ************** EQn *************************** -->
+    <ctl name="EQ1 Input 1 Volume" value="32" />
+    <ctl name="EQ1 Input 2 Volume" value="32" />
+    <ctl name="EQ1 Input 3 Volume" value="32" />
+    <ctl name="EQ1 Input 4 Volume" value="32" />
+    <ctl name="EQ2 Input 1 Volume" value="32" />
+    <ctl name="EQ2 Input 2 Volume" value="32" />
+    <ctl name="EQ2 Input 3 Volume" value="32" />
+    <ctl name="EQ2 Input 4 Volume" value="32" />
+    <ctl name="EQ3 Input 1 Volume" value="32" />
+    <ctl name="EQ3 Input 2 Volume" value="32" />
+    <ctl name="EQ3 Input 3 Volume" value="32" />
+    <ctl name="EQ3 Input 4 Volume" value="32" />
+    <ctl name="EQ4 Input 1 Volume" value="32" />
+    <ctl name="EQ4 Input 2 Volume" value="32" />
+    <ctl name="EQ4 Input 3 Volume" value="32" />
+    <ctl name="EQ4 Input 4 Volume" value="32" />
+
+
+<!--  ************************************Initial END*************************************  -->
+
+<!--  ****************************** Begin ** CORE PATH PERMANENT FIXED ******************* -->
+
+<!-- +++++++++++++++++++++++++++++++++ Devices ++++++++++++++++++++++++++++++++++++++++ -->
+    
+<!-- // Default configuration for a specific output  -->
+<!-- // Should really add aliasing; headset and headphone are the same thing  -->
+<!-- // and we should refcount appropriately (ditto for speaker/earpiece on  -->
+<!-- // some low end devices)  -->
+
+    <!-- ************ System <=> AIF1 ******************************** -->
+    <!-- /// OUTPUT Paths for System /// -->
+
+    <!-- Analog output AMP -->
+    <!-- AP Side is mixed to Input 1 of each out mixer -->
+    <!-- RCV(Mono) -->
+    <!-- does not have this device in P90X but Configure anyway -->
+    <ctl name="EPOUT Input 1" value="AIF1RX1" />
+    <ctl name="EPOUT Input 2" value="AIF1RX2" />
+    <ctl name="EPOUT Digital Switch" value="1" />
+    
+    <!--  SPK(stereo) [System -> SPK] -->
+    <!-- This system always connects thrue EQ3/4 -->
+    <!-- EQs are enabled by loaded effects -->
+    <ctl name="SPKOUTL Input 1" value="AIF1RX1" />
+    <ctl name="SPKOUTR Input 1" value="AIF1RX2" />
+    <ctl name="SPKOUTL Input 3" value="AIF1RX1" />
+    <ctl name="SPKOUTR Input 3" value="AIF1RX2" />
+    <ctl name="Speaker Digital Switch" value="1" />
+
+    <!--  HP(stereo)  [System -> HP]-->
+    <ctl name="HPOUT1L Input 1" value="AIF1RX1" />
+    <ctl name="HPOUT1R Input 1" value="AIF1RX2" />
+    <ctl name="HPOUT1L Input 3" value="AIF1RX1" />
+    <ctl name="HPOUT1R Input 3" value="AIF1RX2" />
+    <ctl name="HPOUT1 Digital Switch" value="1" />
+    
+    <!-- VPS(stereo) -->
+    <!-- P90X uses only HPOUT1 not use HPOUT2 -->
+    <ctl name="HPOUT2L Input 1" value="AIF1RX1" />
+    <ctl name="HPOUT2R Input 1" value="AIF1RX2" />
+    <ctl name="HPOUT2L Input 3" value="AIF1RX1" />
+    <ctl name="HPOUT2R Input 3" value="AIF1RX2" />
+    <ctl name="HPOUT2 Digital Switch" value="1" />
+
+    <!-- /// INPUT PATHS FOR SYSTEM /// -->
+    <!-- AIF1TX use for voice capture + voice call up-link recording  -->
+    <ctl name="AIF1TX1 Input 1" value="LHPF2" /><!-- Input 1 < Main Mic -->
+    <ctl name="AIF1TX2 Input 1" value="LHPF2" />
+    <ctl name="AIF1TX1 Input 2" value="LHPF4" /><!-- Input 2 < Headset Mic -->
+    <ctl name="AIF1TX2 Input 2" value="LHPF4" />
+    <!-- Stereo recording from voice_call + Bluetooth down-link -->
+    <ctl name="AIF1TX1 Input 3" value="ASRC2L" /><!-- Input 3 < Modem Downlink BT Uplink -->
+    <ctl name="AIF1TX2 Input 3" value="ASRC2R" /><!-- Input 3 < Modem Downlink BT Uplink -->
+<!-- ****************************** BT SCO ************************** -->    
+    <!-- AIF3 and AIF1 are on the same rate. -->
+    <ctl name="AIF1TX1 Input 4" value="AIF3RX1" /><!-- Input 4 < Bluetooth Mic -->
+    <ctl name="AIF1TX2 Input 4" value="AIF3RX2" />
+    <!--  BT mic->CP [BT -> Gsm Voicecall Modem] -->
+    <!-- USE Input 4 for BT <-> Modem -->
+    <ctl name="AIF2TX1 Input 4" value="AIF3RX1" />
+    <ctl name="AIF2TX2 Input 4" value="AIF3RX2" />
+    <!-- Input 4 < Bluetooth Mic -->
+    <!--  CP->BT  -->
+    <!-- USE Input 4 for Modem <-> BT -->
+    <ctl name="AIF3TX1 Input 1" value="AIF1RX1" /><!-- Input 1 < Bluetooth Spk -->
+    <ctl name="AIF3TX2 Input 1" value="AIF1RX2" /><!-- Input 1 < Bluetooth Spk -->
+    <ctl name="AIF3TX1 Input 4" value="AIF2RX1" />
+    <ctl name="AIF3TX2 Input 4" value="AIF2RX2" />
+
+<!--  ****************************** END ** CORE PATH PERMANENT FIXED ******************* -->
+<!-- ***************************** DRC SETTING ****************************************** -->
+    <ctl name="DRC1L_ENA" value="ON" /><!-- DRC1L_ENA 0/1-->
+    <ctl name="DRC1R_ENA" value="ON" /><!-- DRC1L_ENA 0/1-->
+
+    <ctl name="DRC1_NG_ENA" value="ON" /><!-- DRC1_NG_ENA 0/1-->
+    <ctl name="DRC1_KNEE2_OP_ENA" value="ON" /><!-- DRC1_KNEE2_OP_ENA 0/1-->
+    
+    <ctl name="DRC1_KNEE_IP" value="-12.75dB" />
+    <!-- DRC1_KNEE_IP -->
+    <!-- DRC1 Input signal level at the Compressor ‘Knee’.
+        000000 = 0dB
+        000001 = -0.75dB
+        000010 = -1.5dB
+        ... (-0.75dB steps)
+        111100 = -45dB
+    -->
+
+    <ctl name="DRC1_KNEE_OP" value="-5.25dB" />
+    <!-- DRC1_KNEE_OP -->
+    <!-- DRC1 Output signal at the Compressor ‘Knee’.
+        00000 = 0dB
+        00001 = -0.75dB
+        00010 = -1.5dB
+        ... (-0.75dB steps)
+        11110 = -22.5dB
+    -->
+
+    <ctl name="DRC1_LO_COMP" value="1x" />
+    <!-- DRC1_LO_COMP -->
+    <!-- DRC1 Compressor slope (lower region)
+        000 = 1 (no compression)
+        001 = 1/2
+        010 = 1/4
+        011 = 1/8
+        100 = 0
+    -->
+
+    <ctl name="DRC1_HI_COMP" value="x/16" />
+    <!-- DRC1_HI_COMP -->
+    <!-- DRC1 Compressor slope (upper region)
+        000 = 1 (no compression)
+        001 = 1/2
+        010 = 1/4
+        011 = 1/8
+        100 = 1/16
+        101 = 0
+    -->
+
+    <ctl name="DRC1_KNEE2_IP" value="-36dB" />
+    <!-- DRC1_KNEE2_IP -->
+    <!-- DRC1 Input signal level at the Noise Gate threshold ‘Knee2’.
+        00000 = -36dB
+        00001 = -37.5dB
+        00010 = -39dB
+        ... (-1.5dB steps)
+        11110 = -81dB
+        11111 = -82.5dB
+        Only applicable when
+        DRC1_NG_ENA = 1.
+    -->
+
+    <ctl name="DRC1_KNEE2_OP" value="-63dB" />
+    <!-- DRC1_KNEE2_OP -->
+    <!-- DRC1 Output signal at the Noise Gate threshold ‘Knee2’.
+        00000 = -30dB
+        00001 = -31.5dB
+        00010 = -33dB
+        ... (-1.5dB steps)
+        11110 = -75dB
+        11111 = -76.5dB
+        Only applicable when
+        DRC1_NG_ENA = 1. and 
+        DRC1_KNEE2_OP_ENA = 1.
+    -->
+
+    <ctl name="DRC1_NG_EXP" value="1x" />
+    <!-- DRC1_NG_EXP -->
+    <!-- DRC1 Noise Gate slope
+        00 = 1 (no expansion)
+        01 = 2
+        10 = 4
+        11 = 8
+        Only applicable when
+        DRC1_NG_ENA = 1.
+    -->
+
+    <ctl name="DRC1_MINGAIN" value="-36dB" />
+    <!-- DRC1_MINGAIN -->
+    <!-- DRC1 Minimum gain to attenuate audio signals
+        000 = 0dB
+        001 = -12dB (default)
+        010 = -18dB
+        011 = -24dB
+        100 = -36dB
+    -->
+
+    <ctl name="DRC1_MAXGAIN" value="18dB" />
+    <!-- DRC1_MAXGAIN -->
+    <!-- DRC1 Maximum gain to boost audio signals (dB)
+        00 = 12dB
+        01 = 18dB
+        10 = 24dB
+        11 = 36dB
+    -->
+
+    <ctl name="DRC1_NG_MINGAIN" value="-36dB" />
+    <!-- DRC1_NG_MINGAIN -->
+    <!-- DRC1 Minimum gain to attenuate audio signals when the noise gate is active.
+        0000 = -36dB
+        0001 = -30dB
+        0010 = -24dB
+        0011 = -18dB
+        0100 = -12dB
+        0101 = -6dB
+        0110 = 0dB
+        0111 = 6dB
+        1000 = 12dB
+        1001 = 18dB
+        1010 = 24dB
+        1011 = 30dB
+        1100 = 36dB
+    -->
+
+    <ctl name="DRC1_ATK" value="363us" />
+    <!-- DRC1_ATK -->
+    <!-- DRC1 Gain attack rate (seconds/6dB)
+        0001 = 181us
+        0010 = 363us
+        0011 = 726us
+        0100 = 1.45ms
+        0101 = 2.9ms
+        0110 = 5.8ms
+        0111 = 11.6ms
+        1000 = 23.2ms
+        1001 = 46.4ms
+        1010 = 92.8ms
+        1011 = 185.6ms
+    -->
+
+    <ctl name="DRC1_DCY" value="5.8ms" />
+    <!-- DRC1_DCY -->
+    <!-- DRC1 Gain decay rate (seconds/6dB)
+        0000 = 1.45ms
+        0001 = 2.9ms
+        0010 = 5.8ms
+        0011 = 11.6ms
+        0100 = 23.25ms
+        0101 = 46.5ms
+        0110 = 93ms
+        0111 = 186ms
+        1000 = 372ms
+        1001 = 743ms
+        1010 = 1.49s
+        1011 = 2.97s
+    -->
+
+    <ctl name="DRC1_QR_THR" value="12dB" />
+    <!-- DRC1_QR_THR -->
+    <!-- DRC1 Quick-release threshold (crest factor in dB)
+        00 = 12dB
+        01 = 18dB
+        10 = 24dB
+        11 = 30dB
+    -->
+
+    <ctl name="DRC1_QR_DCY" value="0.725ms" />
+    <!-- DRC1_QR_DCY -->
+    <!-- DRC1 Quick-release decay rate (seconds/6dB)
+        00 = 0.725ms
+        01 = 1.45ms
+        10 = 5.8ms
+    -->
+    <!-- Only DRC1_ANTICLIP or DRC1_QR can be ON -->
+    <ctl name="DRC1_ANTICLIP" value="OFF" /><!-- DRC1_ANTICLIP 0/1-->
+    <ctl name="DRC1_QR" value="ON" /><!-- DRC1_QR 0/1-->
+
+  
+<!-- *********************** Output Devices VOICE CALL USES ******************************** -->
+    <path name="VC-HpSp">
+        <!-- USE Input 3 for GSM Voice Call -->
+        <!--  CP->SPK  -->
+        <ctl name="EQ3 Input 1" value="ASRC2L" />
+        <ctl name="EQ4 Input 1" value="ASRC2R" />
+        <ctl name="SPKOUTL Input 2" value="ASRC2L" />
+        <ctl name="SPKOUTR Input 2" value="ASRC2R" />
+       <!--  CP->HP  -->
+        <ctl name="HPOUT1L Input 2" value="ASRC2L" />
+        <ctl name="HPOUT1R Input 2" value="ASRC2R" />
+    </path>
+<!-- ******************************** Output Device Path ********************************* -->
+    <path name="OP-Analogue-Dock-Out-Enable">
+	    <ctl name="VPS Switch" value="1" />
+    </path>
+<!-- ********************************* Input Devices SYSTEM/NORMAL USES ************************************ -->
+    <path name="Builtin_Mic-Enable">
+        <!-- Main Mic uses Input 1 & FILTER 1+2 as BPF -->
+	    <ctl name="Main Mic Switch" value="1" />
+        <ctl name="DRC1L Input 1" value="IN1L" />
+        <ctl name="LHPF1 Input 1" value="DRC1L" />
+        <ctl name="LHPF2 Input 1" value="LHPF1" />
+    </path>
+
+    <path name="Headset_In-Enable">
+        <!-- Headset Mic uses Input 2 & FILTER 1+2 as BPF -->
+	    <ctl name="Headset Mic Switch" value="1" />
+        <ctl name="Main Mic Switch" value="0" />
+        <ctl name="LHPF1 Input 2" value="IN1R" />
+        <ctl name="LHPF2 Input 2" value="LHPF1" />
+    </path>
+<!-- *********************************************** GSM Voice Call ******************************** -->
+    <path name="Verb-Voicecall">
+        <ctl name="AIF2 Mode" value="Slave" />
+        <!-- Stereo voice_call down-link -->
+        <!-- Signal in from modem must pass throu ASRC to change rate to connect to output -->
+        <ctl name="ASRC2L Input" value="AIF2RX1" /><!-- Modem Downlink Output-->
+        <ctl name="ASRC2R Input" value="AIF2RX2" /><!-- Modem Downlink Output-->
+        <ctl name="AIF1TX1 Input 1 Volume" value="50" /><!-- Mic Recording-->
+        <ctl name="AIF1TX2 Input 1 Volume" value="50" /><!-- Mic Recording-->
+        <ctl name="AIF1TX1 Input 2 Volume" value="50" /><!-- HS_Mic Recording-->
+        <ctl name="AIF1TX2 Input 2 Volume" value="50" /><!-- HS_Mic Recording-->
+        <ctl name="AIF1TX1 Input 3 Volume" value="50" /><!-- Downlink Recording-->
+        <ctl name="AIF1TX2 Input 3 Volume" value="50" /><!-- Downlink Recording-->
+        <ctl name="AIF1TX1 Input 4 Volume" value="50" /><!-- BT Mic Recording-->
+        <ctl name="AIF1TX2 Input 4 Volume" value="50" /><!-- BT Mic Recording-->
+        <ctl name="AIF2TX1 Input 1 Volume" value="42" /><!-- Mic to Uplink-->
+        <ctl name="AIF2TX2 Input 1 Volume" value="42" /><!-- Mic to Uplink-->
+    </path>
+<!-- ***************** Input Devices VOICE CALL USES ************************** -->
+    <path name="VMainMic">
+        <!-- Main Mic uses Input 1 & FILTER 3+4 as BPF -->
+        <ctl name="Main Mic Switch" value="1" />
+        <ctl name="DRC1L Input 1" value="IN1L" />
+        <ctl name="LHPF3 Input 1" value="DRC1L" /><!-- Main Mic In -->
+        <ctl name="LHPF4 Input 1" value="LHPF3" />
+        <!-- Mic is @ system rate must change rate with ASRC1 to Modem Rate (Slave Mode) -->
+        <!-- Mic->ASRC1->AIF2TX -->
+        <ctl name="ASRC1L Input" value="LHPF4" />
+        <ctl name="ASRC1R Input" value="LHPF4" />
+        <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
+        <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
+    </path>
+    
+    <path name="VHeadsetMic">
+        <!-- Headset Mic uses Input 2 & FILTER 3+4 as BPF -->
+        <ctl name="Headset Mic Switch" value="1" />
+        <ctl name="Main Mic Switch" value="0" />
+        <ctl name="LHPF3 Input 2" value="IN1R" />
+        <ctl name="LHPF4 Input 2" value="LHPF3" />
+        <!-- Mic is @ system rate must change rate with ASRC1 to Modem Rate (Slave Mode) -->
+        <!-- Mic->ASRCL1->AIF2TX -->
+        <ctl name="ASRC1L Input" value="LHPF4" />
+        <ctl name="ASRC1R Input" value="LHPF4" />
+        <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
+        <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
+    </path>
+<!-- *****************************  Audio Hal Paths Start Here ************************* -->
+    <!--
+    #######################################################
+    ### AUDIO ROUTING
+    #######################################################
+    -->
+    <path name="none">
+        <!-- Empty path -->
+    </path>
+
+<!-- ###################### Playback ########################## -->
+
+    <!--path name="earpiece"-->
+        <!-- Empty path V1A don't have this output-->
+    <!--/path-->
+
+    <path name="speaker">
+        <!-- FOR NORMAL SYSTEM -->
+        <ctl name="SPK Switch" value="1" />
+        <ctl name="Speaker Digital Volume" value="130" />
+        <ctl name="SPKOUTL Input 1 Volume" value="32" />
+        <ctl name="SPKOUTR Input 1 Volume" value="32" />
+        <ctl name="Speaker Digital Switch" value="1" />
+    </path>
+
+    <path name="headphones">
+        <!-- FOR NORMAL SYSTEM -->
+        <ctl name="HP Switch" value="1" />
+        <ctl name="Noise Gate Switch" value="0" />
+        <ctl name="HPOUT1 Digital Volume" value="128" />
+        <ctl name="HPOUT1L Input 1 Volume" value="32" />
+        <ctl name="HPOUT1R Input 1 Volume" value="32" />
+        <ctl name="Speaker Digital Switch" value="0" />
+    </path>
+
+    <path name="speaker-and-headphones">
+        <!-- FOR NORMAL SYSTEM -->
+        <ctl name="SPK Switch" value="1" />
+        <ctl name="Speaker Digital Volume" value="128" />
+        <ctl name="SPKOUTL Input 1 Volume" value="32" />
+        <ctl name="SPKOUTR Input 1 Volume" value="32" />
+        
+        <ctl name="HP Switch" value="1" />
+        <ctl name="Noise Gate Switch" value="0" />
+        <ctl name="HPOUT1 Digital Volume" value="128" />
+        <ctl name="HPOUT1L Input 1 Volume" value="32" />
+        <ctl name="HPOUT1R Input 1 Volume" value="32" />
+    </path>
+
+    <!--path name="voice-call-earpiece"-->
+        <!-- Empty path V1A don't have this output-->
+    <!--/path-->
+
+    <!--path name="voice-call-earpiece-wb"-->
+        <!-- Empty path V1A don't have this output-->
+    <!--/path-->
+
+    <path name="voice-call-speaker">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- For voice phone call OUTPUT Path -->
+        <ctl name="SPK Switch" value="1" />
+        <path name="VC-HpSp" />
+        <ctl name="Speaker Digital Volume" value="128" />
+        <ctl name="Speaker Digital Switch" value="1" />
+        <!-- #CP RX -->
+        <ctl name="SPKOUTL Input 2 Volume" value="42" />
+        <ctl name="SPKOUTR Input 2 Volume" value="42" />
+        <path name="Verb-Voicecall" />
+    </path>
+
+    <path name="voice-call-speaker-wb">
+        <!-- FOR VOICE PHONE CALL -->
+        <path name="voice-call-speaker" />
+    </path>
+
+    <path name="voice-call-headphones">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- For voice phone call OUTPUT Path -->
+        <ctl name="HP Switch" value="1" />
+        <path name="VC-HpSp" />
+        <ctl name="Noise Gate Switch" value="0" />
+        <ctl name="HPOUT1 Digital Volume" value="128" />
+        <!-- #CP RX -->
+        <ctl name="HPOUT1L Input 2 Volume" value="42" />
+        <ctl name="HPOUT1R Input 2 Volume" value="42" />
+        <path name="Verb-Voicecall" />
+        <ctl name="Speaker Digital Switch" value="0" />
+    </path>
+
+    <path name="voice-call-headphones-wb">
+        <!-- FOR VOICE PHONE CALL -->
+        <path name="voice-call-headphones" />
+    </path>
+
+    <path name="voice-call-bt-sco-headset">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- For voice phone call OUTPUT Path -->
+        <path name="Verb-Voicecall" />
+        <ctl name="AIF3TX1 Input 4 Volume" value="80" /><!-- BT SPK from Modem-->
+        <ctl name="AIF3TX2 Input 4 Volume" value="80" /><!-- BT SPK from Modem-->
+    </path>
+
+    <path name="voice-call-bt-sco-headset-wb">
+        <!-- FOR VOICE PHONE CALL -->
+        <path name="voice-call-bt-sco-headset" />
+    </path>
+
+    <path name="hdmi">
+        <!-- FOR NORMAL SYSTEM -->
+        <ctl name="HDMI Switch" value="1" />
+    </path>
+
+    <path name="speaker-and-hdmi">
+        <!-- FOR NORMAL SYSTEM -->
+        <path name="speaker" />
+        <path name="hdmi" />   
+    </path>
+
+    <path name="bt-sco-headset">
+        <!-- FOR VOIP SYSTEM -->
+        <!-- VOICE_COMMUNICATION -->
+        <ctl name="AIF2 Mode" value="Slave" />
+
+        <ctl name="ASRC2L Input" value="AIF3RX1" /><!-- Input 4 < Bluetooth Mic -->
+        <ctl name="ASRC2R Input" value="AIF3RX2" />
+        <ctl name="AIF1TX1 Input 4" value="ASRC2L" /><!-- Input 4 < Bluetooth Mic -->
+        <ctl name="AIF1TX2 Input 4" value="ASRC2R" />
+        <ctl name="ASRC1L Input" value="AIF1RX1" /><!-- Input 1 < Bluetooth Spk -->
+        <ctl name="ASRC1R Input" value="AIF1RX2" /><!-- Input 1 < Bluetooth Spk -->
+        <ctl name="AIF3TX1 Input 1" value="ASRC1L" /><!-- Input 1 < Bluetooth Spk -->
+        <ctl name="AIF3TX2 Input 1" value="ASRC1R" /><!-- Input 1 < Bluetooth Spk -->
+
+        <ctl name="AIF3TX1 Input 1 Volume" value="64" />
+        <ctl name="AIF3TX2 Input 1 Volume" value="64" />
+        <ctl name="Speaker Digital Switch" value="0" />
+    </path>
+
+    <path name="speaker-and-bt-sco-headset">
+        <!-- FOR NORMAL SYSTEM -->
+        <path name="speaker" />
+        <path name="bt-sco-headset" />   
+        <ctl name="Speaker Digital Switch" value="1" />
+    </path>
+
+<!-- ############################### Capture ###################################### -->
+
+    <path name="earpiece-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <!-- For LineageOs Recorder program -->
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="25" />
+        <ctl name="IN1L Digital Volume" value="128" />
+        <ctl name="LHPF1 Input 1 Volume" value="42" />
+        <ctl name="LHPF2 Input 1 Volume" value="42" />
+    </path>
+
+    <path name="speaker-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <!-- For normal uses -->
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="25" />
+        <ctl name="IN1L Digital Volume" value="128" />
+        <ctl name="LHPF1 Input 1 Volume" value="42" />
+        <ctl name="LHPF2 Input 1 Volume" value="42" />
+    </path>
+
+    <path name="headset-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <path name="Headset_In-Enable" />
+        <ctl name="IN1R Volume" value="25" />
+        <ctl name="IN1R Digital Volume" value="128" />
+        <ctl name="LHPF1 Input 2 Volume" value="42" />
+        <ctl name="LHPF2 Input 2 Volume" value="42" />
+    </path>
+
+    <path name="voice-call-mic">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- For voice phone call INPUT Path -->
+        <!-- Configure builtin mic only -->
+        <path name="VMainMic" />
+        <ctl name="IN1L Volume" value="25" />
+        <ctl name="IN1L Digital Volume" value="128" />
+        <ctl name="LHPF3 Input 1 Volume" value="32" />
+        <ctl name="LHPF4 Input 1 Volume" value="32" />
+    </path>
+
+    <!-- Two mic -->
+    <!--path name="voice-call-earpiece-mic"-->
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- Should be main mic and back mic -->
+        <!-- Capture channel set to main mic -->
+        <!-- Empty path -->
+    <!--/path-->
+
+    <!--path name="voice-call-earpiece-mic-wb"-->
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- Should be main mic and back mic -->
+        <!-- Capture channel set to main mic -->
+        <!-- Empty path -->
+    <!--/path-->
+
+    <path name="voice-call-speaker-mic">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- Should be main mic and back mic -->
+        <!-- Capture channel set to back mic -->
+        <path name="voice-call-mic" />
+    </path>
+
+    <path name="voice-call-speaker-mic-wb">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- Should be main mic and back mic -->
+        <!-- Capture channel set to back mic -->
+        <path name="voice-call-speaker-mic" />
+    </path>
+
+    <path name="voice-call-headset-mic">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- For voice phone call INPUT Path -->
+        <path name="VHeadsetMic" />
+        <ctl name="IN1R Volume" value="35" />
+        <ctl name="IN1R Digital Volume" value="128" />
+        <ctl name="LHPF3 Input 2 Volume" value="42" />
+        <ctl name="LHPF4 Input 2 Volume" value="42" />
+    </path>
+
+    <path name="voice-call-headset-mic-wb">
+        <!-- FOR VOICE PHONE CALL -->
+        <path name="voice-call-headset-mic" />
+    </path>
+
+    <path name="voice-call-bt-sco-mic">
+        <!-- FOR VOICE PHONE CALL -->
+        <!-- For voice phone call INPUT Path -->
+        <ctl name="Headset Mic Switch" value="0" />
+        <ctl name="Main Mic Switch" value="0" />
+        <ctl name="AIF2TX1 Input 4 Volume" value="64" /><!-- BT MIC input to Modem-->
+        <ctl name="AIF2TX2 Input 4 Volume" value="64" /><!-- BT MIC input to Modem-->
+    </path>
+
+    <path name="voice-call-bt-sco-mic-wb">
+        <!-- FOR VOICE PHONE CALL -->
+        <path name="voice-call-bt-sco-mic" />
+    </path>
+
+    <path name="hdmi-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <!-- Empty path -->
+    </path>
+
+    <path name="bt-sco-mic">
+        <!-- FOR VOIP SYSTEM -->
+        <!-- VOICE_COMMUNICATION -->
+        <ctl name="Headset Mic Switch" value="0" />
+        <ctl name="Main Mic Switch" value="0" />
+        <ctl name="AIF1TX1 Input 4 Volume" value="64" />
+        <ctl name="AIF1TX2 Input 4 Volume" value="64" />
+    </path>
+
+    <path name="voice-rec-headset-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <!-- For Voice Recording INPUT Path -->
+        <!-- "OK Google" Google app use this path for input--> 
+        <path name="Headset_In-Enable" />
+        <ctl name="IN1R Volume" value="25" />
+        <ctl name="IN1R Digital Volume" value="128" />
+        <ctl name="LHPF1 Input 2 Volume" value="46" />
+        <ctl name="LHPF2 Input 2 Volume" value="46" />
+    </path>
+
+    <path name="voice-rec-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <!-- For Voice Recording INPUT Path -->
+        <!-- "OK Google" Google app use this path for input--> 
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="25" />
+        <ctl name="IN1L Digital Volume" value="128" />
+        <ctl name="LHPF1 Input 1 Volume" value="46" />
+        <ctl name="LHPF2 Input 1 Volume" value="46" />
+    </path>
+
+    <path name="camcorder-mic">
+        <!-- FOR NORMAL SYSTEM -->
+        <!-- For Camera/Vedio recording -->
+        <!-- Should be builtin and back mic -->
+        <path name="Builtin_Mic-Enable" />
+        <ctl name="IN1L Volume" value="25" />
+        <ctl name="IN1L Digital Volume" value="138" />
+        <ctl name="LHPF1 Input 1 Volume" value="46" />
+        <ctl name="LHPF2 Input 1 Volume" value="46" />
+    </path>
+
+    <path name="loopback-aec">
+        <!-- Empty path -->
+        <ctl name="AEC Loopback" value="SPKOUTL" />
+        <ctl name="AIF1TX8 Input 4" value="AEC" />   
+    </path>
+</mixer>

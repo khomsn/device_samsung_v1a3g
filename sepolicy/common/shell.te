@@ -1,0 +1,18 @@
+# exfat external sd card
+allow untrusted_app exfat:file read;
+# ttySAC2
+
+allow shell device:chr_file { open read write setattr getattr ioctl };
+
+# SU
+allow shell su:process signal;
+
+# exFAT and fuseblk
+allow shell exfat:dir create_dir_perms;
+allow shell exfat:file create_file_perms;
+
+allow shell gpsd_exec:file { read getattr };
+allow shell system_file:file { entrypoint };
+
+allow shell shell:capability { sys_ptrace kill };
+allow shell { audioserver mediaserver }:process { signal };

@@ -1,9 +1,12 @@
-allow vold efs_file:dir rw_dir_perms;
-allow vold efs_file:file create;
+#allow vold vold_tmpfs:file create_file_perms; = vold vold_tmpfs:file { create rename setattr unlink { { getattr open read ioctl lock map watch watch_reads } { open append write lock map } } };
 
-allow vold {
-    block_device
-    cache_block_device
-    efs_block_device
-    system_block_device
-}:blk_file getattr;
+# /efs
+allow vold efs_file:dir r_dir_perms;
+# /dev/block/mmcblk0p[0-9]
+allow vold emmcblk_device:dir create_dir_perms;
+allow vold emmcblk_device:blk_file create_file_perms;
+
+allow vold persist_file:dir r_dir_perms;
+allow vold gpsd_exec:file { getattr read };
+
+allow vold_prepare_subdirs gpsd_exec:file { getattr read };

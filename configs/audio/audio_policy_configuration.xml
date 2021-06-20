@@ -34,7 +34,8 @@
             <attachedDevices>
                 <item>Speaker</item>
                 <item>Built-In Mic</item>
-                <item>Voice Call Mic</item>
+                <item>Voice Callout</item>
+                <item>Voice Callin</item>
             </attachedDevices>
             <defaultOutputDevice>Speaker</defaultOutputDevice>
             <mixPorts>
@@ -47,16 +48,18 @@
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
+<!--
                 <mixPort name="deep_buffer" role="source"
                         flags="AUDIO_OUTPUT_FLAG_DEEP_BUFFER">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
+                -->
                 <mixPort name="compressed_offload" role="source"
                          flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING">
                     <profile name="" format="AUDIO_FORMAT_MP3"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_MONO"/>
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO"/>
                     <profile name="" format="AUDIO_FORMAT_AAC"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_MONO"/>
@@ -70,7 +73,7 @@
                 <mixPort name="primary input" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_VOICE_UPLINK,AUDIO_CHANNEL_IN_VOICE_DNLINK"/>
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
                 </mixPort>
             </mixPorts>
             <devicePorts>
@@ -103,6 +106,11 @@
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,16000" channelMasks="AUDIO_CHANNEL_OUT_MONO"/>
                 </devicePort>
+                <!-- Modem Callout Port == Voice Callout-->
+                <devicePort tagName="Voice Callout" type="AUDIO_DEVICE_OUT_TELEPHONY_TX" role="sink">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="8000,16000" channelMasks="AUDIO_CHANNEL_OUT_MONO"/>
+                </devicePort>
                 <devicePort tagName="HDMI" type="AUDIO_DEVICE_OUT_AUX_DIGITAL" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,11025,16000,22050,32000,44100,48000,64000,88200,96000,128000,176400,192000" channelMasks="dynamic"/>
@@ -116,48 +124,57 @@
                 <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK,AUDIO_CHANNEL_IN_VOICE_UPLINK,AUDIO_CHANNEL_IN_VOICE_DNLINK"/>
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
                 </devicePort>
                 <devicePort tagName="Wired Headset Mic" type="AUDIO_DEVICE_IN_WIRED_HEADSET" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK,AUDIO_CHANNEL_IN_VOICE_UPLINK,AUDIO_CHANNEL_IN_VOICE_DNLINK"/>
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
                 </devicePort>
                 <devicePort tagName="BT SCO Headset Mic" type="AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,16000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK,AUDIO_CHANNEL_IN_VOICE_UPLINK,AUDIO_CHANNEL_IN_VOICE_DNLINK"/>
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
                 </devicePort>
-                <devicePort tagName="Voice Call Mic" type="AUDIO_DEVICE_IN_VOICE_CALL" role="source">
+                <!-- 
+                AUDIO_DEVICE_IN_VOICE_CALL                 = 0x80000040u, // BIT_IN | 0x40
+                AUDIO_DEVICE_IN_TELEPHONY_RX               = 0x80000040u, // IN_VOICE_CALL
+                Modem Callin Port == Voice Callin
+                -->
+                <devicePort tagName="Voice Callin" type="AUDIO_DEVICE_IN_VOICE_CALL" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK,AUDIO_CHANNEL_IN_VOICE_UPLINK,AUDIO_CHANNEL_IN_VOICE_DNLINK"/>
+                             samplingRates="8000,16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
                 </devicePort>
             </devicePorts>
             <!-- route declaration, i.e. list all available sources for a given sink -->
             <routes>
                 <route type="mix" sink="Speaker"
-                       sources="primary output,deep_buffer,compressed_offload,fast,BT SCO Headset Mic,Voice Call Mic"/>
+                       sources="primary output,compressed_offload,fast,BT SCO Headset Mic,Voice Callin"/>
                 <route type="mix" sink="Wired Headset"
-                       sources="primary output,deep_buffer,compressed_offload,fast,BT SCO Headset Mic,Voice Call Mic"/>
-                <route type="mix" sink="Wired Headphones"
-                       sources="primary output,deep_buffer,compressed_offload,fast,BT SCO Headset Mic,Voice Call Mic"/>
+                       sources="primary output,compressed_offload,fast,BT SCO Headset Mic,Voice Callin"/>
+                <route type="mix" sink="Wired Headphone"
+                       sources="primary output,compressed_offload,fast,BT SCO Headset Mic,Voice Callin"/>
                 <route type="mix" sink="Dock Headset"
-                       sources="primary output,deep_buffer,compressed_offload,fast,BT SCO Headset Mic,Voice Call Mic"/>
-                <route type="mix" sink="BT SCO"
-                       sources="primary output,fast,deep_buffer"/>
-                <route type="mix" sink="BT SCO Headset"
-                       sources="primary output,fast,deep_buffer"/>
-                <route type="mix" sink="BT SCO Car Kit"
-                       sources="primary output,fast,deep_buffer"/>
-                <route type="mix" sink="HDMI"
-                       sources="primary output,deep_buffer,compressed_offload,fast,hdmi"/>
-                <route type="mix" sink="Proxy"
-                       sources="primary output,deep_buffer,compressed_offload,fast,hdmi"/>
+                       sources="primary output,compressed_offload,fast,BT SCO Headset Mic,Voice Callin"/>
 
                 <route type="mix" sink="primary input"
-                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic,Voice Call Mic"/>
+                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic,Voice Callin"/>
 
+                <route type="mix" sink="Voice Callout"
+                       sources="Built-In Mic,Wired Headset Mic,BT SCO Headset Mic"/>
+
+                <route type="mix" sink="BT SCO"
+                       sources="primary output,fast,Voice Callin"/>
+                <route type="mix" sink="BT SCO Headset"
+                       sources="primary output,fast,Voice Callin"/>
+                <route type="mix" sink="BT SCO Car Kit"
+                       sources="primary output,fast,Voice Callin"/>
+
+                <route type="mix" sink="HDMI"
+                       sources="primary output,compressed_offload,fast,hdmi"/>
+                <route type="mix" sink="Proxy"
+                       sources="primary output,compressed_offload,fast,hdmi"/>
             </routes>
         </module>
 

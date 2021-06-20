@@ -28,8 +28,9 @@
 #define PANEL_BRIGHTNESS_NODE "/sys/class/backlight/panel/brightness"
 #define PANEL_MAX_BRIGHTNESS_NODE "/sys/class/backlight/panel/max_brightness"
 #define BUTTON_BRIGHTNESS_NODE "/sys/class/sec/sec_touchkey/brightness"
+
 //kBacklightPath
-#define LIGHT_SENSOR_ENABLE_NODE "/sys/class/input/input7/enabled"
+#define LIGHT_SENSOR_ENABLE_NODE "/sys/devices/virtual/input/input7/enable"
 //kFileCabc = "/sys/class/mdnie/mdnie/cabc";
 #define MDNIE_CABC_NODE "/sys/class/mdnie/mdnie/cabc"
 //kModePath "/sys/class/mdnie/mdnie/mode"

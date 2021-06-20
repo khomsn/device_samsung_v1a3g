@@ -17,11 +17,16 @@
 
 #ifndef SAMSUNG_CONSUMERIR_H
 #define SAMSUNG_CONSUMERIR_H
-
+#ifdef SAMSUNG_HIDL_IR
 #include <android/hardware/ir/1.0/IConsumerIr.h>
 
 using android::hardware::ir::V1_0::ConsumerIrFreqRange;
 
+static const std::vector<ConsumerIrFreqRange> consumerirFreqs = {
+    {.min = 16000, .max = 60000},
+};
+
+#endif
 /*
  * Board specific nodes
  *
@@ -38,10 +43,10 @@ using android::hardware::ir::V1_0::ConsumerIrFreqRange;
  * can override this header in your device tree
  */
 // Some devices need MS_IR_SIGNAL to avoid ms to pulses conversionn
-//#define MS_IR_SIGNAL
-
-static const std::vector<ConsumerIrFreqRange> consumerirFreqs = {
+#define MS_IR_SIGNAL
+#ifndef SAMSUNG_HIDL_IR
+static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 16000, .max = 60000},
 };
-
+#endif
 #endif  // SAMSUNG_CONSUMERIR_H

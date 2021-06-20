@@ -1,0 +1,9 @@
+allow mediacodec debugfs:file { open write };
+allow mediaserver debugfs:file { open write };
+allow mediaswcodec debugfs:file { open write };
+allow netd debugfs:file { open write };
+allow system_server debugfs:file { open read getattr };
+allow system_server debugfs:dir { open read };
+allow usbd debugfs:file { open write };
+allow hal_audio_default debugfs:file { open read };
+allow gpuservice debugfs:file { open write };

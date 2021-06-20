@@ -96,4 +96,4 @@
 /dev/block/mmcblk0rpmb    0660   system     system
 
 # RILD
-/dev/alarm                0600   radio      system
+/dev/alarm                0660   system     radio
