@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!--kernel-->
+  <project name="khomsn/android_kernel_samsung_exynos5420" path="kernel/samsung/exynos5420" remote="github"  revision="lineage-17.1" />
+  <!--Vendor-->
+  <project name="khomsn/vendor_samsung_v1a3g" path="vendor/samsung/v1a3g" remote="github" revision="lineage-17.1"  />
+  <!--Device-->
+  <project name="khomsn/device_samsung_v1a3g" path="device/samsung/v1a3g" remote="github"  revision="lineage-17.1" />
+  
+  <!--Hardware-->
+  <project name="khomsn/android_hardware_ril" path="hardware/ril" remote="github" revision="lineage-17.1" />
+  <project name="khomsn/android_hardware_samsung" path="hardware/samsung" remote="github" revision="lineage-17.1" />
+  <project name="LineageOS/android_hardware_samsung_slsi_exynos" path="hardware/samsung_slsi/exynos" remote="github" revision="lineage-17.1" />
+  <project name="LineageOS/android_hardware_samsung_slsi_exynos5" path="hardware/samsung_slsi/exynos5" remote="github" revision="lineage-17.1" />
+  <project name="LineageOS/android_hardware_samsung_slsi_openmax" path="hardware/samsung_slsi/openmax" remote="github" revision="lineage-17.1" />
+  <project name="exynos5420/android_hardware_samsung_slsi_exynos5420" path="hardware/samsung_slsi/exynos5420" remote="github" revision="lineage-17.1"/>
+</manifest>
