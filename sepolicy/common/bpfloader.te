@@ -1,3 +1,0 @@
-#avc : denied { getattr } for comm=bpfloader path=/system/vendor/bin/hw/gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:bpfloader:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
-#avc : denied { read } for comm=bpfloader name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:bpfloader:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
-#allow bpfloader gpsd_exec:file { open read getattr };

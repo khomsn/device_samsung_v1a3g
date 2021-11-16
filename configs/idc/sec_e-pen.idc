@@ -1,8 +1,8 @@
 #touch.deviceType touchScreen, touchPad, touchNavigation, pointer, default
 touch.deviceType = pointer
 
-#touch.orientationAware bool
-touch.orientationAware = true
+#touch.orientationAware bool (int)
+touch.orientationAware = 1
 
 #cursor.mode navigation, pointer , default
 cursor.mode = navigation
@@ -15,5 +15,5 @@ touch.gestureMode = single-touch
 #touch.displayId string
 touch.displayId = sec_e-pen
 
-#touch.wake bool
-touch.wake = true
+#touch.wake bool (int)
+touch.wake = 1

@@ -1,3 +1,8 @@
 # storaged.te
 
-allow storaged sysfs_disk_stat:file r_file_perms;
+allow storaged {
+    device
+    debugfs
+    sysfs
+    sysfs_disk_stat
+    }:file { open write getattr read };

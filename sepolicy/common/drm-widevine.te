@@ -1,0 +1,5 @@
+# foo service
+type drm-widevine, domain;
+type drm-widevine_exec, exec_type, file_type;
+
+init_daemon_domain(drm-widevine)

@@ -11,30 +11,9 @@ on property:sys.mobicoredaemon.enable=true
 
 #************************************************* Boot Completed ***********************************************************************#
 on property:sys.boot_completed=1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "20000 1000000:80000 1200000:100000 1700000:20000"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 100
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 600000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "70 350000:70 500000:75 600000:85 800000:90 1200000:95 1700000:97 2100000:100"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
-
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "20000 1000000:80000 1200000:100000 1700000:20000"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost 0
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration 0
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 100
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 600000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "70 350000:70 500000:75 600000:85 800000:90 1200000:95 1300000:100"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 20000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
-
-    # Re-Enable Samsung Hotplug
-    write /sys/power/cpuhotplug/enable 1
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 100
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "50 450000:50 800000:65 1500000:80 1800000:95"
 
 on property:sys.boot_completed=1 && property:sys.logbootcomplete=1
     start init_d
@@ -43,9 +22,101 @@ on property:sys.boot_completed=1 && property:sys.logbootcomplete=1
 # Start fbind
     start fbind
 
+# Start spen process
+    start spen
+
+on property:lineage.sysinit.completed=1 && property:lineage.fsmbind.completed=1
+    start selinuxset
+
 #*********************** Kick watchdogd if debug_level is low *****************************************************************************#
 on property:ro.debug_level=0x4f4c
     start watchdogd
+#**************************************************CPU Setting *****************************************************************************#
+on property:cpu.temp.read=500
+# Exynos Thermal throttling
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "54 60 84"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1800 1600 1400 600"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1900000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1500000"
+
+on property:cpu.temp.read=550
+# Exynos Thermal throttling
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "57 68 84"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1700 1500 1200 600"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1900000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1400000"
+
+on property:cpu.temp.read=580
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "60 70 89"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1600 1400 1100 400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1800000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1300000"
+
+on property:cpu.temp.read=620
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "64 80 92"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1500 1300 1000 400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1700000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1200000"
+
+on property:cpu.temp.read=660
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "68 81 95"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1400 1200 900 400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1600000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1100000"
+
+on property:cpu.temp.read=700
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "72 82 89"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1300 1100 800 400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1400000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "1000000"
+
+on property:cpu.temp.read=740
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "76 84 92"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1200 1000 700 400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1300000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "700000"
+
+on property:cpu.temp.read=780
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_temp "80 90 95"
+    write /sys/class/thermal/thermal_zone0/oneshot_trip_freq "1100 700 500 400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1200000"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "250000"
+
+on property:cpu.governor.set=interactive
+    # Interactive
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+
+    # Tune Interactive
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1000000:80000 1200000:100000 1700000:20000"
+    write /sys/devices/system/cpu/cpufreq/interactive/boost 0
+    write /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration 40000
+    write /sys/devices/system/cpu/cpufreq/interactive/enforced_mode 1
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 99
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 600000
+    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpufreq/interactive/mode 0
+    write /sys/devices/system/cpu/cpufreq/interactive/multi_enter_load 360
+    write /sys/devices/system/cpu/cpufreq/interactive/multi_enter_time 99000
+    write /sys/devices/system/cpu/cpufreq/interactive/multi_exit_load 240
+    write /sys/devices/system/cpu/cpufreq/interactive/multi_exit_time 299000
+    write /sys/devices/system/cpu/cpufreq/interactive/param_index 0
+    write /sys/devices/system/cpu/cpufreq/interactive/single_enter_load 95
+    write /sys/devices/system/cpu/cpufreq/interactive/single_enter_time 199000
+    write /sys/devices/system/cpu/cpufreq/interactive/single_exit_load 60
+    write /sys/devices/system/cpu/cpufreq/interactive/single_exit_time 99000
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "70 600000:70 800000:75 1500000:80 1700000:90"
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 20000
+
+on property:cpu.governor.set=performance
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor performance
+
+on property:cpu.governor.set=conservative
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor conservative
+
+on property:cpu.governor.set=powersave
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
 
 #********************************************USB Configuration******************************************************************************#
 on property:sys.usb.config=none
@@ -161,6 +232,7 @@ on property:sys.usb.config=askon,adb
     stop adbd
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    start adbd
     setprop sys.usb.state ${sys.usb.config}
 
 # rndis,acm,diag and diag,acm,adb used for Hidden Menu

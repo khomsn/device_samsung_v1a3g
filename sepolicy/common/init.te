@@ -5,7 +5,10 @@ allow init {
     }:blk_file rw_file_perms;
 
 # LD_SHIM_LIBS
-allow init mediaserver:process { noatsecure };
+allow init {
+    mediaserver
+    init
+    }:process { noatsecure execmem };
 
 allow init {
     debugfs
@@ -23,9 +26,27 @@ allow init {
     vendor_file
     system_data_file
     gps_data_file
-    }:file { open read append write execute_no_trans setattr getattr relabelto lock };
+    system_file
+    media_rw_data_file
+    su_exec
+    sysfs_devices_system_cpu
+    shell_exec
+    }:file { open read append write execute execute_no_trans setattr getattr relabelto lock };
 
-allow init hwservicemanager:binder { call transfer };
+allow init {
+    tee
+    }:unix_stream_socket { connectto };
+
+allow init {
+    hwservicemanager
+    mediadrmserver
+    system_server
+    }:binder { call transfer };
+    
+allow init {
+    input_method_service
+    package_service
+    }:service_manager { find };
 
 allow init {
     sysfs_writable
@@ -37,8 +58,10 @@ allow init {
     vndbinder_device
     sysfs_mdnie_writable
     mif_device
+    ion_device
+    tee_device
     }:chr_file { open read write ioctl };
-    
+
 allow init {
     hal_power_stats_hwservice
     hal_lineage_livedisplay_hwservice
@@ -49,13 +72,17 @@ allow init {
     hal_telephony_hwservice
     hidl_base_hwservice
     hal_drm_hwservice
+    hal_gnss_hwservice
+    hal_lineage_touch_hwservice
     }:hwservice_manager { add find };
-    
+
 allow init sysfs_sec:lnk_file read;
 allow init socket_device:sock_file { create setattr unlink };
 
-allow init mediadrmserver:binder call;
-allow init secmem_device:chr_file ioctl;
+allow init {
+    secmem_device
+    radio_device
+    }:chr_file { open read write ioctl };
 
 allow vendor_init {
     camera_data_file
@@ -74,7 +101,9 @@ allow vendor_init {
     dhcp_data_file
     radio_data_file
     rootfs
-    }:dir { open search write remove_name add_name create setattr getattr };
+    vendor_app_file
+    gps_data_file
+    }:dir { open search write remove_name add_name create setattr rmdir getattr };
 
 allow vendor_init {
     gpsd_exec
@@ -87,6 +116,3 @@ allow vendor_init {
     }:file { open write read getattr setattr create };
     
 allow vendor_init system_data_file:lnk_file { create unlink };
-
-#allow fsverity_init gpsd_exec:file { read getattr };
-    

@@ -25,16 +25,13 @@ on boot
     chown system system /sys/class/input/input9/enabled
     chmod 0660 /sys/class/input/input9/enabled
 
-# Grip Sensor
+# Grip Sensor / Proximity Sensor
     chown system system /sys/class/input/input8/enabled
     chmod 0660 /sys/class/input/input8/enabled
 
 # Light Sensor
     chown system system /sys/class/input/input7/enabled
     chmod 0660 /sys/class/input/input7/enabled
-    chown system system /sys/class/input/input7/enable
-    chmod 0660 /sys/class/input/input7/enable
-    write /sys/class/input/input7/enable 1
 
 # Magnetic Sensor
     chown system system /sys/class/input/input6/enabled
@@ -85,8 +82,8 @@ on boot
     chown system radio /sys/class/sec/sec_touchkey/boost_level
     chown system radio /sys/class/sec/sec_touchkey/extra_button_event
 # KeyDisabler permission
-    chown system system /sys/class/sec/sec_touchkey/touchkey_enabled
-    chmod 0660 /sys/class/sec/sec_touchkey/touchkey_enabled
+    chown system radio /sys/class/sec/sec_touchkey/touchkey_enabled
+    chmod 0664 /sys/class/sec/sec_touchkey/touchkey_enabled
 
     chmod 0660 /dev/ttySAC2
     chown system system /dev/ttySAC2
@@ -106,6 +103,7 @@ on boot
     chown system radio /sys/class/sec/sec_epen/epen_saving_mode
     chown system radio /sys/class/sec/sec_epen/epen_connection
     chown system radio /sys/class/sec/sec_epen/boost_level
+    chown system radio /sys/class/sec/sec_epen/epen_gestures
     # EPEN saving mode
     write /sys/devices/virtual/sec/sec_epen/epen_saving_mode 1
 
@@ -123,6 +121,13 @@ on boot
     chown system radio /sys/class/sensors/grip_sensor/calibration
     chown system radio /sys/class/sensors/grip_sensor/threshold
     chown system radio /sys/class/sensors/grip_sensor/onoff
+# Proximity_sensor    
+    chown system radio /sys/class/sensors/proximity_sensor/vendor
+    chown system radio /sys/class/sensors/proximity_sensor/name
+    chown system radio /sys/class/sensors/proximity_sensor/raw_data
+    chown system radio /sys/class/sensors/proximity_sensor/calibration
+    chown system radio /sys/class/sensors/proximity_sensor/threshold
+    chown system radio /sys/class/sensors/proximity_sensor/onoff
 # Gyro_sensor
     chown system radio /sys/class/sensors/gyro_sensor/power_on
     chown system radio /sys/class/sensors/gyro_sensor/power_off
@@ -164,7 +169,7 @@ on boot
     chmod 0664 /sys/class/host_notify/usb_otg/booster
 
 # SSWAP
-    write /proc/sys/vm/swappiness 130
+    write /proc/sys/vm/swappiness 20
 
 # PMS DVFS
     chown radio system /sys/power/cpufreq_table
@@ -215,20 +220,16 @@ on boot
     chown radio system /sys/devices/platform/exynos5-tmu/curr_temp
 
 # Quadrant Benchmark
-    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
     chown radio system /sys/class/devfreq/exynos5-busfreq-mif/min_freq
     chown radio system /sys/class/devfreq/exynos5-busfreq-int/min_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
-    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
-    chmod 0664 /sys/class/thermal/thermal_zone0/boost_mode
     chmod 0664 /sys/class/devfreq/exynos5-busfreq-mif/min_freq
     chmod 0664 /sys/class/devfreq/exynos5-busfreq-int/min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
-    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
 
 # CPU Idle
     chown system radio /sys/devices/system/cpu/cpu0/cpuidle/state2/disable
@@ -237,9 +238,6 @@ on boot
 # C-STATE
     chown system system /sys/module/cpuidle/parameters/off
     chmod 0660 /sys/module/cpuidle/parameters/off
-
-# ASV Group
-    chown system radio /sys/module/asv_exynos/parameters/asv_group
 
 # MTP permission
     chmod 0660 /dev/mtp_usb
@@ -282,54 +280,6 @@ on boot
     chmod 0660 /dev/tspdrv
     chown vibe vibe /dev/tspdrv
 
-    # Change permission for interactive governor
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/cpu_util
-    chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/interactive/cpu_util
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/enforced_mode
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enforced_mode
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_time
 
     # Assume HMP uses shared cpufreq policy for all LITTLE CPUs
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq

@@ -3,9 +3,8 @@
 <manifest version="1.0" type="device">
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <!-- hwbinder with result in crash when using bluetooth sco
-        <transport>hwbinder</transport>
-        -->
+        <!-- hwbinder with result in crash when using bluetooth sco -->
+        <!--transport>hwbinder</transport-->
         <transport arch="32">passthrough</transport>
         <version>5.0</version>
         <interface>
@@ -244,7 +243,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-<!--    <hal format="hidl">
+    <hal format="hidl">
         <name>android.hardware.wifi.hostapd</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
@@ -252,7 +251,7 @@
             <name>IHostapd</name>
             <instance>default</instance>
         </interface>
-    </hal> -->
+    </hal>
     <hal format="hidl">
         <name>android.hardware.wifi.supplicant</name>
         <transport>hwbinder</transport>
@@ -262,6 +261,14 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <!-- vendor.lineage.livedisplay some of these instance cause reboot 
+    IAdaptiveBacklight , IDisplayColorCalibration , ISunlightEnhancement
+    with hwbinder,
+    <transport arch="32">passthrough</transport> has no control for all.
+    
+    so let system disign has same effect as hwbinder. Best way is not defind
+    -->
+    <!--
     <hal format="hidl">
         <name>vendor.lineage.livedisplay</name>
         <transport>hwbinder</transport>
@@ -271,7 +278,7 @@
             <instance>default</instance>
         </interface>
         <interface>
-            <name>IDisplayColorCalibrationExynos</name>
+            <name>IDisplayColorCalibration</name>
             <instance>default</instance>
         </interface>
         <interface>
@@ -283,10 +290,11 @@
             <instance>default</instance>
         </interface>
         <interface>
-            <name>ISunlightEnhancementExynos</name>
+            <name>ISunlightEnhancement</name>
             <instance>default</instance>
         </interface>
     </hal>
+    -->
     <hal format="hidl">
         <name>vendor.lineage.power</name>
         <transport>hwbinder</transport>

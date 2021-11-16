@@ -1,19 +1,12 @@
 # HDMI
 allow surfaceflinger audio_device:chr_file { open read ioctl write };
-#denied { read write } for comm="surfaceflinger" name="mali0" dev="tmpfs" ino=4445 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
-#avc: denied { open } for comm="surfaceflinger" name="mali0" dev="tmpfs" ino=4445 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
-#avc: denied { getattr } for comm="surfaceflinger" path="/dev/mali0" dev="tmpfs" ino=4445 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
-#avc: denied { ioctl } for comm="surfaceflinger" path="/dev/mali0" dev="tmpfs" ino=4445 ioctlcmd=8000 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:device:s0 tclass=chr_file permissive=1
+
 allow surfaceflinger device:chr_file { open read ioctl write getattr };
-#avc: denied { read } for comm="surfaceflinger" name="cpu" dev="sysfs" ino=32 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
-#avc: denied { open } for comm="surfaceflinger" name="cpu" dev="sysfs" ino=32 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
+
 allow surfaceflinger sysfs:dir { open read };
-#avc: denied { read } for comm="surfaceflinger" name="name" dev="sysfs" ino=15108 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
-#avc: denied { open } for comm="surfaceflinger" name="name" dev="sysfs" ino=15108 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
-#avc: denied { getattr } for comm="surfaceflinger" path="/sys/devices/platform/exynos-mdev.2/video4linux/v4l-subdev0/name" dev="sysfs" ino=15108 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+
 allow surfaceflinger sysfs:file { open read ioctl write getattr };
-#avc : denied { getattr } for comm=surfaceflinger path=/system/vendor/bin/hw/gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
-#avc : denied { read } for comm=surfaceflinger name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:surfaceflinger:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
+
 allow surfaceflinger gpsd_exec:file { read getattr };
 # HWC
 allow surfaceflinger secmem_device:chr_file rw_file_perms;

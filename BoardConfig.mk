@@ -75,8 +75,10 @@ TARGET_CAMERALIB_PROVIDED := false
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
-TARGET_KERNEL_CONFIG := lineageos_v1a3g_khomsn_v1_defconfig
+#TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
+#TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420-lineage-17.1
+TARGET_KERNEL_CONFIG := lineageos_v1a3g_khomsn_v2_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/v1a3g
 #KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/gcc-linaro-7.2.1-2017.11-x86_64_arm-eabi/bin
 #KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-linux-eabi-UB-5.3/bin
 #KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
@@ -150,10 +152,6 @@ BOARD_USES_DT := true
 # ION
 TARGET_USES_ION := true
 
-# Hardware
-#BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
-#BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
-
 # # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
@@ -170,13 +168,17 @@ TARGET_OMX_LEGACY_RESCALING := true
 BOARD_USE_TIMESTAMP_REORDER_SUPPORT := false
 BOARD_USE_DEINTERLACING_SUPPORT := false
 BOARD_USE_HEVCDEC_SUPPORT := true
-BOARD_USE_HEVCENC_SUPPORT := false
+BOARD_USE_HEVCENC_SUPPORT := true
 BOARD_USE_HEVC_HWIP := true
 BOARD_USE_VP9DEC_SUPPORT := false
 BOARD_USE_VP9ENC_SUPPORT := false
 BOARD_USE_CUSTOM_COMPONENT_SUPPORT := true
 BOARD_USE_VIDEO_EXT_FOR_WFD_HDCP := false
 BOARD_USE_SINGLE_PLANE_IN_DRM := false
+BOARD_USE_WMA_CODEC := true
+# Advanced Low Power audio support
+BOARD_USE_ALP_AUDIO := true
+BOARD_USE_SEIREN_AUDIO := true
 
 #TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/bin/mediaserver=22
@@ -252,10 +254,6 @@ TARGET_AUDIOHAL_VARIANT := samsung
 # Audio HAL from device/samsung/v1a3g
 #TARGET_AUDIOHAL_VARIANT := v1axx
 
-# Advanced Low Power audio support
-BOARD_USE_ALP_AUDIO := true
-BOARD_USE_SEIREN_AUDIO := true
-
 # We use our lights hal
 #TARGET_PROVIDES_LIBLIGHT := true
 BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
@@ -303,7 +301,7 @@ WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/vendor/etc/wifi/bcmdh
 WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/vendor/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/vendor/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_FW_PATH_STA          := "/system/vendor/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/vendor/etc/wifi/bcmdhd_apsta.bin"
-#WPA_SUPPLICANT_USE_HIDL          := true
+WPA_SUPPLICANT_USE_HIDL          := true
 
 # Network Routing
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
@@ -326,6 +324,9 @@ TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 # Memory management
 MALLOC_SVELTE := true
 
+# Seccomp filters
+BOARD_SECCOMP_POLICY += $(LOCAL_PATH)/seccomp
+
 # SELinux put absolute path only for sepolicy dir!!!
 SELINUX_IGNORE_NEVERALLOWS := true
 # SELinux
@@ -335,14 +336,14 @@ include $(LOCAL_PATH)/sepolicy/sepolicy.mk
 #LINKER_FORCED_SHIM_LIBS := /system/vendor/lib/egl/libGLES_mali.so|libpopcountsi2.so
 
 # Shims: mali
-TARGET_LD_SHIM_LIBS += /vendor/lib/egl/libGLES_mali.so|libgutils.so
+TARGET_LD_SHIM_LIBS += /system/vendor/lib/egl/libGLES_mali.so|libgutils.so
 
 # Shims: gps
-TARGET_LD_SHIM_LIBS += /vendor/bin/hw/gpsd|libdmitry.so
+TARGET_LD_SHIM_LIBS += /system/vendor/bin/hw/gpsd|libdmitry.so
 
 # Shims: sec-ril
-TARGET_LD_SHIM_LIBS += /system/lib/libsec-ril.so|libsecril_atomic.so
+TARGET_LD_SHIM_LIBS += /system/vendor/lib/libsec-ril.so|libsecril_atomic.so
 
 # Shimes: camera
-TARGET_LD_SHIM_LIBS += /system/lib/libexynoscamera.so|libexynoscamera_shim.so
+TARGET_LD_SHIM_LIBS += /system/vendor/lib/libexynoscamera.so|libexynoscamera_shim.so
 #############################################################################################################

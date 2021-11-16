@@ -6,5 +6,4 @@ allow mediacodec system_file:dir r_dir_perms;
 
 # /sys/class/video4linux/video6/name
 allow mediacodec sysfs:file r_file_perms;
-#avc : denied { read } for comm=android.hardwar name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:mediacodec:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
 allow mediacodec gpsd_exec:file { read getattr };

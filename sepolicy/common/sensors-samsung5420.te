@@ -1,0 +1,5 @@
+# foo service
+type sensors-samsung5420, domain;
+type sensors-samsung5420_exec, exec_type, file_type;
+
+init_daemon_domain(sensors-samsung5420)

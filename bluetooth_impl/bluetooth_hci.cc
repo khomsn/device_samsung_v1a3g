@@ -134,13 +134,13 @@ Return<void> BluetoothHci::sendScoData(const hidl_vec<uint8_t>& data) {
 
 void BluetoothHci::sendDataToController(const uint8_t type,
                                         const hidl_vec<uint8_t>& data) {
-
+/*
     ALOGI("BluetoothHci::sendDataToController type[%d], size[%d]",type, data.size());
 
     for (int i = 0 ; i < data.size(); i++){
      ALOGI("data[%i]=[%02x]",i,data[i]);
     }
-
+*/
     /*  
     typedef struct {
     uint16_t handle;

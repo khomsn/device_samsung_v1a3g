@@ -1,0 +1,5 @@
+# foo service
+type drm-clearkey, domain;
+type drm-clearkey_exec, exec_type, file_type;
+
+init_daemon_domain(drm-clearkey)

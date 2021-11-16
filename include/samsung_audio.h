@@ -29,26 +29,28 @@
  * defined.
  */
 /******************************** SOUND DEVICES ID: START *******************/
+/* Card 0 */
 #define MIXER_CARD 0
 #define SOUND_CARD 0
-
-/* Playback */
-#define SOUND_PLAYBACK_DEVICE 0 //3
-#define SOUND_PLAYBACK_SCO_DEVICE 2
-#define SOUND_DEEP_BUFFER_DEVICE 3
+/* Device ID 0*/
 #define SOUND_HDMI_DEVICE 0
-
-/* Capture */
+#define SOUND_PLAYBACK_DEVICE 0
 #define SOUND_CAPTURE_DEVICE 0
-#define SOUND_CAPTURE_SCO_DEVICE 2
-
+/* Device ID 1*/
 /* Voice calls */
 #define SOUND_PLAYBACK_VOICE_DEVICE 1
 #define SOUND_CAPTURE_VOICE_DEVICE 1
+/* Device ID 2*/
+/* BT SCO */
+#define SOUND_PLAYBACK_SCO_DEVICE 2
+#define SOUND_CAPTURE_SCO_DEVICE 2
+/* Device ID 3*/
+#define SOUND_DEEP_BUFFER_DEVICE 3
+#define SOUND_CAPTURE_DEEP_BUFFER_DEVICE 3
 
-#define SOUND_CAPTURE_LOOPBACK_AEC_DEVICE 1
 /* Unusupported
 #define SOUND_CAPTURE_HOTWORD_DEVICE 0
+#define SOUND_CAPTURE_LOOPBACK_AEC_DEVICE 1
 */
 /******************************** SOUND DEVICES ID: END *******************/
 /* Wideband AMR callback */

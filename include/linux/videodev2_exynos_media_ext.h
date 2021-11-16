@@ -14,7 +14,7 @@
 
 #ifndef __LINUX_VIDEODEV2_EXYNOS_MEDIA_EXT_H
 #define __LINUX_VIDEODEV2_EXYNOS_MEDIA_EXT_H
-
+#ifndef __LINUX_V4L2_CONTROLS_H
 /* proposed CIDs, based on 3.3-rc3 */
 #define V4L2_CID_MPEG_VIDEO_VBV_DELAY		(V4L2_CID_MPEG_MFC_BASE + 26)
 
@@ -81,4 +81,5 @@ enum v4l2_mpeg_video_h264_hierarchical_coding_type {
 					(V4L2_CID_MPEG_MFC_BASE + 40)
 #define V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING_LAYER_QP	\
 					(V4L2_CID_MPEG_MFC_BASE + 41)
+#endif
 #endif /* __LINUX_VIDEODEV2_EXYNOS_MEDIA_EXT */

@@ -1,8 +1,8 @@
 on fs
 # mobicore
-    mkdir /system/app/mcRegistry/TbStorage 0775 system system
-    chmod 0775 /system/app/mcRegistry/TbStorage
-    chown system system /system/app/mcRegistry/TbStorage
+    mkdir /system/vendor/app/mcRegistry/TbStorage 0775 system system
+    chmod 0775 /system/vendor/app/mcRegistry/TbStorage
+    chown system system /system/vendor/app/mcRegistry/TbStorage
 # [ SEC_MM_DRM
     # DRM directory creation
     mkdir /system/etc/security/.drm 0775
@@ -21,8 +21,11 @@ on fs
 
     chown radio system /efs
     chmod 0771 /efs
-    chmod 0774 /preload
+    chmod 0776 /preload
     chown root root /preload
+    mkdir /preload/System 0776 root root
+    chmod 0775 /preload/System
+    chown root root /preload/System
     chmod 0774 /misc
     chown root root /misc
 
@@ -105,5 +108,4 @@ on fs
     setprop ro.adb.nonblocking_ffs 0
 
     write /sys/class/android_usb/android0/enable 1
-    stop adbd
     start adbd

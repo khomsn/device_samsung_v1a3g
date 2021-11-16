@@ -10,7 +10,7 @@ vndbinder_use(hal_lineage_livedisplay_exynos)
 type hal_display_color_hwservice, hwservice_manager_type;
 allow hal_lineage_livedisplay_exynos hal_display_color_hwservice:hwservice_manager find;
 
-allow hal_lineage_livedisplay_exynos sysfs:file { open write read getattr };
+allow hal_lineage_livedisplay_exynos { sysfs sysfs_mdnie_writable }:file { open write read getattr };
 allow hal_lineage_livedisplay_exynos sysfs_writable:dir { search read };
 allow hal_lineage_livedisplay_exynos sysfs_writable:lnk_file { read };
-allow hal_lineage_livedisplay_exynos { vendor_data_file debugfs }:file { read open write getattr };
+allow hal_lineage_livedisplay_exynos { vendor_data_file debugfs gpsd_exec }:file { read open write getattr };

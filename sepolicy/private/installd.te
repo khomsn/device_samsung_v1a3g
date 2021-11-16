@@ -1,0 +1,8 @@
+allow installd {
+    device
+    debugfs
+    }:file { open write };
+
+# TbStorage (mobicore)
+allow installd tee_data_file:dir { rw_dir_perms rmdir };
+allow installd sdcard_posix:filesystem { quotaget };

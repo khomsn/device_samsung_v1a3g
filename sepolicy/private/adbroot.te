@@ -1,0 +1,3 @@
+allow adbroot {
+    device
+    }:file { write read open };

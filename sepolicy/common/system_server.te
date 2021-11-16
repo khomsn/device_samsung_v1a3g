@@ -17,16 +17,16 @@ allow system_server sysfs_mdnie_writable:file rw_file_perms;
 
 # /efs/FactoryApp
 allow system_server app_efs_file:dir r_dir_perms;
-allow system_server app_efs_file:file r_file_perms;
+allow system_server {
+    app_efs_file
+    gpsd_exec
+    }:file r_file_perms;
 
 # Unknown
 allow system_server user_profile_data_file:dir { read open };
 
 # tsp_keys_enabled
 allow system_server sysfs_input_file:file { read open write };
-
-# Unknown
-allow system_server kernel:process setsched;
 
 # fimg2d
 allow system_server fimg2d_device:chr_file rw_file_perms;
@@ -35,7 +35,6 @@ allow system_server fimg2d_device:chr_file rw_file_perms;
 allow system_server persist_file:dir r_dir_perms;
 allow system_server persist_alarm_file:dir rw_dir_perms;
 allow system_server persist_alarm_file:file create_file_perms;
-#avc: denied { call } for comm="batterystats-wo" scontext=u:r:system_server:s0 tcontext=u:r:init:s0 tclass=binder permissive=1
 allow system_server init:binder { call };
 
 allow system_server sysfs_sec:dir search;
@@ -49,7 +48,10 @@ type_transition system_server system_data_file:fifo_file gps_data_file ".flp.int
 type_transition system_server system_data_file:fifo_file gps_data_file ".gps.interface.pipe.to_gpsd";
 type_transition system_server system_data_file:fifo_file gps_data_file ".gps.interface.pipe.to_jni";
 
-allow system_server gps_data_file:fifo_file create_file_perms;
+allow system_server {
+        gps_data_file
+        init
+        }:fifo_file { write create_file_perms };
 allow system_server gps_data_file:dir rw_dir_perms;
 
 # /data/system/gps/chip.info
@@ -65,7 +67,12 @@ allow system_server gps_data_file:file { create setattr unlink write };
 allow system_server gpsd:unix_stream_socket connectto;
 allow system_server sysfs_sec:dir search;
 allow system_server sysfs_sec:lnk_file read;
-allow system_server crash_dump:process getpgid;
+allow system_server {
+        crash_dump
+        kernel
+        app_zygote
+        }:process { getpgid setsched };
+
 allow system_server unlabeled:dir write;
 
 #============= system_server ==============

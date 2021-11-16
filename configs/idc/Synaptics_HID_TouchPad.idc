@@ -22,7 +22,7 @@
 
 # Basic Parameters
 touch.deviceType = pointer
-touch.orientationAware = true
+touch.orientationAware = 1
 
 touch.gestureMode = pointer
 

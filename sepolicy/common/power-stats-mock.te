@@ -1,0 +1,5 @@
+# foo service
+type power-stats-mock, domain;
+type power-stats-mock_exec, exec_type, file_type;
+
+init_daemon_domain(power-stats-mock)

@@ -40,7 +40,8 @@
 //kLUXPath "/sys/class/mdnie/mdnie/lux"
 #define LIGHT_SENSOR_LUX_NODE "/sys/class/sensors/light_sensor/lux"
 //kREPath "/sys/class/mdnie/mdnie/accessibility"
-#define MDNIE_READING_MODE_NODE "/sys/class/mdnie/mdnie/accessibility"
+#define MDNIE_ACCESS_MODE_NODE "/sys/class/mdnie/mdnie/accessibility"
+#define MDNIE_SCENARIO_MODE_NODE "/sys/class/mdnie/mdnie/scenario"
 //kColorPath  "/sys/class/mdnie/mdnie/sensorRGB"
 //#define MDNIE_SENSOR_RGB_NODE "/sys/class/mdnie/mdnie/sensorRGB"
 

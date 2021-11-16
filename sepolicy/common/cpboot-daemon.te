@@ -55,14 +55,8 @@ allow cpboot-daemon proc:file r_file_perms;
 set_prop(cpboot-daemon, cpboot-daemon_prop)
 set_prop(cpboot-daemon, radio_prop)
 set_prop(cpboot-daemon, system_prop)
-#avc: denied { read } for comm="cbd" name="__properties__" dev="tmpfs" ino=4124 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:properties_device:s0 tclass=dir permissive=1
-#avc: denied { open } for comm="cbd" name="__properties__" dev="tmpfs" ino=4124 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:properties_device:s0 tclass=dir permissive=1
+
 allow cpboot-daemon properties_device:dir { open read };
-#avc: denied { read } for comm="cbd" name="stat" dev="proc" ino=4026535012 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:proc_stat:s0 tclass=file permissive=1
-#avc: denied { open } for comm="cbd" name="stat" dev="proc" ino=4026535012 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:proc_stat:s0 tclass=file permissive=1
-#avc: denied { getattr } for comm="cbd" path="/proc/stat" dev="proc" ino=4026535012 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:proc_stat:s0 tclass=file permissive=1
 allow cpboot-daemon proc_stat:file { open read getattr };
-#avc: denied { read } for comm="cbd" name="cmdline" dev="proc" ino=4026535005 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:proc_cmdline:s0 tclass=file permissive=1
-#avc: denied { open } for comm="cbd" name="cmdline" dev="proc" ino=4026535005 scontext=u:r:cpboot-daemon:s0 tcontext=u:object_r:proc_cmdline:s0 tclass=file permissive=1
 allow cpboot-daemon proc_cmdline:file { open read };
 

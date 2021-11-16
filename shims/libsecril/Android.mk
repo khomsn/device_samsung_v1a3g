@@ -18,4 +18,5 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := jf_atomic.cpp
 LOCAL_MODULE := libsecril_atomic
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)

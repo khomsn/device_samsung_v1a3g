@@ -1,4 +1,3 @@
-#avc : denied { write } for comm=android.hardwar name=trace_marker dev=debugfs ino=305 scontext=u:r:hal_audio_default:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
 allow hal_audio_default debugfs:file { write };
 allow hal_audio_default gpsd_exec:file { read };
 allow hal_audio_default rild:unix_stream_socket { connectto };

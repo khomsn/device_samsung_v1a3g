@@ -9,29 +9,33 @@ binder_call(gpsd, system_server)
 binder_use(gpsd)
 
 allow gpsd gps_data_file:fifo_file { unlink create setattr getattr rw_file_perms };
-allow gpsd sysfs_wake_lock:file rw_file_perms;
 allow gpsd self:netlink_kobject_uevent_socket { read bind create setopt };
 allow gpsd rild:unix_stream_socket connectto;
-#avc : denied { write } for comm=gpsd name=trace_marker dev=debugfs ino=305 scontext=u:r:gpsd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
-#avc : denied { open } for comm=gpsd name=trace_marker dev=debugfs ino=305 scontext=u:r:gpsd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
-allow gpsd debugfs:file { open write };
-# Allow rild to connect to gpsd
 unix_socket_connect(gpsd, property, rild)
 
 # /dev/ttySAC0
-allow gpsd bluetooth_device:chr_file { getattr setattr rw_file_perms };
-allow gpsd gps_device:chr_file { getattr setattr rw_file_perms };
-allow gpsd gps_data_file:dir { search write add_name remove_name };
-allow gpsd gps_data_file:file { create rw_file_perms };
-allow gpsd gps_data_file:fifo_file { unlink create setattr getattr rw_file_perms };
+allow gpsd {
+    bluetooth_device
+    gps_device
+    mif_device
+    }:chr_file { getattr setattr rw_file_perms };
 
-allow gpsd sysfs:file { open read getattr };
+allow gpsd gps_data_file:dir { search write add_name remove_name };
+
+allow gpsd gps_data_file:file { create rw_file_perms };
+allow gpsd sysfs:file { open write read getattr };
+allow gpsd shell_exec:file { execute execute_no_trans getattr open read };
+allow gpsd toolbox_exec:file { execute execute_no_trans getattr open read };
+allow gpsd sysfs_wake_lock:file rw_file_perms;
+allow gpsd debugfs:file { open write };
 
 allow gpsd dnsproxyd_socket:sock_file write;
 allow gpsd fwmarkd_socket:sock_file write;
 allow gpsd netd:unix_stream_socket connectto;
 allow gpsd self:udp_socket { connect create read setopt write };
 
-allow gpsd mif_device:chr_file r_file_perms;
-allow gpsd shell_exec:file { execute execute_no_trans getattr open read };
-allow gpsd toolbox_exec:file { execute execute_no_trans getattr open read };
+allow gpsd gps_data_file:fifo_file { unlink create setattr getattr rw_file_perms };
+allow gpsd {
+    self
+    port
+    }:tcp_socket { create getopt bind name_connect connect };

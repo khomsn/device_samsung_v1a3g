@@ -1,0 +1,13 @@
+allow priv_app {
+    debugfs
+    mnt_media_rw_file
+    sysfs
+    device
+    }:dir { read open search };
+
+allow priv_app {
+    debugfs
+    sysfs
+    apexd_prop
+    sysfs_android_usb
+    }:file { read open getattr };

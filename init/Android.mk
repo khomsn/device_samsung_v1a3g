@@ -71,6 +71,20 @@ LOCAL_MODULE_PATH       := $(TARGET_OUT_VENDOR_ETC)/init
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE            := selinux.rc
+LOCAL_MODULE_CLASS      := BOOT
+LOCAL_SRC_FILES         := selinux.rc
+LOCAL_MODULE_PATH       := $(TARGET_OUT_VENDOR_ETC)/init
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE            := spen.rc
+LOCAL_MODULE_CLASS      := BOOT
+LOCAL_SRC_FILES         := spen.rc
+LOCAL_MODULE_PATH       := $(TARGET_OUT_VENDOR_ETC)/init
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE            := sswap.rc
 LOCAL_MODULE_CLASS      := BOOT
 LOCAL_SRC_FILES         := sswap.rc

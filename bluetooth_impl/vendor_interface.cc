@@ -61,7 +61,7 @@ HC_BT_HDR* WrapPacketAndCopy(uint16_t event, const hidl_vec<uint8_t>& data) {
   // TODO(eisenbach): Avoid copy here; if BT_HDR->data can be ensured to
   // be the only way the data is accessed, a pointer could be passed here...
   memcpy(packet->data, data.data(), data.size());
-  ALOGI("%s: WrapPacketAndCopy", __func__);
+//  ALOGI("%s: WrapPacketAndCopy", __func__);
   return packet;
 }
 
@@ -245,7 +245,7 @@ bool VendorInterface::Open(InitializeCompleteCallback initialize_complete_cb,
 
   event_cb_ = event_cb;
   PacketReadCallback intercept_events = [this](const hidl_vec<uint8_t>& event) {
-      ALOGI("%s: intercept_events", __func__);
+ //     ALOGI("%s: intercept_events", __func__);
     HandleIncomingEvent(event);
   };
 
@@ -255,7 +255,7 @@ bool VendorInterface::Open(InitializeCompleteCallback initialize_complete_cb,
     fd_watcher_.WatchFdForNonBlockingReads(
         fd_list[0], [h4_hci](int fd) { h4_hci->OnDataReady(fd); });
     hci_ = h4_hci;
-    ALOGI("%s: h4_hci", __func__);
+//    ALOGI("%s: h4_hci", __func__);
   } else {
     hci::MctProtocol* mct_hci =
         new hci::MctProtocol(fd_list, intercept_events, acl_cb);
@@ -264,7 +264,7 @@ bool VendorInterface::Open(InitializeCompleteCallback initialize_complete_cb,
     fd_watcher_.WatchFdForNonBlockingReads(
         fd_list[CH_ACL_IN], [mct_hci](int fd) { mct_hci->OnAclDataReady(fd); });
     hci_ = mct_hci;
-    ALOGI("%s: mct_hci", __func__);
+ //   ALOGI("%s: mct_hci", __func__);
   }
 
   // Initially, the power management is off.
@@ -315,7 +315,7 @@ void VendorInterface::Close() {
 }
 
 size_t VendorInterface::Send(uint8_t type, const uint8_t* data, size_t length) {
-    ALOGI("%s: Interface Send (%02x)", __func__, data[0] | (data[1] << 8));
+//    ALOGI("%s: Interface Send (%02x)", __func__, data[0] | (data[1] << 8));
   std::unique_lock<std::mutex> lock(wakeup_mutex_);
   recent_activity_flag = true;
 
@@ -349,7 +349,7 @@ void VendorInterface::OnFirmwareConfigured(uint8_t result) {
   lib_interface_->op(BT_VND_OP_SCO_CFG, nullptr);
 
   lib_interface_->op(BT_VND_OP_GET_LPM_IDLE_TIMEOUT, &lpm_timeout_ms);
-  ALOGI("%s: lpm_timeout_ms %d", __func__, lpm_timeout_ms);
+//  ALOGI("%s: lpm_timeout_ms %d", __func__, lpm_timeout_ms);
 
   bt_vendor_lpm_mode_t mode = BT_VND_LPM_ENABLE;
   lib_interface_->op(BT_VND_OP_LPM_SET_MODE, &mode);
@@ -365,7 +365,7 @@ void VendorInterface::OnTimeout() {
   if (recent_activity_flag == false) {
     lpm_wake_deasserted = true;
     bt_vendor_lpm_wake_state_t wakeState = BT_VND_LPM_WAKE_DEASSERT;
-    ALOGE("OnTimeout111.");
+//    ALOGE("OnTimeout111.");
     lib_interface_->op(BT_VND_OP_LPM_WAKE_SET_STATE, &wakeState);
     fd_watcher_.ConfigureTimeout(std::chrono::seconds(0), []() {
       ALOGE("Zero timeout! Should never happen.");
@@ -375,7 +375,7 @@ void VendorInterface::OnTimeout() {
 }
 
 void VendorInterface::HandleIncomingEvent(const hidl_vec<uint8_t>& hci_packet) {
-    ALOGI("%s:+++ ", __func__);
+//    ALOGI("%s:+++ ", __func__);
   if (internal_command.cb != nullptr &&
       internal_command_event_match(hci_packet)) {
     HC_BT_HDR* bt_hdr = WrapPacketAndCopy(HCI_PACKET_TYPE_EVENT, hci_packet);
@@ -396,9 +396,9 @@ void VendorInterface::SetAudioState(void *param) {
 }
 
 void VendorInterface::ScoAudioSet(void *param) {
-    ALOGI("%s:", __func__);
+//    ALOGI("%s:", __func__);
   if (lib_interface_ != nullptr) {
-      ALOGI("%s:got interface!!!!!", __func__);
+//      ALOGI("%s:got interface!!!!!", __func__);
     lib_interface_->op(BT_VND_OP_SET_AUDIO_STATE, param);
   }    
 }

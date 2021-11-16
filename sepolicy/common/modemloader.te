@@ -8,14 +8,10 @@ init_daemon_domain(modemloader)
 allow modemloader proc:file r_file_perms;
 
 set_prop(modemloader, modemloader_prop)
-#avc:  denied  { set } for property=hw.revision pid=3009 uid=1000 gid=1000 scontext=u:r:modemloader:s0 tcontext=u:object_r:system_prop:s0 tclass=property_service permissive=1
 allow modemloader system_prop:property_service { set };
 set_prop(modemloader, system_prop)
-#avc:  denied  { set } for property=ro.cbd.dt_revision pid=3009 uid=1000 gid=1000 scontext=u:r:modemloader:s0 tcontext=u:object_r:default_prop:s0 tclass=property_service permissive=1
 allow modemloader default_prop:property_service { set };
 set_prop(modemloader, default_prop)
-#avc:  denied  { set } for property=ril.cbd.dt_revision pid=3009 uid=1000 gid=1000 scontext=u:r:modemloader:s0 tcontext=u:object_r:radio_prop:s0 tclass=property_service permissive=1
 allow modemloader radio_prop:property_service { set };
 set_prop(modemloader, radio_prop)
-#avc : denied { getattr } for comm=modemloader path=/system/vendor/bin/hw/gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:modemloader:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
 allow modemloader gpsd_exec:file { getattr read };

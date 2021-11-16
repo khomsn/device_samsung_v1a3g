@@ -671,7 +671,7 @@
     <integer translatable="false" name="config_wifi_framework_network_switch_rx_packet_threshold">20</integer>
 
     <!-- Integer indicating wpa_supplicant scan interval in milliseconds -->
-    <integer translatable="false" name="config_wifi_supplicant_scan_interval">15000</integer>
+    <integer translatable="false" name="config_wifi_supplicant_scan_interval">30000</integer>
 
     <!-- Integer indicating amount of time failed networks areblacklisted for the purpose
          of network switching in milliseconds -->
@@ -696,7 +696,7 @@
     <integer translatable="false" name="config_wifi_framework_associated_full_scan_max_total_dwell_time">500</integer>
 
     <!-- Integer indicating associated full scan max num active channels -->
-    <integer translatable="false" name="config_wifi_framework_associated_partial_scan_max_num_active_channels">6</integer>
+    <integer translatable="false" name="config_wifi_framework_associated_partial_scan_max_num_active_channels">10</integer>
 
     <!-- Integer indicating RSSI boost given to current network -->
     <integer translatable="false" name="config_wifi_framework_current_network_boost">16</integer>
@@ -754,7 +754,7 @@
     <string translatable="false" name="config_wifi_softap_acs_supported_channel_list"></string>
 
     <!-- Wifi driver supports IEEE80211AC for softap -->
-    <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">false</bool>
+    <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">true</bool>
 
     <!-- Indicates that local-only hotspot should be brought up at 5GHz.  This option is
          for automotive builds only (the one that have PackageManager#FEATURE_AUTOMOTIVE) -->
@@ -764,7 +764,7 @@
     <bool translatable="false" name="config_wifi_connected_mac_randomization_supported">false</bool>
 
     <!-- Indicates that p2p MAC randomization is supported on this device -->
-    <bool translatable="false" name="config_wifi_p2p_mac_randomization_supported">false</bool>
+    <bool translatable="false" name="config_wifi_p2p_mac_randomization_supported">true</bool>
 
     <!-- Indicates that wifi link probing is supported on this device -->
     <bool translatable="false" name="config_wifi_link_probing_supported">false</bool>
@@ -774,10 +774,10 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Flag indicating whether we should enable the adaptive sleep.-->
-    <bool name="config_adaptive_sleep_available">false</bool>
+    <bool name="config_adaptive_sleep_available">true</bool>
 
     <!-- Flag indicating whether we should enable smart battery. -->
-    <bool name="config_smart_battery_available">false</bool>
+    <bool name="config_smart_battery_available">true</bool>
 
     <!-- Fast brightness animation ramp rate in brightness units per second-->
     <integer translatable="false" name="config_brightness_ramp_rate_fast">180</integer>
@@ -825,7 +825,7 @@
     <!-- If this is true, allow wake from theater mode from motion. -->
     <bool name="config_allowTheaterModeWakeFromMotionWhenNotDreaming">false</bool>
     <!-- If this is true, allow wake from theater mode from lid switch. -->
-    <bool name="config_allowTheaterModeWakeFromLidSwitch">false</bool>
+    <bool name="config_allowTheaterModeWakeFromLidSwitch">true</bool>
     <!-- If this is true, allow wake from theater mode when docked. -->
     <bool name="config_allowTheaterModeWakeFromDock">false</bool>
     <!-- If this is true, allow wake from theater mode from window layout flag. -->
@@ -915,7 +915,7 @@
 
     <!-- Indicate whether closing the lid causes the lockscreen to appear.
          The default is false. -->
-    <bool name="config_lidControlsScreenLock">false</bool>
+    <bool name="config_lidControlsScreenLock">true</bool>
 
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
@@ -940,7 +940,7 @@
          keeps the screen on.  By default it stays on when plugged in to
          AC.  0 will not keep it on; or together 1 to stay on when plugged
          in to AC and 2 to stay on when plugged in to USB.  (So 3 for both.) -->
-    <integer name="config_deskDockKeepsScreenOn">1</integer>
+    <integer name="config_deskDockKeepsScreenOn">0</integer>
 
     <!-- Control whether being in the desk dock should enable accelerometer
          based screen orientation.  This defaults to true because it is
@@ -1000,7 +1000,7 @@
 
     <!--  Control whether to lock UI mode to what is selected from config_defaultUiModeType.
           Once UI mode is locked, applications cannot change it anymore. -->
-    <bool name="config_lockUiMode">false</bool>
+    <bool name="config_lockUiMode">true</bool>
 
     <!--  Control whether to lock day/night mode change from normal application. When it is
           true, day / night mode change is only allowed to apps with MODIFY_DAY_NIGHT_MODE
@@ -1013,7 +1013,7 @@
              1 - MODE_NIGHT_NO
              2 - MODE_NIGHT_YES
     -->
-    <integer name="config_defaultNightMode">1</integer>
+    <integer name="config_defaultNightMode">0</integer>
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware. -->
@@ -1021,7 +1021,7 @@
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware for individual layers. -->
-    <bool name="config_setColorTransformAcceleratedPerLayer">false</bool>
+    <bool name="config_setColorTransformAcceleratedPerLayer">true</bool>
 
     <!-- Control whether Night display is available. This should only be enabled on devices
          that have a HWC implementation that can apply the matrix passed to setColorTransform
@@ -1079,10 +1079,10 @@
     </string-array>
 
     <!-- Boolean indicating whether display white balance is supported. -->
-    <bool name="config_displayWhiteBalanceAvailable">false</bool>
+    <bool name="config_displayWhiteBalanceAvailable">true</bool>
 
     <!-- Boolean indicating whether display white balance should be enabled by default. -->
-    <bool name="config_displayWhiteBalanceEnabledDefault">false</bool>
+    <bool name="config_displayWhiteBalanceEnabledDefault">true</bool>
 
     <!-- Minimum color temperature, in Kelvin, supported by display white balance. -->
     <integer name="config_displayWhiteBalanceColorTemperatureMin">4000</integer>
@@ -1180,7 +1180,7 @@
             0 - Nothing
             1 - Go to voice assist
     -->
-    <integer name="config_longPressOnBackBehavior">0</integer>
+    <integer name="config_longPressOnBackBehavior">1</integer>
 
     <!-- Allows activities to be launched on a long press on power during device setup. -->
     <bool name="config_allowStartActivityForLongPressOnPowerInSetup">false</bool>
@@ -1333,7 +1333,7 @@
     <integer name="config_lowBatteryWarningLevel">15</integer>
 
     <!-- The default suggested battery % at which we enable battery saver automatically.  -->
-    <integer name="config_lowBatteryAutoTriggerDefaultLevel">15</integer>
+    <integer name="config_lowBatteryAutoTriggerDefaultLevel">30</integer>
 
     <!-- The app which will handle routine based automatic battery saver, if empty the UI for
          routine based battery saver will be hidden -->
@@ -1434,7 +1434,7 @@
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">5</integer>
+    <integer name="config_screenBrightnessSettingMinimum">1</integer>
 
     <!-- Maximum screen brightness allowed by the power manager.
          The user is forbidden from setting the brightness above this level. -->
@@ -1442,7 +1442,7 @@
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
-    <integer name="config_screenBrightnessSettingDefault">115</integer>
+    <integer name="config_screenBrightnessSettingDefault">85</integer>
 
     <!-- Default screen brightness for VR setting. -->
     <integer name="config_screenBrightnessForVrSettingDefault">86</integer>
@@ -1457,7 +1457,7 @@
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">10</integer>
+    <integer name="config_screenBrightnessDoze">3</integer>
 
     <!-- Delay that allows some content to arrive at the display before switching
          from DOZE to ON. -->
@@ -1476,8 +1476,8 @@
          when adapting to brighter or darker environments.  This parameter controls how quickly
          brightness changes occur in response to an observed change in light level that exceeds the
          hysteresis threshold. -->
-    <integer name="config_autoBrightnessBrighteningLightDebounce">4000</integer>
-    <integer name="config_autoBrightnessDarkeningLightDebounce">8000</integer>
+    <integer name="config_autoBrightnessBrighteningLightDebounce">1000</integer>
+    <integer name="config_autoBrightnessDarkeningLightDebounce">2500</integer>
 
     <!-- Initial light sensor event rate in milliseconds for automatic brightness control. This is
          used for obtaining the first light sample when the device stops dozing.
@@ -1512,7 +1512,7 @@
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDim">2</integer>
+    <integer name="config_screenBrightnessDim">1</integer>
 
     <!-- Minimum allowable screen brightness to use in a very dark room.
          This value sets the floor for the darkest possible auto-brightness
@@ -1532,11 +1532,12 @@
          the config_minimumBrightnessCurveNits array. -->
     <array name="config_minimumBrightnessCurveLux">
         <item>0.0</item>
-        <item>200.0</item>
-        <item>800.0</item>
-        <item>1000.0</item>
-        <item>2000.0</item>
-        <item>4000.0</item>
+        <item>10.0</item>
+        <item>83.0</item>
+        <item>469.0</item>
+        <item>1300.0</item>
+        <item>7500.0</item>
+        <item>15000.0</item>
     </array>
 
     <!-- Array of nits values to define the minimum brightness curve, which guarantees that any
@@ -1547,12 +1548,13 @@
          The values must be non-negative and non-decreasing, and correspond to the values in the
          config_minimumBrightnessCurveLux array. -->
     <array name="config_minimumBrightnessCurveNits">
-        <item>0.0</item>
-        <item>20.0</item>
-        <item>30.0</item>
-        <item>45.0</item>
-        <item>50.0</item>
-        <item>90.0</item>
+        <item>2.5</item>
+        <item>8.0</item>
+        <item>32.0</item>
+        <item>60.0</item>
+        <item>69.0</item>
+        <item>92.0</item>
+        <item>98.0</item>
     </array>
 
     <!-- Array of light sensor lux values to define our levels for auto backlight brightness support.
@@ -1576,14 +1578,26 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>4</item>
-        <item>150</item>
-        <item>500</item>
-        <item>750</item>
-        <item>1300</item>
-        <item>2500</item>
-        <item>3900</item>
+        <!--Level Max-->
+        <item>5</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>90</item>
+        <item>200</item>
+        <item>400</item>
+        <item>800</item>
+        <item>1600</item>
+        <item>3200</item>
         <item>5000</item>
+        <item>8000</item>
+        <item>11000</item>
+        <item>15000</item>
+        <item>19000</item>
+        <item>25000</item>
+        <item>30000</item>
+        <item>35000</item>
+        <item>40000</item>
     </integer-array>
 
     <!-- Timeout (in milliseconds) after which we remove the effects any user interactions might've
@@ -1594,19 +1608,31 @@
     <integer name="config_autoBrightnessShortTermModelTimeout">300000</integer>
 
     <!-- Array of output values for LCD backlight corresponding to the lux values
-         in the config_autoBrightnessLevels array.  This array should have size one greater
-         than the size of the config_autoBrightnessLevels array.
+         in the config_autoBrightnessLevels array.  This array should have same size
+         with the size of the config_autoBrightnessLevels array.
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>5</item>   <!-- 0-4 -->
-        <item>45</item>   <!-- 4-150 -->
-        <item>64</item>   <!-- 150-750 -->
-        <item>90</item>   <!-- 750-1300 -->
-        <item>128</item>  <!-- 1300-2500 -->
-        <item>156</item>  <!-- 2500-3900 -->
-        <item>192</item>  <!-- 3900-5000 -->
-        <item>255</item>  <!-- 5000+ -->
+        <item>4</item>   <!-- 0-5 -->
+        <item>10</item>   <!-- 5-15 -->
+        <item>15</item>   <!-- 15-30 -->
+        <item>25</item>   <!-- 30-60 -->
+        <item>35</item>  <!-- 60-90 -->
+        <item>44</item>  <!-- 90-200 -->
+        <item>54</item>  <!-- 200-400 -->
+        <item>64</item>  <!-- 400-800 -->
+        <item>74</item>  <!-- 800-1600 -->
+        <item>84</item>  <!-- 1600-3200 -->
+        <item>95</item>  <!-- 3200-5000 -->
+        <item>106</item>  <!-- 5000-8000 -->
+        <item>117</item>  <!-- 8000-11000 -->
+        <item>128</item>  <!-- 11000-15000 -->
+        <item>138</item>  <!-- 15000-19000 -->
+        <item>148</item>  <!-- 19000-25000 -->
+        <item>158</item>  <!-- 25000-30000 -->
+        <item>169</item>  <!-- 30000-35000 -->
+        <item>189</item>  <!-- 35000-40000 -->
+        <item>218</item>  <!-- 40000+ -->
     </integer-array>
 
     <!-- Array of desired screen brightness in nits corresponding to the lux values
@@ -1619,7 +1645,7 @@
             - config_screenBrightnessNits must be defined
             - config_screenBrightnessBacklight must be defined
 
-         This array should have size one greater than the size of the config_autoBrightnessLevels
+         This array should have same size with the size of the config_autoBrightnessLevels
          array. The brightness values must be non-negative and non-decreasing. This must be
          overridden in platform specific overlays -->
     <array name="config_autoBrightnessDisplayValuesNits">
@@ -1631,14 +1657,6 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>255</item>   <!-- 0-4 -->
-        <item>192</item>   <!-- 4-150 -->
-        <item>156</item>   <!-- 150-750 -->
-        <item>64</item>    <!-- 750-1300 -->
-        <item>5</item>     <!-- 1300-2500 -->
-        <item>0</item>     <!-- 2500-3900 -->
-        <item>0</item>     <!-- 3900-5000 -->
-        <item>0</item>     <!-- 5000+ -->
     </integer-array>
 
     <!-- Array of output values for keyboard backlight corresponding to the lux values
@@ -1651,7 +1669,8 @@
 
     <!-- An array describing the screen's backlight values corresponding to the brightness
          values in the config_screenBrightnessNits array.
-
+         Start point must <= config_screenBrightnessSettingMinimum
+         Stop point must >= config_screenBrightnessBacklight
          This array should be equal in size to config_screenBrightnessBacklight. -->
     <integer-array name="config_screenBrightnessBacklight">
     </integer-array>
@@ -1782,7 +1801,7 @@
 
     <!-- Enables the TimeZoneRuleManager service. This is the master switch for the updateable time
          zone update mechanism. -->
-    <bool name="config_enableUpdateableTimeZoneRules">false</bool>
+    <bool name="config_enableUpdateableTimeZoneRules">true</bool>
 
     <!-- Enables APK-based time zone update triggering. Set this to false when updates are triggered
          via external events and not by APK updates. For example, if an updater checks with a server
@@ -1994,7 +2013,7 @@
     <bool name="config_bluetooth_reload_supported_profiles_when_enabled">false</bool>
 
     <!-- Enabling autoconnect over pan -->
-    <bool name="config_bluetooth_pan_enable_autoconnect">false</bool>
+    <bool name="config_bluetooth_pan_enable_autoconnect">true</bool>
 
     <!-- The default data-use polling period. -->
     <integer name="config_datause_polling_period_sec">600</integer>
@@ -2179,10 +2198,10 @@
     <!-- Max space (in MB) allocated to DownloadManager to store the downloaded
          files if they are to be stored in DownloadManager's data dir,
          which typically is /data/data/com.android.providers.downloads/files -->
-    <integer name="config_downloadDataDirSize">200</integer>
+    <integer name="config_downloadDataDirSize">500</integer>
 
     <!-- Max number of downloads allowed to proceed concurrently -->
-    <integer name="config_MaxConcurrentDownloadsAllowed">5</integer>
+    <integer name="config_MaxConcurrentDownloadsAllowed">10</integer>
 
     <!-- When the free space available in DownloadManager's data dir falls
          below the percentage value specified by this param, DownloadManager
@@ -2264,7 +2283,7 @@
     <integer-array name="config_sms_enabled_locking_shift_tables"></integer-array>
 
     <!-- Set to true if the RSSI should always display CDMA signal strength even on EVDO -->
-    <bool name="config_alwaysUseCdmaRssi">false</bool>
+    <bool name="config_alwaysUseCdmaRssi">true</bool>
 
 
     <!-- If this value is true, duplicate Source/Destination port fields
@@ -2339,9 +2358,9 @@
     <bool name="config_dreamsSupported">true</bool>
 
     <!-- If supported, are dreams enabled? (by default) -->
-    <bool name="config_dreamsEnabledByDefault">true</bool>
+    <bool name="config_dreamsEnabledByDefault">false</bool>
     <!-- If supported and enabled, are dreams activated when docked? (by default) -->
-    <bool name="config_dreamsActivatedOnDockByDefault">true</bool>
+    <bool name="config_dreamsActivatedOnDockByDefault">false</bool>
     <!-- If supported and enabled, are dreams activated when asleep and charging? (by default) -->
     <bool name="config_dreamsActivatedOnSleepByDefault">false</bool>
     <!-- ComponentName of the default dream (Settings.Secure.DEFAULT_SCREENSAVER_COMPONENT) -->
@@ -3232,7 +3251,7 @@
     <string name="config_keyguardComponent" translatable="false">com.android.systemui/com.android.systemui.keyguard.KeyguardService</string>
 
     <!-- Limit for the number of face templates per user -->
-    <integer name="config_faceMaxTemplatesPerUser">1</integer>
+    <integer name="config_faceMaxTemplatesPerUser">5</integer>
 
     <!-- For performance and storage reasons, limit the number of fingerprints per user -->
     <integer name="config_fingerprintMaxTemplatesPerUser">5</integer>
@@ -3565,7 +3584,7 @@
     <integer name="config_keepPreloadsMinDays">7</integer>
 
     <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
-    <bool name="config_useRoundIcon">false</bool>
+    <bool name="config_useRoundIcon">true</bool>
 
     <!-- Flag indicating whether the assist disclosure can be disabled using
          ASSIST_DISCLOSURE_ENABLED. -->
@@ -3890,6 +3909,7 @@
          instead of 'Emergency calls only' when SIM is unready. -->
     <string-array translatable="false" name="config_display_no_service_when_sim_unready">
         <item>"DE"</item>
+        <item>"TH"</item>
     </string-array>
 
     <!-- Class names of device specific services inheriting com.android.server.SystemService. The
@@ -3952,7 +3972,7 @@
     </string-array>
 
     <!-- Default hyphenation frequency setting (0=NONE, 1=NORMAL, 2=FULL). -->
-    <item name="config_preferredHyphenationFrequency" format="integer" type="dimen">0</item>
+    <item name="config_preferredHyphenationFrequency" format="integer" type="dimen">2</item>
 
     <!-- Package name for ManagedProvisioning which is responsible for provisioning work profiles. -->
     <string name="config_managed_provisioning_package" translatable="false">com.android.managedprovisioning</string>
@@ -3984,10 +4004,10 @@
     <fraction name="config_prescaleAbsoluteVolume_index1">50%</fraction>
 
     <!-- Pre-scale volume at volume step 2 for Absolute Volume -->
-    <fraction name="config_prescaleAbsoluteVolume_index2">70%</fraction>
+    <fraction name="config_prescaleAbsoluteVolume_index2">85%</fraction>
 
     <!-- Pre-scale volume at volume step 3 for Absolute Volume -->
-    <fraction name="config_prescaleAbsoluteVolume_index3">85%</fraction>
+    <fraction name="config_prescaleAbsoluteVolume_index3">100%</fraction>
 
     <!-- Whether or not the "SMS app service" feature is enabled -->
     <bool name="config_useSmsAppService">true</bool>
@@ -4256,7 +4276,7 @@
 
     <!-- The type of the light sensor to be used by the display framework for things like
          auto-brightness. If unset, then it just gets the default sensor of type TYPE_LIGHT. -->
-    <string name="config_displayLightSensorType" translatable="false" />
+    <string name="config_displayLightSensorType" translatable="false">android.sensor.light</string>
 
     <!-- Whether or not to enable automatic heap dumps for the system server on debuggable builds. -->
     <bool name="config_debugEnableAutomaticSystemServerHeapDumps">false</bool>

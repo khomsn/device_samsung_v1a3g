@@ -1,23 +1,8 @@
-#avc: denied { sys_nice } for pid=2326 comm="main" capability=23 scontext=u:r:zygote:s0 tcontext=u:r:zygote:s0 tclass=capability permissive=0
 allow zygote self:capability sys_nice;
-#avc: denied { write } for comm="zygote" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:zygote:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
-#avc: denied { open } for comm="zygote" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:zygote:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
-#avc: denied { getattr } for comm="main" path="/sys/kernel/debug/tracing/trace_marker" dev="debugfs" ino=305 scontext=u:r:zygote:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
 allow zygote debugfs:file { open write getattr };
-#avc: denied { write } for comm="zygote" name="boot.art" dev="mmcblk0p18" ino=1697 scontext=u:r:zygote:s0 tcontext=u:object_r:system_file:s0 tclass=file permissive=1
 allow zygote system_file:file { write };
-#avc: denied { write } for comm="main" name="framework" dev="mmcblk0p18" ino=1658 scontext=u:r:zygote:s0 tcontext=u:object_r:system_file:s0 tclass=dir permissive=1
 allow zygote system_file:dir { write };
-#avc: denied { read } for comm="main" name="cmdline" dev="proc" ino=4026535005 scontext=u:r:zygote:s0 tcontext=u:object_r:proc_cmdline:s0 tclass=file permissive=1
-#avc: denied { open } for comm="main" name="cmdline" dev="proc" ino=4026535005 scontext=u:r:zygote:s0 tcontext=u:object_r:proc_cmdline:s0 tclass=file permissive=1
-#avc: denied { getattr } for comm="main" path="/proc/cmdline" dev="proc" ino=4026535005 scontext=u:r:zygote:s0 tcontext=u:object_r:proc_cmdline:s0 tclass=file permissive=1
 allow zygote proc_cmdline:file { read open getattr };
-#avc: denied { read } for comm="main" name="cpu" dev="sysfs" ino=32 scontext=u:r:zygote:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
-#avc: denied { open } for comm="main" name="cpu" dev="sysfs" ino=32 scontext=u:r:zygote:s0 tcontext=u:object_r:sysfs:s0 tclass=dir permissive=1
 allow zygote sysfs:dir { read open };
-#avc: denied { write } for comm="main" name="tasks" dev="tmpfs" ino=7191 scontext=u:r:zygote:s0 tcontext=u:object_r:device:s0 tclass=file permissive=1
-#avc: denied { open } for comm="main" name="tasks" dev="tmpfs" ino=7191 scontext=u:r:zygote:s0 tcontext=u:object_r:device:s0 tclass=file permissive=1
 allow zygote device:file { open write };
-#avc : denied { getattr } for comm=app_process path=/system/vendor/bin/hw/gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:zygote:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
-#avc : denied { read } for comm=app_process name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:zygote:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
 allow zygote gpsd_exec:file { read getattr };

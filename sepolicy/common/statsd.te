@@ -1,3 +1,4 @@
-#avc: denied { write } for comm="Binder:3046_2" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:statsd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
-#avc: denied { open } for comm="Binder:3046_2" name="trace_marker" dev="debugfs" ino=305 scontext=u:r:statsd:s0 tcontext=u:object_r:debugfs:s0 tclass=file permissive=1
-allow statsd debugfs:file { write open };
+allow statsd {
+    debugfs
+    gpsd_exec
+    }:file { write open getattr read };

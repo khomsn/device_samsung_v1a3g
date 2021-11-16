@@ -1,3 +1,1 @@
-#avc : denied { getattr } for comm=usbd path=/system/vendor/bin/hw/gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:usbd:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
-#avc : denied { read } for comm=usbd name=gpsd dev=mmcblk0p18 ino=3478 scontext=u:r:usbd:s0 tcontext=u:object_r:gpsd_exec:s0 tclass=file permissive=1
 allow usbd gpsd_exec:file { read getattr };

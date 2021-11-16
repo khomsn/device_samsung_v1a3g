@@ -1,0 +1,5 @@
+# foo service
+type power-exynos, domain;
+type power-exynos_exec, exec_type, file_type;
+
+init_daemon_domain(power-exynos)

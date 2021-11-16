@@ -5,16 +5,19 @@
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.disable=1 \
-    ro.config.vc_call_vol_steps=50 \
-    ro.config.media_vol_steps=50 \
-    ro.config.ring_vol_steps=50 \
-    ro.config.alarm_vol_steps=50 \
-    ro.config.notify_vol_steps=50 \
-    ro.config.bt_sco_vol_steps=15 \
-    ro.config.system_vol_steps=50 \
+    ro.config.vc_call_vol_steps=15 \
+    ro.config.media_vol_steps=25 \
+    ro.config.ring_vol_steps=15 \
+    ro.config.alarm_vol_steps=15 \
+    ro.config.notify_vol_steps=15 \
+    ro.config.system_vol_steps=25 \
     audio_hal.disable_two_mic=true \
-    audio_hal.force_voice_config=narrow \
+    audio_hal.force_voice_config=wide \
+    audio_hal.period_size=64 \
+    audio_hal.pb.start_threshold=65 \
+    audio_hal.pb.stop_threshold=4800 \
     af.fast_track_multiplier=1 \
+    ro.af.client_heap_size_kbyte=16384 \
     persist.bluetooth.disableabsvol=false
 
 # AptXHD
@@ -25,7 +28,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.bt.bdaddr_path="/efs/bluetooth/bt_addr"
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0
+    wifi.interface=wlan0 \
+    wifi.direct.interface=p2p0
 
 #    
 # Boot directly from charger mode
@@ -81,9 +85,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.legacyencoder=true \
     media.stagefright.less-secure=true
 
-# IO Scheduler
+# IO Scheduler > noop deadline cfq <
 PRODUCT_PROPERTY_OVERRIDES += \
-    sys.io.scheduler=bfq
+    sys.io.scheduler=noop
 
 # Dex2oat optimizations
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -172,7 +176,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.latch_unsignaled=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=220 \
+    ro.sf.lcd_density=260 \
     lockscreen.rot_override=true
 
 # Disable more Codec2.0 components

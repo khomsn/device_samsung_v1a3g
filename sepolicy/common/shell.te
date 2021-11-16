@@ -8,11 +8,21 @@ allow shell device:chr_file { open read write setattr getattr ioctl };
 allow shell su:process signal;
 
 # exFAT and fuseblk
-allow shell exfat:dir create_dir_perms;
-allow shell exfat:file create_file_perms;
+allow shell {
+    exfat
+    device
+    persist_file
+    media_rw_data_file
+    }:dir { create reparent rename rmdir setattr { { open getattr read search ioctl lock watch watch_reads } { open search write add_name remove_name lock } } };
 
-allow shell gpsd_exec:file { read getattr };
-allow shell system_file:file { entrypoint };
+allow shell {
+    exfat
+    gpsd_exec
+    system_file
+    device
+    sysfs
+    }:file { create rename setattr unlink entrypoint getattr open read ioctl lock map watch watch_reads append write };
 
-allow shell shell:capability { sys_ptrace kill };
+allow shell self:capability { sys_ptrace kill dac_override };
 allow shell { audioserver mediaserver }:process { signal };
+allow shell default_prop:property_service { set };

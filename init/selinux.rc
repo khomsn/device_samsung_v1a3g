@@ -1,0 +1,8 @@
+# Run init.d scripts
+service selinuxset /system/bin/selinuxset
+    class main
+    seclabel u:r:shell:s0
+    user root
+    group root
+    oneshot
+    disabled

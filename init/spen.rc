@@ -1,0 +1,8 @@
+# Run init.d scripts
+service spen /system/bin/SpenFunction
+    class main
+    seclabel u:r:shell:s0
+    user root
+    group root
+    oneshot
+    disabled

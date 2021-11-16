@@ -15,6 +15,32 @@
          <library name="pre_processing" path="libaudiopreprocessing.so"/>
     -->
     <libraries>
+        <!--
+        <library name="atmos" path="libatmos.so"/>
+        <library name="vlldp" path="libswvlldp.so"/>
+        <library name="dax" path="libswdax.so"/>
+        <library name="dap" path="libswdap.so"/>
+        <library name="sonyeffect_hw" path="libsonypostprocbundle.so"/>
+        <library name="sonyeffect_sw" path="libsonysweffect.so"/>
+        <library name="znrwrapper" path="libznrwrapper.so"/>
+        <library name="maxxaudio3" path="libmaxxeffect-cembedded.so"/>
+        <library name="jdsp" path="libjamesdsp.so"/>
+        <library name="icepower" path="libicepower.so"/>
+        <library name="dax_hw" path="libhwdax.so"/>
+        <library name="dax_sw" path="libswdax.so"/>
+        <library name="dap_hw" path="libhwdap.so"/>
+        <library name="dap_sw" path="libswdap.so"/>
+        <library name="dtsaudio" path="libdtsaudio.so"/>
+        <library name="dirac" path="libdirac.so"/>
+        <library name="equalizerMz" path="libequalizerMz.so"/>
+        <library name="livemusicMz" path="liblivemusicMz.so"/>
+        <library name="virtualizerMz" path="libvirtualizerMz.so"/>
+        <library name="bassboostMz" path="libbassboostMz.so"/>
+        <library name="dolbyatmos" path="libatmos.so"/>
+        <library name="arkamys" path="libarkamys.so"/>
+        <library name="am3daudioenhancement" path="libam3daudioenhancement.so"/>
+        -->
+        <library name="ds" path="libdseffect.so"/>
         <library name="v4a_fx" path="libv4a_fx.so"/>
         <library name="bundle" path="libbundlewrapper.so"/>
         <library name="reverb" path="libreverbwrapper.so"/>
@@ -49,6 +75,45 @@
     -->
 
     <effects>
+        <!--
+        <effect name="v4a_standard_xhifi" library="v4a_xhifi" uuid="d92c3a90-3e26-11e2-a25f-0800200c9a66"/>
+        <effect name="atmos" library="atmos" uuid="9d4921da-8225-4f29-aefa-aacb40a73593"/>
+        <effect name="vlldp" library="vlldp" uuid="3783c334-d3a0-4d13-874f-0032e5fb80e2"/>
+        <effect name="dax" library="dax" uuid="9d4921da-8225-4f29-aefa-6e6f69726861"/>
+        <effect name="dap" library="dap" uuid="9d4921da-8225-4f29-aefa-39537a04bcaa"/>
+        <effectProxy name="sonyeffect" library="proxy" uuid="af8da7e0-2ca1-11e3-b71d-0002a5d5c51b">
+            <libsw library="sonyeffect_sw" uuid="50786e95-da76-4557-976b-7981bdf6feb9"/>
+            <libhw library="sonyeffect_hw" uuid="f9ed8ae0-1b9c-11e4-8900-0002a5d5c51b"/>
+        </effectProxy>
+        <effect name="ZNR" library="znrwrapper" uuid="b8a031e0-6bbf-11e5-b9ef-0002a5d5c51b"/>
+        <effect name="maxxaudio3" library="maxxaudio3" uuid="ae12da60-99ac-11df-b456-0002a5d5c51b"/>
+        <effect name="jamesdsp" library="jdsp" uuid="f27317f4-c984-4de6-9a90-545759495bf2"/>
+        <effect name="icepower_null" library="icepower" uuid="63509430-52aa-11e3-8f96-0800200c9a66"/>
+        <effect name="icepower_load" library="icepower" uuid="bf51a790-512b-11e3-8f96-0800200c9a66"/>
+        <effect name="icepower_test" library="icepower" uuid="e5456320-5391-11e3-8f96-0800200c9a66"/>
+        <effect name="icepower_eq" library="icepower" uuid="50dbef80-4ad4-11e3-8f96-0800200c9a66"/>
+        <effect name="icepower_algo" library="icepower" uuid="f1c02420-777f-11e3-981f-0800200c9a66"/>
+        <effectProxy name="dax" library="proxy" uuid="9d4921da-8225-4f29-aefa-6e6f69726861">
+            <libsw library="dax_sw" uuid="6ab06da4-c516-4611-8166-6168726e6f69"/>
+            <libhw library="dax_hw" uuid="a0c30891-8246-4aef-b8ad-696f6e726861"/>
+        </effectProxy>
+        <effectProxy name="dap" library="proxy" uuid="9d4921da-8225-4f29-aefa-6e6f69726861">
+            <libsw library="dap_sw" uuid="6ab06da4-c516-4611-8166-452799218539"/>
+            <libhw library="dap_hw" uuid="a0c30891-8246-4aef-b8ad-d53e26da0253"/>
+        </effectProxy>
+        <effect name="dtsaudio" library="dtsaudio" uuid="146edfc0-7ed2-11e4-80eb-0002a5d5c51b"/>
+        <effect name="dirac_music" library="dirac" uuid="b437f4de-da28-449b-9673-667f8b964304"/>
+        <effect name="dirac_controller" library="dirac" uuid="b437f4de-da28-449b-9673-667f8b9643fe"/>
+        <effect name="dirac" library="dirac" uuid="4c6383e0-ff7d-11e0-b6d8-0002a5d5c51b"/>
+        <effect name="equalizerMz" library="equalizerMz" uuid="9626da93-9c71-4bb2-8e23-9fc707fb9703"/>
+        <effect name="livemusicMz" library="livemusicMz" uuid="0bbc89fe-52dc-4c40-8211-cae4da538b50"/>
+        <effect name="virtualizerMz" library="virtualizerMz" uuid="0e9779c9-4e8f-494d-b2b1-b4ad4e37c54c"/>
+        <effect name="bassboostMz" library="bassboostMz" uuid="850b6319-bf66-4f93-bec0-dc6964367786"/>
+        <effect name="dolbyatmos" library="dolbyatmos" uuid="74697567-7261-6564-6864-65726f206678"/>
+        <effect name="Arkamysfx" library="arkamys" uuid="17852d50-161e-11e2-892e-0800200c9a66"/>
+        <effect name="am3daudioenhancement" library="am3daudioenhancement" uuid="6723dd80-f0b7-11e0-98a2-0002a5d5c51b"/>
+        -->
+        <effect name="dsplus" library="ds" uuid="9d4921da-8225-4f29-aefa-39537a04bcaa"/>
         <effect name="v4a_standard_fx" library="v4a_fx" uuid="41d3c987-e6cf-11e3-a88a-11aba5d5c51b"/>
         <effect name="bassboost" library="bundle" uuid="8631f300-72e2-11df-b57e-0002a5d5c51b"/>
         <effect name="virtualizer" library="bundle" uuid="1d4033c0-8557-11df-9f2d-0002a5d5c51b"/>
@@ -83,20 +148,13 @@
             </stream>
         </preprocess>
     -->
-
-    <preprocess>
-<!--        <stream type="mic">
-            <apply effect="agc"/>
-            <apply effect="ns"/>
-            <apply effect="aec"/>
-        </stream>
--->
-        <stream type="voice_communication">
-            <apply effect="aec"/>
-            <apply effect="ns"/>
-            <apply effect="agc"/>
-        </stream>
-    </preprocess>
+        <preprocess>
+            <stream type="voice_communication">
+                <apply effect="aec"/>
+                <apply effect="ns"/>
+                <apply effect="agc"/>
+            </stream>
+        </preprocess>
 
     <!-- Audio post processor configurations.
          The post processor configuration is described in a "postprocess" element and consists in a

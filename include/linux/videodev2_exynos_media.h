@@ -20,8 +20,9 @@
 
 /* RGB formats */
 #define V4L2_PIX_FMT_RGB32X    v4l2_fourcc('R', 'G', 'B', 'X') /* 32  RGB-8-8-8-8   */
+#ifndef V4L2_PIX_FMT_ARGB32
 #define V4L2_PIX_FMT_ARGB32    v4l2_fourcc('A', 'R', 'G', 'B') /* 32  ARGB-8-8-8-8   */
-
+#endif
 /* two planes -- one Y, one Cr + Cb interleaved  */
 #define V4L2_PIX_FMT_YUV444_2P v4l2_fourcc('Y', 'U', '2', 'P') /* 24  Y/CbCr */
 #define V4L2_PIX_FMT_YVU444_2P v4l2_fourcc('Y', 'V', '2', 'P') /* 24  Y/CrCb */
@@ -37,8 +38,9 @@
 
 /* three non contiguous planes - Y, Cb, Cr */
 /* 12  YVU420 planar */
+#ifndef V4L2_PIX_FMT_YVU420M
 #define V4L2_PIX_FMT_YVU420M  v4l2_fourcc('Y', 'V', 'U', 'M')
-
+#endif
 /* compressed formats */
 #define V4L2_PIX_FMT_H264_MVC v4l2_fourcc('M', '2', '6', '4') /* H264 MVC */
 #define V4L2_PIX_FMT_FIMV     v4l2_fourcc('F', 'I', 'M', 'V') /* FIMV  */
@@ -305,7 +307,7 @@ enum v4l2_mpeg_mfc51_video_frame_type {
 					(V4L2_CID_MPEG_MFC_BASE + 98)
 
 /* CIDs for HEVC encoding. Number gaps are for compatibility */
-
+#ifndef __LINUX_V4L2_CONTROLS_H
 #define V4L2_CID_MPEG_VIDEO_HEVC_MIN_QP				\
 					(V4L2_CID_MPEG_MFC_BASE + 110)
 #define V4L2_CID_MPEG_VIDEO_HEVC_MAX_QP				\
@@ -316,6 +318,7 @@ enum v4l2_mpeg_mfc51_video_frame_type {
 					(V4L2_CID_MPEG_MFC_BASE + 113)
 #define V4L2_CID_MPEG_VIDEO_HEVC_B_FRAME_QP                     \
 					(V4L2_CID_MPEG_MFC_BASE + 114)
+#endif
 #define V4L2_CID_MPEG_VIDEO_HEVC_HIERARCHICAL_QP_ENABLE \
 					(V4L2_CID_MPEG_MFC_BASE + 115)
 #define V4L2_CID_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_TYPE       \
@@ -326,10 +329,12 @@ enum v4l2_mpeg_mfc51_video_frame_type {
 					(V4L2_CID_MPEG_MFC_BASE + 118)
 #define V4L2_CID_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_LAYER_BIT  \
 					(V4L2_CID_MPEG_MFC_BASE + 119)
+#ifndef __LINUX_V4L2_CONTROLS_H
 #define V4L2_CID_MPEG_VIDEO_HEVC_PROFILE			\
 					(V4L2_CID_MPEG_MFC_BASE + 120)
 #define V4L2_CID_MPEG_VIDEO_HEVC_LEVEL				\
 					(V4L2_CID_MPEG_MFC_BASE + 121)
+#endif
 #define V4L2_CID_MPEG_MFC90_VIDEO_HEVC_RC_FRAME_RATE            \
 					(V4L2_CID_MPEG_MFC_BASE + 122)
 #define V4L2_CID_MPEG_MFC90_VIDEO_HEVC_TIER_FLAG                \

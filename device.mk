@@ -88,16 +88,6 @@ PRODUCT_PACKAGES += \
     libantradio
 
 # Audio ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio@5.0-impl \
-    android.hardware.audio.common@5.0 \
-    android.hardware.audio.common@5.0-util \
-    android.hardware.audio.effect@2.0-impl \
-    android.hardware.audio.effect@5.0 \
-    android.hardware.audio.effect@5.0-impl
-    
 PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl \
     android.hardware.audio.common@5.0 \
@@ -121,9 +111,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/mixer_paths_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_0.xml
-
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/mixer_paths.xml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
@@ -153,24 +140,28 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.0-impl
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 # Camera
 PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl.exynos5420 \
+    android.hardware.camera.provider@2.4-service \
+    camera.device@1.0-impl.exynos5420 \
+
+#PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl-legacy \
     camera.device@1.0-impl-legacy \
+
+PRODUCT_PACKAGES += \
     libhwjpeg \
     libsecnativefeature \
-    libion_exynos
+    libion_exynos \
 
 PRODUCT_PACKAGES += \
     libexynoscamera_shim
 
 PRODUCT_PACKAGES += \
-    camera.universal5420 
-
-PRODUCT_PACKAGES += \
-    libexynoscamera
-
+    libexynoscamera \
+    camera.universal5420
+#-------------------------------------------------------------------------------
 # Configstore
 PRODUCT_PACKAGES += \
     android.hardware.configstore@1.1-impl \
@@ -184,12 +175,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
     android.hidl.manager@1.0
-
-
-# Substratum Themes
-#PRODUCT_PACKAGES += \
-    ThemeInterfacer \
-    projekt.substratum.theme.xml
 
 # File$(TARGET_COPY_OUT_SYSTEM) management tools
 PRODUCT_PACKAGES += \
@@ -220,27 +205,24 @@ PRODUCT_PACKAGES += \
 # LiveDisplay
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@2.0-service.samsung-exynos
-
-# WeatherProviders
-#PRODUCT_PACKAGES += \
-    OpenWeatherMapWeatherProvider \
-    YahooWeatherProvider \
-    WundergroundWeatherProvider
-
-# GPS # SHIM LIBS
-#PRODUCT_PACKAGES += \
-    libshim_gpsd
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/gps.cfg \
     $(LOCAL_PATH)/configs/gps/gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gps.xml
 
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
+# GNNS
+#PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl.universal5420 \
+    android.hardware.gnss@1.0-service.universal5420
+
+#PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/configs/gps/gps.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/gps.conf
 
 PRODUCT_PACKAGES += \
     libdmitry
-
+#-------------------------------------------------------------------------------
 # __popcountsi2 method, for the r7p0 egl blob
 PRODUCT_PACKAGES += \
     libpopcountsi2
@@ -274,27 +256,9 @@ PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-service \
     consumerir.universal5420
 
-#PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.samsung
-
-
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.samsung
-
-# Media profile
-#PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_video.xml \
-    $(LOCAL_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media/media_codecs_ffmpeg.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_ffmpeg.xml \
-    $(LOCAL_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_performance.xml \
-    $(LOCAL_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles.xml
-
-# USB
-#PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
@@ -311,8 +275,34 @@ PRODUCT_PACKAGES += \
 # OMX Video codecs
 PRODUCT_PACKAGES += \
     libcsc \
+    libOMX.Exynos.VP8.Encoder \
+    libOMX.Exynos.MPEG4.Encoder \
+    libOMX.Exynos.HEVC.Encoder \
+    libOMX.Exynos.AVC.Encoder \
+    libExynosOMX_Venc \
+    libOMX.Exynos.VP8.Decoder \
+    libOMX.Exynos.MPEG4.Decoder \
+    libOMX.Exynos.HEVC.Decoder \
+    libOMX.Exynos.AVC.Decoder \
     libOMX.Exynos.WMV.Decoder \
-    libOMX.Exynos.MPEG2.Decoder
+    libOMX.Exynos.MPEG2.Decoder \
+    libExynosOMX_Vdec \
+    libExynosOMX_Adec \
+    libOMX.Exynos.MP3.Decoder \
+    libOMX.Exynos.FLAC.Decoder \
+    libOMX.Exynos.AAC.Decoder \
+    libOMX.Exynos.MP3.Decoder \
+    libExynosOMX_Basecomponent \
+    libExynosOMX_Core \
+    libExynosOMX_SkypeHD_Enc \
+    libExynosOMX_SkypeHD_Dec \
+    libExynosOMX_OSAL \
+    
+
+#PRODUCT_PACKAGES += \
+    libOMX.Exynos.WMA.Decoder \
+    libOMX.Exynos.VP9.Encoder \
+    libOMX.Exynos.VP9.Decoder \
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -355,16 +345,9 @@ PRODUCT_PACKAGES += \
     mcDriverDaemon
 
 # Power
-#PRODUCT_PACKAGES += \
-    power.universal5420
-
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.exynos \
+    android.hardware.power@1.0-service.universal5420 \
     android.hardware.power.stats@1.0-service.mock
-
-# Persistent partition hack
-#PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/backuptool.sh:install/bin/backuptool.sh
 
 # System properties
 -include $(LOCAL_PATH)/$(TARGET_COPY_OUT_SYSTEM)_prop.mk
@@ -397,7 +380,8 @@ PRODUCT_PACKAGES += \
     mobicore.rc \
     modemloader.rc \
     rild.legacy.rc \
-    spen-d.rc \
+    selinux.rc \
+    spen.rc \
     sswap.rc \
     watchdogd.rc \
     wpa_supplicant.rc \
@@ -406,10 +390,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/fstab_fst.universal5420:$(TARGET_COPY_OUT_RAMDISK)/fstab.universal5420 \
     $(LOCAL_PATH)/rootdir/fstab_fst.universal5420:$(TARGET_COPY_OUT_VENDOR)/fstab.universal5420
-
-# Gestures
-#PRODUCT_PACKAGES += \
-    com.cyanogenmod.keyhandler
 
 #***************************Wireless Connection***************************#
 # Radio ---------with xmm6262------------------
@@ -438,7 +418,7 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service \
     libbt-vendor
 
-#PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/bluetooth/bt_vendor.conf
 
 # Wifi
@@ -480,15 +460,13 @@ PRODUCT_PACKAGES += \
 
 # Vibrator HAL
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl 
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service \
 
 # Offmode charger
 PRODUCT_PACKAGES += \
     charger_res_images \
     lineage_charger_res_images
-
-#PRODUCT_PACKAGES += \
-    SamsungServiceMode
 
 # Misc libraries libstlport
 #PRODUCT_PACKAGES += \
@@ -498,190 +476,10 @@ PRODUCT_PACKAGES += \
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/samsung/v1a3g/v1a3g-vendor.mk)
 # Call Prebuilding Apps packages
-$(call inherit-product-if-exists, vendor/samsung/prebuilding_apps/prebuilding_apps.mk)
+#$(call inherit-product-if-exists, vendor/samsung/prebuilding_apps/prebuilding_apps.mk)
 # call Samsung LSI board support package
 $(call inherit-product-if-exists, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product-if-exists, hardware/samsung_slsi/exynos5420/exynos5420.mk)
-$(call inherit-product-if-exists, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
-$(call inherit-product-if-exists, hardware/samsung_slsi-cm/exynos5420/exynos5420.mk)
-
 # call dalvik heap and hwui config
 $(call inherit-product-if-exists, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 ####################################################################################################
-
-#DolBy and Viper
-#PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/sound:$(TARGET_COPY_OUT_SYSTEM)/bin/sound \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/aplay:$(TARGET_COPY_OUT_SYSTEM)/bin/aplay \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/alsa_aplay:$(TARGET_COPY_OUT_SYSTEM)/bin/alsa_aplay \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/alsa_amixer:$(TARGET_COPY_OUT_SYSTEM)/bin/alsa_amixer \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/sound8x60:$(TARGET_COPY_OUT_SYSTEM)/bin/sound8x60 \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/spkamp:$(TARGET_COPY_OUT_SYSTEM)/bin/spkamp \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/snd8k:$(TARGET_COPY_OUT_SYSTEM)/bin/snd8k \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/alsa_ctl:$(TARGET_COPY_OUT_SYSTEM)/bin/alsa_ctl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/asound:$(TARGET_COPY_OUT_SYSTEM)/bin/asound \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/bin/snd:$(TARGET_COPY_OUT_SYSTEM)/bin/snd \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.privateapis_impl.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.privateapis_impl.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.media.infinite.extension_1.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.media.infinite.extension_1.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.video.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.video.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.illumination.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.illumination.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.album.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.album.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.faceeditor.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.faceeditor.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.$(TARGET_COPY_OUT_SYSTEM).jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.$(TARGET_COPY_OUT_SYSTEM).jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.media.dashboard.extension.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.media.dashboard.extension.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.musicslideshow.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.musicslideshow.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.photoeditor.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.photoeditor.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.video.settings.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.video.settings.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.covermode.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.covermode.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.uxp.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.uxp.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.appextensions.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.appextensions.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.photoanalyzer.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.photoanalyzer.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.music.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.music.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.mediacontent.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.mediacontent.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.settings.illumination.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.settings.illumination.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.media_impl.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.media_impl.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.colorextraction_impl.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.colorextraction_impl.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/sonyaudioeffect.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/sonyaudioeffect.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sony.device.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sony.device.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.home.resourceprovider.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.home.resourceprovider.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.photoanalyzer_impl.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonymobile.photoanalyzer_impl.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.musicvisualizer.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.musicvisualizer.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.uxpres.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.uxpres.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.video.player.service.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/com.sonyericsson.video.player.service.jar \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_gec.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_gec.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_earbud_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_earbud_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album01:$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album01 \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album_mapping:$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album_mapping \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album:$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_v2.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_v2.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_gec_bt.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_gec_bt.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_midtier_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_midtier_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo_v2.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo_v2.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_v2_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_v2_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/audio_only_image.png:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_only_image.png \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_earbud.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_earbud.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/be_movie_spc:$(TARGET_COPY_OUT_SYSTEM)/etc/be_movie_spc \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_beats_speaker.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_beats_speaker.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_beats_wireless_bt.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_beats_wireless_bt.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_gec_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_gec_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/dsx_param_file.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/dsx_param_file.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo_v2_2vol.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_ibeats_solo_v2_2vol.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_midtier.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_htc_midtier.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album02:$(TARGET_COPY_OUT_SYSTEM)/etc/be2_album02 \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/image_beatbox_bt.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/image_beatbox_bt.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libvoAudioFR.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libvoAudioFR.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libaudioalsa.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libaudioalsa.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libacdbmapper.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libacdbmapper.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libaudcal.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libaudcal.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libaudio_init.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libaudio_init.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libasound.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libasound.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libdlbdapstorage.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libdlbdapstorage.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libbeatscorehtc.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libbeatscorehtc.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libsoundhoundaudio.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libsoundhoundaudio.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/libAudioTrimmer.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libAudioTrimmer.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/priv-app/AsUI/AsUI.apk:$(TARGET_COPY_OUT_SYSTEM)/priv-app/AsUI/AsUI.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/priv-app/As/As.apk:$(TARGET_COPY_OUT_SYSTEM)/priv-app/As/As.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/priv-app/SemcMusic/SemcMusic.apk:$(TARGET_COPY_OUT_SYSTEM)/priv-app/SemcMusic/SemcMusic.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/app/HeadphoneSelection/HeadphoneSelection.apk:$(TARGET_COPY_OUT_SYSTEM)/app/HeadphoneSelection/HeadphoneSelection.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/app/YouTubeKaraokePlugin/YouTubeKaraokePlugin.apk:$(TARGET_COPY_OUT_SYSTEM)/app/YouTubeKaraokePlugin/YouTubeKaraokePlugin.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/app/WikipediaPlugin/WikipediaPlugin.apk:$(TARGET_COPY_OUT_SYSTEM)/app/WikipediaPlugin/WikipediaPlugin.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/app/GoogleLyricsPlugin/GoogleLyricsPlugin.apk:$(TARGET_COPY_OUT_SYSTEM)/app/GoogleLyricsPlugin/GoogleLyricsPlugin.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/app/YouTubePlugin/YouTubePlugin.apk:$(TARGET_COPY_OUT_SYSTEM)/app/YouTubePlugin/YouTubePlugin.apk \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats_l.preset:$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats_l.preset \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats_l.eq:$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats_l.eq \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats.eq:$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats.eq \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats_l.config:$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats_l.config \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats.preset:$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats.preset \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats.config:$(TARGET_COPY_OUT_SYSTEM)/etc/tfa/playbackbeats.config \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/dolby/ds-default.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/dolby/ds-default.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.photoanalyzer.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.photoanalyzer.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.media.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.media.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.trackid.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.trackid.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.album.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.album.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.$(TARGET_COPY_OUT_SYSTEM).xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.$(TARGET_COPY_OUT_SYSTEM).xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.media.infinite.extension_1.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.media.infinite.extension_1.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.colorextraction.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.colorextraction.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.video.player.service.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.video.player.service.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.video.settings.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.video.settings.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.illumination.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.illumination.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.faceeditor.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.faceeditor.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.photoeditor.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.photoeditor.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.appextensions.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.appextensions.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.media.dashboard.extension.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.media.dashboard.extension.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.privateapis.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.privateapis.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sony.device.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sony.device.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.uxpres.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonyericsson.uxpres.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.mediacontent.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.mediacontent.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.settings.illumination.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.settings.illumination.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.home.resourceprovider.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.sonymobile.home.resourceprovider.xml \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srs_global.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srs_global.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_movie.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_movie.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srs_bypass.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srs_bypass.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_51.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_51.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srs_geq10.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srs_geq10.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_voice.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_voice.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_music.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/soundimage/srsfx_trumedia_music.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_SubSemCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_SubSemCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_MainSubSemCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_MainSubSemCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_MainSubSoiCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_MainSubSoiCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_SubSemCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_SubSemCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/xloud_param_arm.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/xloud_param_arm.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_MainCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_MainCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_SubSoiCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_SubSoiCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/sforce_param_qdsp.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/sforce_param_qdsp.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_NoCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_NoCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_MainCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_MainCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_MainSubSoiCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_MainSubSoiCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/clearphase_sp_param.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/clearphase_sp_param.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/effect_params.data:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/effect_params.data \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/sforce_param_arm.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/sforce_param_arm.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_MainSubSemCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_48k_MainSubSemCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_NoCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_NoCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/xloud_param_qdsp.bin:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/xloud_param_qdsp.bin \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_SubSoiCam.tbl:$(TARGET_COPY_OUT_SYSTEM)/etc/sony_effect/znr_param_44k_SubSoiCam.tbl \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/etc/surround_sound_3mic/surround_sound_rec_AZ.cfg:$(TARGET_COPY_OUT_SYSTEM)/etc/surround_sound_3mic/surround_sound_rec_AZ.cfg \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libznrwrapper.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libznrwrapper.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libvolumelistener.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libvolumelistener.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcomvisualizer.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcomvisualizer.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcvirt.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcvirt.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libvptwrapper.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libvptwrapper.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrsprocessing.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrsprocessing.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libvpt51wrapper.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libvpt51wrapper.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrsfx.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrsfx.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libbeatsbass.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libbeatsbass.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libswdap-mod.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libswdap-mod.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcreverb.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcreverb.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrscorehtc.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrscorehtc.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libbeatscorehtc.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libbeatscorehtc.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrscore.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrscore.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libibanezseven-stereo+.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libibanezseven-stereo+.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libibanezsevendseehx.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libibanezsevendseehx.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsonypostprocbundle.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsonypostprocbundle.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libxloudwrapper.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libxloudwrapper.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsonysweffect.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsonysweffect.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcompostprocbundle.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcompostprocbundle.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcomvoiceprocessing.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcomvoiceprocessing.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrstb.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libsrstb.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcbassboost.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libqcbassboost.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libibanezseven-hi-res.so:$(TARGET_COPY_OUT_SYSTEM)/lib/soundfx/libibanezseven-hi-res.so \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/alsa.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/alsa.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/center_lfe.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/center_lfe.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround51.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround51.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/dmix.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/dmix.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/iec958.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/iec958.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/rear.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/rear.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround50.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround50.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/front.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/front.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/side.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/side.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround71.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround71.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/modem.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/modem.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/default.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/default.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround40.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround40.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround41.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/surround41.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/dsnoop.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/dsnoop.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/dpl.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/pcm/dpl.conf \
-     $(LOCAL_PATH)/Dolby-ViperFx/$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/cards/aliases.conf:$(TARGET_COPY_OUT_SYSTEM)/usr/share/alsa/cards/aliases.conf 

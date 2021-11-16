@@ -1,6 +1,75 @@
-allow toolbox block_device:dir { add_name write };
-allow toolbox block_device:lnk_file create;
+allow toolbox {
+    block_device
+    persist_file
+    device
+    sysfs_writable
+    init
+    kernel
+    cache_file
+    efs_file
+    labeledfs
+    storage_file
+    system_file
+    unlabeled
+    audioserver
+    hal_graphics_allocator_default
+    logd
+    su
+    vendor_init
+    }:dir { add_name write search create getattr setattr };
+
+allow toolbox {
+    block_device
+    sysfs_writable
+    }:lnk_file { read create };
+
 allow toolbox emmcblk_device:blk_file setattr;
-allow toolbox self:capability { chown fowner fsetid };
-allow toolbox sysfs:file getattr;
-allow toolbox sysfs_devices_system_cpu:file setattr;
+allow toolbox self:capability { chown fowner fsetid dac_override sys_ptrace sys_admin };
+allow toolbox {
+    sysfs
+    sysfs_devices_system_cpu
+    proc
+    media_rw_data_file
+    persist_file
+    device
+    gpsd_exec
+    selinuxfs
+    proc_meminfo
+    init
+    kernel
+    proc_stat
+    hal_graphics_allocator_default
+    hal_lineage_livedisplay_exynos
+    hal_usb_default
+    hal_vibrator_default
+    hal_wifi_default
+    hwservicemanager
+    logd
+    servicemanager
+    ueventd
+    vendor_init
+    vndservicemanager
+    vold
+    apexd
+    cpboot-daemon
+    hal_bluetooth_default
+    hal_camera_default
+    hal_keymaster_default
+    healthd
+    incidentd
+    installd
+    netd
+    rild
+    zygote
+    }:file { write open read getattr append setattr };
+
+allow toolbox {
+    property_socket
+    }:sock_file { write };
+
+allow toolbox init:unix_stream_socket { connectto };
+allow toolbox init:fifo_file { write ioctl read getattr };
+allow toolbox input_device:chr_file { read open };
+allow toolbox kernel:security { setenforce };
+allow toolbox default_prop:property_service { set };
+ 

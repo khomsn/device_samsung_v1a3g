@@ -1,0 +1,18 @@
+# foo service
+type sswap, domain;
+type sswap_exec, exec_type, file_type;
+
+init_daemon_domain(sswap)
+
+allow sswap {
+    block_device
+    }:blk_file { open read write };
+
+allow sswap {
+    properties_device
+    }:dir { open read };
+
+allow sswap {
+    sysfs
+    proc_meminfo
+    }:file { open read getattr write };

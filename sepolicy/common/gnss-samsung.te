@@ -1,0 +1,5 @@
+# foo service
+type gnss-samsung, domain;
+type gnss-samsung_exec, exec_type, file_type;
+
+init_daemon_domain(gnss-samsung)
